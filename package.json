@@ -1,0 +1,19 @@
+
+{
+  "name": "react-native-iron-source",
+  "version": "1.0.0",
+  "description": "React Native package to interface the ironSource SDK.  https://ironsrc.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "Ben Yee <benyee@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native": ">= 0.29.0"    
+
+  }
+}
