@@ -22,7 +22,7 @@ RCT_EXPORT_METHOD(initializeAdsForUser:(NSString *)appId userId:(NSString *)user
 //
 RCT_EXPORT_METHOD(showAd)
 {
-  if (supersonicRVAdAvailabilityChanged:(BOOL)hasAvailableAds) {
+  if ([[Supersonic sharedInstance] isAdAvailable]) {
     [[Supersonic sharedInstance] showRVWithViewController:[UIApplication sharedApplication].delegate.window.rootViewController];
     NSLog(@"showAd called!!");
   } else {
