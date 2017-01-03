@@ -11,8 +11,6 @@
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
-#import "Supersonic/Supersonic.h"
-
 
 @implementation AppDelegate
 
