@@ -19,7 +19,11 @@ android {
     }
 }
 
+maven {
+    url "https://dl.bintray.com/supersonic/android-sdk"
+}
+
 dependencies {
+    compile 'com.supersonic.sdk:mediationsdk:6.4.21@jar'
     compile 'com.facebook.react:react-native:0.20.+'
 }
-  

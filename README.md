@@ -17,7 +17,7 @@
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
 2. Go to `node_modules` ➜ `react-native-iron-source` and add `RNIronSource.xcodeproj`
 3. In XCode, in the project navigator, select your project. Add `libRNIronSource.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
+4. Run your project (`Cmd+R`)
 
 #### Android
 
@@ -34,20 +34,15 @@
       compile project(':react-native-iron-source')
   	```
 
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
+## IronSource iOS SDK
 
-1. In Visual Studio add the `RNIronSource.sln` in `node_modules/react-native-iron-source/windows/RNIronSource.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Cl.Json.RNIronSource;` to the usings at the top of the file
-  - Add `new RNIronSourcePackage()` to the `List<IReactPackage>` returned by the `Packages` method
+1. Download the iOS SDK from[Ironsrc.com](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/)
+2. Unzip and rename the directory to `SupersonicSDK`
+3. Copy the SDK to `~/Documents/SupersonicSDK`
+4. Drag the `Supersonic.framework` to your react native target build phases from the `~/Documents/SupersonicSDK` directory
+5. Add `~/Documents/SupersonicSDK` to your target's Framework Search Paths in Build Settings
 
 
 ## Usage
-```javascript
-import RNIronSource from 'react-native-iron-source';
 
-// TODO: What do with the module?
-RNIronSource;
-```
-  
+See the `ExampleApp`

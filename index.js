@@ -1,6 +1,6 @@
 
-import { NativeModules } from 'react-native';
+import { NativeModules } from "react-native";
 
-const IronSourceRewardedVideo = NativeModules['RNIronSourceRewardedVideo'];
+import IronSourceRewardedVideo from './RNIronSourceRewardedVideo';
 
-module.exports = IronSourceRewardedVideo;
+module.exports = {IronSourceRewardedVideo};

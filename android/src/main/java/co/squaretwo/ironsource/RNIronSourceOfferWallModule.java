@@ -19,7 +19,6 @@ public class RNIronSourceOfferWallModule extends ReactContextBaseJavaModule {
     private static final String TAG = "RNIronSourceOfferWall";
     private static final int OFFER_WALL_REQUEST = 1;
 
-    private RequestCallback requestCallback;
     private ReactApplicationContext mContext;
     private Intent mOfferWallIntent;
 

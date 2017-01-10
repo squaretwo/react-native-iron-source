@@ -8,3 +8,6 @@
 *.hmap
 *.ipa
 .idea
+.DS_Store
+*.iml
+local.properties
