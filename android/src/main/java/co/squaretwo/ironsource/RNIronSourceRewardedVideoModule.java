@@ -1,6 +1,5 @@
 package co.squaretwo.ironsource;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -20,7 +19,6 @@ import com.supersonic.mediationsdk.sdk.SupersonicFactory;
 
 public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule {
     private static final String TAG = "RewardedVideo";
-    private Intent mRewardedVideoIntent;
     private final ReactApplicationContext reactContext;
     private Supersonic mMediationAgent;
 
@@ -41,7 +39,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
         //Invoked when initialization of RewardedVideo has finished successfully.
         @Override
         public void onRewardedVideoInitSuccess() {
-            Log.d(TAG, "onRewardedVideoInitSuccess() called!");
+            // Log.d(TAG, "onRewardedVideoInitSuccess() called!");
             sendEvent("rewardedVideoInitialized", null);
         }
 
@@ -54,7 +52,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
             String errorMessage = se.getErrorMessage();
             if (errorCode == SupersonicError.ERROR_CODE_GENERIC){
                 //Write a Handler for specific error's.
-                Log.d(TAG, "onRewardedVideoInitFail() called!");
+                // Log.d(TAG, "onRewardedVideoInitFail() called!");
                 sendEvent("rewardedVideoInitializationFailed", null);
             }
         }
@@ -63,7 +61,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
         //SupersonicError contains the reason for the failure.
         @Override
         public void onRewardedVideoShowFail(SupersonicError se) {
-            Log.d(TAG, "onRewardedVideoShowFail() called!");
+            // Log.d(TAG, "onRewardedVideoShowFail() called!");
             sendEvent("rewardedVideoClosedByError", null);
 
         }
@@ -73,7 +71,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
         //tasks till the video ad will be closed.
         @Override
         public void onRewardedVideoAdOpened() {
-            Log.d(TAG, "onRewardedVideoAdOpened() called!");
+            // Log.d(TAG, "onRewardedVideoAdOpened() called!");
             sendEvent("rewardedVideoDidStart", null);
         }
 
@@ -81,7 +79,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
         //Your activity will now regain its focus.
         @Override
         public void onRewardedVideoAdClosed() {
-            Log.d(TAG, "onRewardedVideoAdClosed() called!");
+            // Log.d(TAG, "onRewardedVideoAdClosed() called!");
             sendEvent("rewardedVideoClosedByUser", null);
         }
 
@@ -92,7 +90,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
         @Override
         public void onVideoAvailabilityChanged(boolean available) {
             //Change the in-app 'Traffic Driver' state according to availability.
-            Log.d(TAG, "onVideoAvailabilityChanged() called!");
+            // Log.d(TAG, "onVideoAvailabilityChanged() called!");
             if (available) {
               sendEvent("rewardedVideoAvailable", null);
             } else {
@@ -103,7 +101,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
         //Invoked when the video ad starts playing.
         @Override
         public void onVideoStart() {
-            Log.d(TAG, "onVideoStart() called!");
+            // Log.d(TAG, "onVideoStart() called!");
             sendEvent("rewardedVideoAdStarted", null);
         }
 
@@ -149,7 +147,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "showRewardedVideo() called!!");
+                // Log.d(TAG, "showRewardedVideo() called!!");
                 boolean available = mMediationAgent.isRewardedVideoAvailable();
                 if (available) {
                     mMediationAgent.showRewardedVideo();
