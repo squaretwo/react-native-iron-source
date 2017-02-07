@@ -12,8 +12,5 @@
     "iron source"
   ],
   "author": "Ben Yee <benyee@gmail.com>",
-  "license": "MIT",
-  "peerDependencies": {
-    "react-native": ">= 0.40.0"
-  }
+  "license": "MIT"  
 }
