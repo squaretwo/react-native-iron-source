@@ -10,8 +10,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
-import com.supersonic.mediationsdk.sdk.OfferwallListener;
-
 /**
  * Created by benyee on 11/08/2016.
  */

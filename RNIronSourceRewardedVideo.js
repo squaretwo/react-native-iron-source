@@ -8,8 +8,6 @@ import {
 const RNIronSourceRewardedVideo = NativeModules.RNIronSourceRewardedVideo;
 
 const eventHandlers = {
-  rewardedVideoInitialized: new Map(),
-  rewardedVideoInitializationFailed: new Map(),
   rewardedVideoAvailable: new Map(),
   rewardedVideoUnavailable: new Map(),
   rewardedVideoDidStart: new Map(),
@@ -22,12 +20,6 @@ const eventHandlers = {
 
 const addEventListener = (type, handler) => {
   switch (type) {
-    case 'rewardedVideoInitialized':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'rewardedVideoInitializationFailed':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, (error) => { handler(error); }));
-      break;
     case 'rewardedVideoAvailable':
     case 'rewardedVideoUnavailable':
     case 'rewardedVideoDidStart':
@@ -52,8 +44,6 @@ const removeEventListener = (type, handler) => {
 }
 
 const removeAllListeners = () => {
-  DeviceEventEmitter.removeAllListeners('rewardedVideoInitialized');
-  DeviceEventEmitter.removeAllListeners('rewardedVideoInitializationFailed');
   DeviceEventEmitter.removeAllListeners('rewardedVideoAvailable');
   DeviceEventEmitter.removeAllListeners('rewardedVideoUnavailable');
   DeviceEventEmitter.removeAllListeners('rewardedVideoDidStart');

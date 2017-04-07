@@ -21,11 +21,11 @@ android {
 
 repositories {
     maven {
-        url "https://dl.bintray.com/supersonic/android-sdk"
-    }
+        url "https://dl.bintray.com/ironsource-mobile/android-sdk"
+     }
 }
 
 dependencies {
-    compile 'com.supersonic.sdk:mediationsdk:6.4.21@jar'
+    compile 'com.ironsource.sdk:mediationsdk:6.5.2.1@jar'
     compile 'com.facebook.react:react-native:+'
 }

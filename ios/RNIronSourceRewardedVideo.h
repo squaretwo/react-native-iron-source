@@ -1,8 +1,8 @@
 
 #import "RCTBridgeModule.h"
 #import "RCTEventDispatcher.h"
-#import "Supersonic/Supersonic.h"
+#import "IronSource/IronSource.h"
 
-@interface RNIronSourceRewardedVideo : NSObject <RCTBridgeModule, SupersonicRVDelegate>
+@interface RNIronSourceRewardedVideo : NSObject <RCTBridgeModule, ISRewardedVideoDelegate>
 
 @end

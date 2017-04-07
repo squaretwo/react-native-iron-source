@@ -17,8 +17,10 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(initializeRewardedVideo:(NSString *)appId userId:(NSString *)userId)
 {
     NSLog(@"initializeRewardedVideo called!! with key %@ and user id %@", appId, userId);
-    [[Supersonic sharedInstance] setRVDelegate:self];
-    [[Supersonic sharedInstance] initRVWithAppKey:appId withUserId:userId];
+    [IronSource setRewardedVideoDelegate:self];
+    [IronSource initWithAppKey:appId];
+    [IronSource setUserId:userId];
+    [ISIntegrationHelper validateIntegration];
 }
 
 //
@@ -26,10 +28,10 @@ RCT_EXPORT_METHOD(initializeRewardedVideo:(NSString *)appId userId:(NSString *)u
 //
 RCT_EXPORT_METHOD(showRewardedVideo)
 {
-    if ([[Supersonic sharedInstance] isAdAvailable]) {
+    if ([IronSource hasRewardedVideo]) {
         NSLog(@"showRewardedVideo - video available");
         [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoAvailable" body:nil];
-        [[Supersonic sharedInstance] showRVWithViewController:[UIApplication sharedApplication].delegate.window.rootViewController];
+        [IronSource showRewardedVideoWithViewController:[UIApplication sharedApplication].delegate.window.rootViewController];
 
     } else {
         NSLog(@"showRewardedVideo - video unavailable");
@@ -41,28 +43,11 @@ RCT_EXPORT_METHOD(showRewardedVideo)
 #pragma mark delegate events
 
 /**
- * Invoked when initialization of RewardedVideo ad unit has finished successfully
- */
-- (void)supersonicRVInitSuccess {
-    NSLog(@">>>>>>>>>>>> initialization of RewardedVideo ad unit has finished successfully!");
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoInitialized" body:nil];
-}
-
-/**
- * Invoked when RewardedVideo initialization process has failed. NSError
- * contains the reason for the failure.
- */
-- (void)supersonicRVInitFailedWithError:(NSError *)error {
-    NSLog(@">>>>>>>>>>>> RewardedVideo initialization process has failed %@", error);
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoInitializationFailed" body:error];
-}
-
-/**
  * Invoked when there is a change in the ad availability status.
  * @param - hasAvailableAds - value will change to YES when rewarded videos are available. * You can then show the video by calling showRV(). Value will change to NO when no videos are available.
  */
- - (void)supersonicRVAdAvailabilityChanged:(BOOL)hasAvailableAds {
-     if(hasAvailableAds == YES){
+ - (void)rewardedVideoHasChangedAvailability:(BOOL)available {
+     if(available == YES){
          NSLog(@">>>>>>>>>>>> RewardedVideo available");
          [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoAvailable" body:nil];
      } else {
@@ -70,7 +55,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
      }
  }
 
-- (void)supersonicRVAdRewarded:(SupersonicPlacementInfo*)placementInfo {
+- (void)didReceiveRewardForPlacement:(ISPlacementInfo*)placementInfo {
     NSNumber * rewardAmount = [placementInfo rewardAmount];
     NSString * rewardName = [placementInfo rewardName];
     NSLog(@">>>>>>>>>>>> RewardedVideo %@ reward amount %@", rewardName, rewardAmount);
@@ -82,7 +67,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  * @param - error - NSError which contains the reason for the
  * failure. The error contains error.code and error.message.
  */
-- (void)supersonicRVAdFailedWithError:(NSError *)error {
+- (void)rewardedVideoDidFailToShowWithError:(NSError *)error {
     NSLog(@">>>>>>>>>>>> RewardedVideo ad closed due to an error: %@!", error);
     [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoClosedByError" body:nil];
 }
@@ -90,7 +75,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
 /**
  * Invoked when the RewardedVideo ad view has opened.
  */
-- (void)supersonicRVAdOpened{
+- (void)rewardedVideoDidOpen{
     NSLog(@">>>>>>>>>>>> RewardedVideo opened!");
     [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoDidStart" body:nil];
 }
@@ -99,7 +84,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  * Invoked when the user is about to return to the application after closing the
  * RewardedVideo ad.
  */
-- (void)supersonicRVAdClosed {
+- (void)rewardedVideoDidClose {
     NSLog(@">>>>>>>>>>>> RewardedVideo closed!");
     [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoClosedByUser" body:nil];
 }
@@ -116,7 +101,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  * Available for: AdColony, Vungle, AppLovin, UnityAds
  * Invoked when the video ad starts playing.
  */
-- (void)supersonicRVAdStarted {
+- (void)rewardedVideoDidStart {
     NSLog(@">>>>>>>>>>>> RewardedVideo Ad Started!");
     [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoAdStarted" body:nil];
 }
@@ -125,7 +110,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  * Available for: AdColony, Vungle, AppLovin, UnityAds
  * Invoked when the video ad finishes playing.
  */
-- (void)supersonicRVAdEnded {
+- (void)rewardedVideoDidEnd {
     NSLog(@">>>>>>>>>>>> RewardedVideo Ad Ended!");
     [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoAdEnded" body:nil];
 }

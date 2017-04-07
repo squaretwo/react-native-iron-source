@@ -37,10 +37,10 @@
 ## IronSource iOS SDK
 
 1. Download the iOS SDK from[Ironsrc.com](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/)
-2. Unzip and rename the directory to `SupersonicSDK`
-3. Copy the SDK to `~/Documents/SupersonicSDK`
-4. Drag the `Supersonic.framework` to your react native target build phases from the `~/Documents/SupersonicSDK` directory
-5. Add `~/Documents/SupersonicSDK` to your target's Framework Search Paths in Build Settings
+2. Unzip and rename the directory to `IronSourceSDK`
+3. Copy the SDK to `~/Documents/IronSourceSDK`
+4. Drag the `IronSource.framework` to your react native target build phases from the `~/Documents/IronSourceSDK` directory
+5. Add `~/Documents/IronSourceSDK` to your target's Framework Search Paths in Build Settings
 
 
 ## Usage

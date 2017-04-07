@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B3E7B58A1CC2AC0600A0062D /* RNIronSourceRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNIronSourceRewardedVideo.m */; };
-		B54667901E0B3A8900638AE1 /* Supersonic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B546678F1E0B3A8900638AE1 /* Supersonic.framework */; };
+		B58FBD931E9708C0001125A5 /* IronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58FBD921E9708C0001125A5 /* IronSource.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,7 +27,7 @@
 		134814201AA4EA6300B7C361 /* libRNIronSource.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNIronSource.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5881CC2AC0600A0062D /* RNIronSourceRewardedVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIronSourceRewardedVideo.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNIronSourceRewardedVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIronSourceRewardedVideo.m; sourceTree = "<group>"; };
-		B546678F1E0B3A8900638AE1 /* Supersonic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Supersonic.framework; path = ../../../../Documents/IronSourceSDK/Supersonic.framework; sourceTree = "<group>"; };
+		B58FBD921E9708C0001125A5 /* IronSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IronSource.framework; path = ../../../../Downloads/IronSource/IronSource.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B54667901E0B3A8900638AE1 /* Supersonic.framework in Frameworks */,
+				B58FBD931E9708C0001125A5 /* IronSource.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,7 +63,7 @@
 		B53E8EDD1DD2A18800FBABAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B546678F1E0B3A8900638AE1 /* Supersonic.framework */,
+				B58FBD921E9708C0001125A5 /* IronSource.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -209,7 +209,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"~/Documents/SupersonicSDK",
+					"~/Documents/IronSourceSDK",
 					"$(PROJECT_DIR)/../../../ios/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -229,7 +229,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"~/Documents/SupersonicSDK",
+					"~/Documents/IronSourceSDK",
 					"$(PROJECT_DIR)/../../../ios/Frameworks",
 				);
 				HEADER_SEARCH_PATHS = (
