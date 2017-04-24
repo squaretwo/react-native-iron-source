@@ -18,8 +18,8 @@ RCT_EXPORT_METHOD(initializeRewardedVideo:(NSString *)appId userId:(NSString *)u
 {
     NSLog(@"initializeRewardedVideo called!! with key %@ and user id %@", appId, userId);
     [IronSource setRewardedVideoDelegate:self];
-    [IronSource initWithAppKey:appId];
     [IronSource setUserId:userId];
+    [IronSource initWithAppKey:appId];
     [ISIntegrationHelper validateIntegration];
 }
 
