@@ -8,26 +8,26 @@ import {
 const RNIronSourceRewardedVideo = NativeModules.RNIronSourceRewardedVideo;
 
 const eventHandlers = {
-  rewardedVideoAvailable: new Map(),
-  rewardedVideoUnavailable: new Map(),
-  rewardedVideoDidStart: new Map(),
-  rewardedVideoClosedByUser: new Map(),
-  rewardedVideoClosedByError: new Map(),
-  rewardedVideoAdStarted: new Map(),
-  rewardedVideoAdEnded: new Map(),
-  rewardedVideoAdRewarded:new Map()
+  ironSourceRewardedVideoAvailable: new Map(),
+  ironSourceRewardedVideoUnavailable: new Map(),
+  ironSourceRewardedVideoDidStart: new Map(),
+  ironSourceRewardedVideoClosedByUser: new Map(),
+  ironSourceRewardedVideoClosedByError: new Map(),
+  ironSourceRewardedVideoAdStarted: new Map(),
+  ironSourceRewardedVideoAdEnded: new Map(),
+  ironSourceRewardedVideoAdRewarded:new Map()
 };
 
 const addEventListener = (type, handler) => {
   switch (type) {
-    case 'rewardedVideoAvailable':
-    case 'rewardedVideoUnavailable':
-    case 'rewardedVideoDidStart':
-    case 'rewardedVideoClosedByUser':
-    case 'rewardedVideoClosedByError':
-    case 'rewardedVideoAdStarted':
-    case 'rewardedVideoAdEnded':
-    case 'rewardedVideoAdRewarded':
+    case 'ironSourceRewardedVideoAvailable':
+    case 'ironSourceRewardedVideoUnavailable':
+    case 'ironSourceRewardedVideoDidStart':
+    case 'ironSourceRewardedVideoClosedByUser':
+    case 'ironSourceRewardedVideoClosedByError':
+    case 'ironSourceRewardedVideoAdStarted':
+    case 'ironSourceRewardedVideoAdEnded':
+    case 'ironSourceRewardedVideoAdRewarded':
       eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
       break;
     default:
@@ -44,14 +44,14 @@ const removeEventListener = (type, handler) => {
 }
 
 const removeAllListeners = () => {
-  DeviceEventEmitter.removeAllListeners('rewardedVideoAvailable');
-  DeviceEventEmitter.removeAllListeners('rewardedVideoUnavailable');
-  DeviceEventEmitter.removeAllListeners('rewardedVideoDidStart');
-  DeviceEventEmitter.removeAllListeners('rewardedVideoClosedByUser');
-  DeviceEventEmitter.removeAllListeners('rewardedVideoClosedByError');
-  DeviceEventEmitter.removeAllListeners('rewardedVideoAdStarted');
-  DeviceEventEmitter.removeAllListeners('rewardedVideoAdEnded');
-  DeviceEventEmitter.removeAllListeners('rewardedVideoAdRewarded');
+  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoAvailable');
+  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoUnavailable');
+  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoDidStart');
+  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoClosedByUser');
+  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoClosedByError');
+  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoAdStarted');
+  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoAdEnded');
+  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoAdRewarded');
 };
 
 module.exports = {

@@ -30,12 +30,12 @@ RCT_EXPORT_METHOD(showRewardedVideo)
 {
     if ([IronSource hasRewardedVideo]) {
         NSLog(@"showRewardedVideo - video available");
-        [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoAvailable" body:nil];
+        [self.bridge.eventDispatcher sendDeviceEventWithName:@"ironSourceRewardedVideoAvailable" body:nil];
         [IronSource showRewardedVideoWithViewController:[UIApplication sharedApplication].delegate.window.rootViewController];
 
     } else {
         NSLog(@"showRewardedVideo - video unavailable");
-        [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoUnavailable" body:nil];
+        [self.bridge.eventDispatcher sendDeviceEventWithName:@"ironSourceRewardedVideoUnavailable" body:nil];
     }
 }
 
@@ -49,7 +49,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  - (void)rewardedVideoHasChangedAvailability:(BOOL)available {
      if(available == YES){
          NSLog(@">>>>>>>>>>>> RewardedVideo available");
-         [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoAvailable" body:nil];
+         [self.bridge.eventDispatcher sendDeviceEventWithName:@"ironSourceRewardedVideoAvailable" body:nil];
      } else {
          NSLog(@">>>>>>>>>>>> RewardedVideo NOT available");
      }
@@ -59,7 +59,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
     NSNumber * rewardAmount = [placementInfo rewardAmount];
     NSString * rewardName = [placementInfo rewardName];
     NSLog(@">>>>>>>>>>>> RewardedVideo %@ reward amount %@", rewardName, rewardAmount);
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoAdRewarded" body:nil];
+    [self.bridge.eventDispatcher sendDeviceEventWithName:@"ironSourceRewardedVideoAdRewarded" body:nil];
 }
 
 /**
@@ -69,7 +69,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  */
 - (void)rewardedVideoDidFailToShowWithError:(NSError *)error {
     NSLog(@">>>>>>>>>>>> RewardedVideo ad closed due to an error: %@!", error);
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoClosedByError" body:nil];
+    [self.bridge.eventDispatcher sendDeviceEventWithName:@"ironSourceRewardedVideoClosedByError" body:nil];
 }
 
 /**
@@ -77,7 +77,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  */
 - (void)rewardedVideoDidOpen{
     NSLog(@">>>>>>>>>>>> RewardedVideo opened!");
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoDidStart" body:nil];
+    [self.bridge.eventDispatcher sendDeviceEventWithName:@"ironSourceRewardedVideoDidStart" body:nil];
 }
 
 /**
@@ -86,7 +86,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  */
 - (void)rewardedVideoDidClose {
     NSLog(@">>>>>>>>>>>> RewardedVideo closed!");
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoClosedByUser" body:nil];
+    [self.bridge.eventDispatcher sendDeviceEventWithName:@"ironSourceRewardedVideoClosedByUser" body:nil];
 }
 
 /**
@@ -103,7 +103,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  */
 - (void)rewardedVideoDidStart {
     NSLog(@">>>>>>>>>>>> RewardedVideo Ad Started!");
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoAdStarted" body:nil];
+    [self.bridge.eventDispatcher sendDeviceEventWithName:@"ironSourceRewardedVideoAdStarted" body:nil];
 }
 
 /**
@@ -112,7 +112,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  */
 - (void)rewardedVideoDidEnd {
     NSLog(@">>>>>>>>>>>> RewardedVideo Ad Ended!");
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"rewardedVideoAdEnded" body:nil];
+    [self.bridge.eventDispatcher sendDeviceEventWithName:@"ironSourceRewardedVideoAdEnded" body:nil];
 }
 
 @end

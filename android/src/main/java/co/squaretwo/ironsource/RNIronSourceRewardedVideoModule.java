@@ -37,32 +37,32 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
             @Override
             public void onRewardedVideoAdOpened() {
                 Log.d(TAG, "onRewardedVideoAdOpened() called!");
-                sendEvent("rewardedVideoDidStart", null);
+                sendEvent("ironSourceRewardedVideoDidStart", null);
             }
             @Override
             public void onRewardedVideoAdClosed() {
                 Log.d(TAG, "onRewardedVideoAdClosed() called!");
-                sendEvent("rewardedVideoClosedByUser", null);
+                sendEvent("ironSourceRewardedVideoClosedByUser", null);
             }
             @Override
             public void onRewardedVideoAvailabilityChanged(boolean available) {
                 Log.d(TAG, "onVideoAvailabilityChanged() called!");
                 if (available) {
-                    Log.d(TAG, "rewardedVideoAvailable!" );
-                    sendEvent("rewardedVideoAvailable", null);
+                    Log.d(TAG, "ironSourceRewardedVideoAvailable!" );
+                    sendEvent("ironSourceRewardedVideoAvailable", null);
                 } else {
-                    sendEvent("rewardedVideoUnavailable", null);
+                    sendEvent("ironSourceRewardedVideoUnavailable", null);
                 }
             }
             @Override
             public void onRewardedVideoAdStarted() {
                 Log.d(TAG, "onVideoStart() called!");
-                sendEvent("rewardedVideoAdStarted", null);
+                sendEvent("ironSourceRewardedVideoAdStarted", null);
             }
             @Override
             public void onRewardedVideoAdEnded() {
                 Log.d(TAG, "onVideoEnd() called!");
-                sendEvent("rewardedVideoAdEnded", null);
+                sendEvent("ironSourceRewardedVideoAdEnded", null);
             }
             @Override
             public void onRewardedVideoAdRewarded(Placement placement) {
@@ -73,7 +73,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
             @Override
             public void onRewardedVideoAdShowFailed(IronSourceError se) {
                 Log.d(TAG, "onRewardedVideoShowFail() called!");
-                sendEvent("rewardedVideoClosedByError", null);
+                sendEvent("ironSourceRewardedVideoClosedByError", null);
             }
         });
     }
