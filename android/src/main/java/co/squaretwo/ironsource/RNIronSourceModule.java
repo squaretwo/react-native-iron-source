@@ -26,7 +26,7 @@ public class RNIronSourceModule extends ReactContextBaseJavaModule {
 
     public RNIronSourceModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        reactContext = reactContext;
+        this.reactContext = reactContext;
     }
 
     @Override
