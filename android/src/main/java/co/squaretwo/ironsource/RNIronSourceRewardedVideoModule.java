@@ -26,13 +26,11 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
 
     @Override
     public String getName() {
-        return "RNIronSourceRewardedVideo";
+        return TAG;
     }
 
     @ReactMethod
-    public void initializeRewardedVideo(String appKey, String userId) {
-        IronSource.setUserId(userId);
-        IronSource.init(reactContext.getCurrentActivity(), appKey);
+    public void initializeRewardedVideo() {
         IronSource.setRewardedVideoListener(new RewardedVideoListener() {
             @Override
             public void onRewardedVideoAdOpened() {

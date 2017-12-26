@@ -1,6 +1,8 @@
 
 import { NativeModules } from "react-native";
 
+import IronSource from './RNIronSource';
+import IronSourceOfferwall from './RNIronSourceOfferwall';
 import IronSourceRewardedVideo from './RNIronSourceRewardedVideo';
 
-module.exports = {IronSourceRewardedVideo};
+module.exports = {IronSource, IronSourceRewardedVideo, IronSourceOfferwall};
