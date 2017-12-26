@@ -16,7 +16,7 @@ import com.ironsource.mediationsdk.model.Placement;
 import com.ironsource.mediationsdk.sdk.RewardedVideoListener;
 
 public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule {
-    private static final String TAG = "RewardedVideo";
+    private static final String TAG = "RNIronSourceRewardedVideo";
     private final ReactApplicationContext reactContext;
 
     public RNIronSourceRewardedVideoModule(ReactApplicationContext reactContext) {

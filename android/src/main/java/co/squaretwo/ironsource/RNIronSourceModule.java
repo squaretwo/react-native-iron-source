@@ -35,7 +35,7 @@ public class RNIronSourceModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initialize(final String appId, final String securityToken, final String userId) {
+    public void initializeIronSource(final String appId, final String userId) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
