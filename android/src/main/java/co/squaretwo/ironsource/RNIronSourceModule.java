@@ -15,9 +15,6 @@ import com.ironsource.mediationsdk.logger.IronSourceError;
 import com.ironsource.mediationsdk.model.Placement;
 import com.ironsource.mediationsdk.sdk.RewardedVideoListener;
 
-/**
- * Created by benyee on 11/08/2016.
- */
 public class RNIronSourceModule extends ReactContextBaseJavaModule {
     private static final String TAG = "RNIronSource";
     private static final int OFFER_WALL_REQUEST = 1;

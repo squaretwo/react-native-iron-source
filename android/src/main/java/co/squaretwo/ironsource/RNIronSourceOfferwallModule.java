@@ -15,9 +15,6 @@ import com.ironsource.mediationsdk.logger.IronSourceError;
 import com.ironsource.mediationsdk.model.Placement;
 import com.ironsource.mediationsdk.sdk.OfferwallListener;
 
-/**
- * Created by benyee on 11/08/2016.
- */
 public class RNIronSourceOfferwallModule extends ReactContextBaseJavaModule {
     private static final String TAG = "RNIronSourceOfferwall";
     private static final int OFFER_WALL_REQUEST = 1;
