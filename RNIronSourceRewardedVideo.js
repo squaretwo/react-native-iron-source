@@ -56,7 +56,7 @@ const removeAllListeners = () => {
 
 module.exports = {
   ...RNIronSourceRewardedVideo,
-  initializeRewardedVideo: (key, userId) => RNIronSourceRewardedVideo.initializeRewardedVideo(key, userId),
+  initializeRewardedVideo: () => RNIronSourceRewardedVideo.initializeRewardedVideo(),
   showRewardedVideo: () => RNIronSourceRewardedVideo.showRewardedVideo(),
   addEventListener,
   removeEventListener,

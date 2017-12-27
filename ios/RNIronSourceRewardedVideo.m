@@ -14,13 +14,10 @@
 RCT_EXPORT_MODULE()
 
 // Initialize IronSource before showing the Rewarded Video
-RCT_EXPORT_METHOD(initializeRewardedVideo:(NSString *)appId userId:(NSString *)userId)
+RCT_EXPORT_METHOD(initializeRewardedVideo)
 {
-    NSLog(@"initializeRewardedVideo called!! with key %@ and user id %@", appId, userId);
+    NSLog(@"initializeRewardedVideo called!!");
     [IronSource setRewardedVideoDelegate:self];
-    [IronSource setUserId:userId];
-    [IronSource initWithAppKey:appId];
-    [ISIntegrationHelper validateIntegration];
 }
 
 //
