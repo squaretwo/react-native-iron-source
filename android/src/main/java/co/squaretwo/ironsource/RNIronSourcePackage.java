@@ -15,7 +15,11 @@ public class RNIronSourcePackage implements ReactPackage {
     }
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-      return Arrays.<NativeModule>asList(new RNIronSourceRewardedVideoModule(reactContext));
+      return Arrays.<NativeModule>asList(
+              new RNIronSourceModule(reactContext),
+              new RNIronSourceRewardedVideoModule(reactContext),
+              new RNIronSourceOfferwallModule(reactContext)
+      );
     }
 
     @Override

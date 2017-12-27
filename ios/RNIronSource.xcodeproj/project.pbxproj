@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B3E7B58A1CC2AC0600A0062D /* RNIronSourceRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNIronSourceRewardedVideo.m */; };
 		B58FBD931E9708C0001125A5 /* IronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58FBD921E9708C0001125A5 /* IronSource.framework */; };
+		DC1FC5791FF20BB9002C4213 /* RNIronSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1FC5751FF20BB9002C4213 /* RNIronSource.m */; };
+		DC1FC57A1FF20BB9002C4213 /* RNIronSourceOfferwall.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1FC5761FF20BB9002C4213 /* RNIronSourceOfferwall.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,10 @@
 		B3E7B5881CC2AC0600A0062D /* RNIronSourceRewardedVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIronSourceRewardedVideo.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNIronSourceRewardedVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIronSourceRewardedVideo.m; sourceTree = "<group>"; };
 		B58FBD921E9708C0001125A5 /* IronSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IronSource.framework; path = ../../../../Downloads/IronSource/IronSource.framework; sourceTree = "<group>"; };
+		DC1FC5741FF20BB8002C4213 /* RNIronSourceOfferwall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIronSourceOfferwall.h; sourceTree = "<group>"; };
+		DC1FC5751FF20BB9002C4213 /* RNIronSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIronSource.m; sourceTree = "<group>"; };
+		DC1FC5761FF20BB9002C4213 /* RNIronSourceOfferwall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIronSourceOfferwall.m; sourceTree = "<group>"; };
+		DC1FC5771FF20BB9002C4213 /* RNIronSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIronSource.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,10 @@
 			isa = PBXGroup;
 			children = (
 				B53E8EDD1DD2A18800FBABAC /* Frameworks */,
+				DC1FC5771FF20BB9002C4213 /* RNIronSource.h */,
+				DC1FC5751FF20BB9002C4213 /* RNIronSource.m */,
+				DC1FC5741FF20BB8002C4213 /* RNIronSourceOfferwall.h */,
+				DC1FC5761FF20BB9002C4213 /* RNIronSourceOfferwall.m */,
 				B3E7B5881CC2AC0600A0062D /* RNIronSourceRewardedVideo.h */,
 				B3E7B5891CC2AC0600A0062D /* RNIronSourceRewardedVideo.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -124,7 +134,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC1FC5791FF20BB9002C4213 /* RNIronSource.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNIronSourceRewardedVideo.m in Sources */,
+				DC1FC57A1FF20BB9002C4213 /* RNIronSourceOfferwall.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
