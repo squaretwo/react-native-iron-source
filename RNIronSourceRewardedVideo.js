@@ -1,11 +1,7 @@
-'use strict';
-
-import {
-  NativeModules,
-  DeviceEventEmitter,
-} from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 
 const RNIronSourceRewardedVideo = NativeModules.RNIronSourceRewardedVideo;
+const IronSourceRewardedVideoEventEmitter = new NativeEventEmitter(RNIronSourceRewardedVideo);
 
 const eventHandlers = {
   ironSourceRewardedVideoAvailable: new Map(),
@@ -28,12 +24,12 @@ const addEventListener = (type, handler) => {
     case 'ironSourceRewardedVideoAdStarted':
     case 'ironSourceRewardedVideoAdEnded':
     case 'ironSourceRewardedVideoAdRewarded':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
+      eventHandlers[type].set(handler, IronSourceRewardedVideoEventEmitter.addListener(type, handler));
       break;
     default:
       console.log(`Event with type ${type} does not exist.`);
   }
-}
+};
 
 const removeEventListener = (type, handler) => {
   if (!eventHandlers[type].has(handler)) {
@@ -41,17 +37,17 @@ const removeEventListener = (type, handler) => {
   }
   eventHandlers[type].get(handler).remove();
   eventHandlers[type].delete(handler);
-}
+};
 
 const removeAllListeners = () => {
-  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoAvailable');
-  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoUnavailable');
-  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoDidStart');
-  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoClosedByUser');
-  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoClosedByError');
-  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoAdStarted');
-  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoAdEnded');
-  DeviceEventEmitter.removeAllListeners('ironSourceRewardedVideoAdRewarded');
+  IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoAvailable');
+  IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoUnavailable');
+  IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoDidStart');
+  IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoClosedByUser');
+  IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoClosedByError');
+  IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoAdStarted');
+  IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoAdEnded');
+  IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoAdRewarded');
 };
 
 module.exports = {

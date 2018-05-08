@@ -13,7 +13,7 @@
 
 #import "IronSource/IronSource.h"
 
-@interface RNIronSourceOfferWall : RCTEventEmitter <RCTBridgeModule, ISOfferwallDelegate>
+@interface RNIronSourceOfferwall : RCTEventEmitter <RCTBridgeModule, ISOfferwallDelegate>
 
 @end
 

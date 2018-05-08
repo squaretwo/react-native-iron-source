@@ -1,4 +1,4 @@
-#import "RNIronSourceOfferWall.h"
+#import "RNIronSourceOfferwall.h"
 
 NSString *const kIronSourceOfferwallAvailable = @"ironSourceOfferwallAvailable";
 NSString *const kIronSourceOfferwallUnavailable = @"ironSourceOfferwallUnavailable";
@@ -6,7 +6,7 @@ NSString *const kIronSourceOfferwallDidShow = @"ironSourceOfferwallDidShow";
 NSString *const kIronSourceOfferwallClosedByError = @"ironSourceOfferwallClosedByError";
 NSString *const kIronSourceOfferwallClosedByUser = @"ironSourceOfferwallClosedByUser";
 
-@implementation RNIronSourceOfferWall {
+@implementation RNIronSourceOfferwall {
     RCTResponseSenderBlock _requestOfferwallCallback;
 }
 
@@ -14,8 +14,6 @@ NSString *const kIronSourceOfferwallClosedByUser = @"ironSourceOfferwallClosedBy
 {
     return dispatch_get_main_queue();
 }
-
-@synthesize bridge = _bridge;
 
 RCT_EXPORT_MODULE()
 
@@ -86,5 +84,12 @@ RCT_EXPORT_METHOD(showOfferwall)
     [self sendEventWithName:@"ironSourceOfferwallClosedByUser" body:nil];
 }
 
-@end
+- (BOOL)didReceiveOfferwallCredits:(NSDictionary *)creditInfo{
+    return YES;
+}
 
+- (void)didFailToReceiveOfferwallCreditsWithError:(NSError *)error{
+}
+
+
+@end

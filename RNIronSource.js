@@ -1,9 +1,4 @@
-'use strict';
-
-import {
-  NativeModules,
-  DeviceEventEmitter,
-} from 'react-native';
+import { NativeModules } from 'react-native';
 
 const RNIronSource = NativeModules.RNIronSource;
 

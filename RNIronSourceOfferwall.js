@@ -1,20 +1,17 @@
-'use strict';
-
-import {
-  NativeModules,
-  DeviceEventEmitter,
-} from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 
 const RNIronSourceOfferwall = NativeModules.RNIronSourceOfferwall;
 
+const IronSourceOfferwallEventEmitter = new NativeEventEmitter(RNIronSourceOfferwall);
+
 const eventHandlers = {
-  ironSourceOfferwallAvailable: new Map(),//
-  ironSourceOfferwallUnavailable: new Map(),//
-  ironSourceOfferwallDidShow: new Map(),//
-  ironSourceOfferwallClosedByUser: new Map(),//
-  ironSourceOfferwallClosedByError: new Map(),//
+  ironSourceOfferwallAvailable: new Map(),
+  ironSourceOfferwallUnavailable: new Map(),
+  ironSourceOfferwallDidShow: new Map(),
+  ironSourceOfferwallClosedByUser: new Map(),
+  ironSourceOfferwallClosedByError: new Map(),
   ironSourceOfferwallReceivedCredits:new Map(),
-  ironSourceOfferwallFailedToReceiveCreditsByError:new Map()//
+  ironSourceOfferwallFailedToReceiveCreditsByError:new Map()
 };
 
 const addEventListener = (type, handler) => {
@@ -26,7 +23,7 @@ const addEventListener = (type, handler) => {
     case 'ironSourceOfferwallClosedByError':
     case 'ironSourceOfferwallReceivedCredits':
     case 'ironSourceOfferwallFailedToReceiveCreditsByError':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
+      eventHandlers[type].set(handler, IronSourceOfferwallEventEmitter.addListener(type, handler));
       break;
     default:
       console.log(`Event with type ${type} does not exist.`);
@@ -42,13 +39,13 @@ const removeEventListener = (type, handler) => {
 }
 
 const removeAllListeners = () => {
-  DeviceEventEmitter.removeAllListeners('ironSourceOfferwallAvailable');
-  DeviceEventEmitter.removeAllListeners('ironSourceOfferwallUnavailable');
-  DeviceEventEmitter.removeAllListeners('ironSourceOfferwallDidShow');
-  DeviceEventEmitter.removeAllListeners('ironSourceOfferwallClosedByUser');
-  DeviceEventEmitter.removeAllListeners('ironSourceOfferwallClosedByError');
-  DeviceEventEmitter.removeAllListeners('ironSourceOfferwallReceivedCredits');
-  DeviceEventEmitter.removeAllListeners('ironSourceOfferwallFailedToReceiveCreditsByError');
+  IronSourceOfferwallEventEmitter.removeAllListeners('ironSourceOfferwallAvailable');
+  IronSourceOfferwallEventEmitter.removeAllListeners('ironSourceOfferwallUnavailable');
+  IronSourceOfferwallEventEmitter.removeAllListeners('ironSourceOfferwallDidShow');
+  IronSourceOfferwallEventEmitter.removeAllListeners('ironSourceOfferwallClosedByUser');
+  IronSourceOfferwallEventEmitter.removeAllListeners('ironSourceOfferwallClosedByError');
+  IronSourceOfferwallEventEmitter.removeAllListeners('ironSourceOfferwallReceivedCredits');
+  IronSourceOfferwallEventEmitter.removeAllListeners('ironSourceOfferwallFailedToReceiveCreditsByError');
 };
 
 module.exports = {
