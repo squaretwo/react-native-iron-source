@@ -26,6 +26,6 @@ repositories {
 }
 
 dependencies {
-    compile 'com.ironsource.sdk:mediationsdk:6.7.7@jar'
+    compile 'com.ironsource.sdk:mediationsdk:6.7.9.1@jar'
     compile 'com.facebook.react:react-native:+'
 }

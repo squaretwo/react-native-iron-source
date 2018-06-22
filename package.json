@@ -1,6 +1,6 @@
 {
   "name": "react-native-iron-source",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "description": "React Native package to interface the ironSource SDK.  https://ironsrc.com",
   "main": "index.js",
   "scripts": {
