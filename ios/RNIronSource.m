@@ -9,8 +9,6 @@
     return dispatch_get_main_queue();
 }
 
-@synthesize bridge = _bridge;
-
 RCT_EXPORT_MODULE()
 
 // Initialize IronSource before showing the Rewarded Video
