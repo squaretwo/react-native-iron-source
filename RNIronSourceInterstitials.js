@@ -3,33 +3,40 @@ import { NativeModules, NativeEventEmitter } from 'react-native';
 const RNIronSourceInterstitials = NativeModules.RNIronSourceInterstitials;
 const IronSourceInterstialsEventEmitter = new NativeEventEmitter(RNIronSourceInterstitials);
 
-const eventHandlers = {
-  interstitialDidLoad: new Map(),
-  interstitialDidShow: new Map(),
-  interstitialDidFailToShowWithError: new Map(),
-  didClickInterstitial: new Map(),
-  interstitialDidClose: new Map(),
-  interstitialDidOpen: new Map(),
-  interstitialDidFailToLoadWithError: new Map()
-};
+const eventNames = [
+  'interstitialDidLoad',
+  'interstitialDidShow',
+  'interstitialDidFailToShowWithError',
+  'didClickInterstitial',
+  'interstitialDidClose',
+  'interstitialDidOpen',
+  'interstitialDidFailToLoadWithError'
+];
+
+const eventHandlers = eventNames.reduce((result, eventName) => {
+  result[eventName] = new Map();
+  return result;
+}, {});
 
 const addEventListener = (type, handler) => {
-  switch (type) {
-    case 'interstitialDidLoad':
-    case 'interstitialDidShow':
-    case 'interstitialDidFailToShowWithError':
-    case 'didClickInterstitial':
-    case 'interstitialDidClose':
-    case 'interstitialDidOpen':
-    case 'interstitialDidFailToLoadWithError':
-      eventHandlers[type].set(handler, IronSourceInterstialsEventEmitter.addListener(type, handler));
-      break;
-    default:
-      console.log(`Event with type ${type} does not exist.`);
+  const handlers = eventHandlers[type];
+  if (!handlers) {
+    console.warn(`Event with type ${type} does not exist.`);
+    return;
   }
+
+  if (handlers.has(handler)) {
+    console.warn(`Event with type ${type} and handler has already been added.`);
+    return;
+  }
+
+  handlers.set(handler, IronSourceInterstialsEventEmitter.addListener(type, handler));
 };
 
 const removeEventListener = (type, handler) => {
+  if (!eventHandlers[type]) {
+    return;
+  }
   if (!eventHandlers[type].has(handler)) {
     return;
   }
@@ -38,13 +45,10 @@ const removeEventListener = (type, handler) => {
 };
 
 const removeAllListeners = () => {
-  IronSourceRewardedVideoEventEmitter.removeAllListeners('interstitialDidLoad');
-  IronSourceRewardedVideoEventEmitter.removeAllListeners('interstitialDidShow');
-  IronSourceRewardedVideoEventEmitter.removeAllListeners('interstitialDidFailToShowWithError');
-  IronSourceRewardedVideoEventEmitter.removeAllListeners('didClickInterstitial');
-  IronSourceRewardedVideoEventEmitter.removeAllListeners('interstitialDidClose');
-  IronSourceRewardedVideoEventEmitter.removeAllListeners('interstitialDidOpen');
-  IronSourceRewardedVideoEventEmitter.removeAllListeners('interstitialDidFailToLoadWithError');
+  const count = eventNames.length;
+  for (let i = 0; i < count; i++) {
+    IronSourceRewardedVideoEventEmitter.removeAllListeners(eventNames[i]);
+  }
 };
 
 module.exports = {

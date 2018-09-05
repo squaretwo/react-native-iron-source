@@ -19,11 +19,9 @@ import com.ironsource.mediationsdk.sdk.InterstitialListener;
 
 public class RNIronSourceInterstitialsModule extends ReactContextBaseJavaModule {
     private static final String TAG = "RNIronSourceInterstitials";
-    private final ReactApplicationContext reactContext;
 
     public RNIronSourceInterstitialsModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        this.reactContext = reactContext;
     }
 
     @Override
