@@ -11,6 +11,7 @@
 		B58FBD931E9708C0001125A5 /* IronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58FBD921E9708C0001125A5 /* IronSource.framework */; };
 		DC1FC5791FF20BB9002C4213 /* RNIronSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1FC5751FF20BB9002C4213 /* RNIronSource.m */; };
 		DC1FC57A1FF20BB9002C4213 /* RNIronSourceOfferwall.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1FC5761FF20BB9002C4213 /* RNIronSourceOfferwall.m */; };
+		DC678CC4213F9CE200C1A71C /* RNIronSourceInterstitials.m in Sources */ = {isa = PBXBuildFile; fileRef = DC678CC3213F9CE200C1A71C /* RNIronSourceInterstitials.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		DC1FC5751FF20BB9002C4213 /* RNIronSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIronSource.m; sourceTree = "<group>"; };
 		DC1FC5761FF20BB9002C4213 /* RNIronSourceOfferwall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIronSourceOfferwall.m; sourceTree = "<group>"; };
 		DC1FC5771FF20BB9002C4213 /* RNIronSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIronSource.h; sourceTree = "<group>"; };
+		DC678CC3213F9CE200C1A71C /* RNIronSourceInterstitials.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNIronSourceInterstitials.m; sourceTree = "<group>"; };
+		DC678CC5213F9CF400C1A71C /* RNIronSourceInterstitials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNIronSourceInterstitials.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,8 @@
 				DC1FC5761FF20BB9002C4213 /* RNIronSourceOfferwall.m */,
 				B3E7B5881CC2AC0600A0062D /* RNIronSourceRewardedVideo.h */,
 				B3E7B5891CC2AC0600A0062D /* RNIronSourceRewardedVideo.m */,
+				DC678CC5213F9CF400C1A71C /* RNIronSourceInterstitials.h */,
+				DC678CC3213F9CE200C1A71C /* RNIronSourceInterstitials.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				DC1FC5791FF20BB9002C4213 /* RNIronSource.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNIronSourceRewardedVideo.m in Sources */,
 				DC1FC57A1FF20BB9002C4213 /* RNIronSourceOfferwall.m in Sources */,
+				DC678CC4213F9CE200C1A71C /* RNIronSourceInterstitials.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
