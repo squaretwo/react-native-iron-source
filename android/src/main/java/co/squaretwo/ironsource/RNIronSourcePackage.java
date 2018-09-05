@@ -18,7 +18,8 @@ public class RNIronSourcePackage implements ReactPackage {
       return Arrays.<NativeModule>asList(
               new RNIronSourceModule(reactContext),
               new RNIronSourceRewardedVideoModule(reactContext),
-              new RNIronSourceOfferwallModule(reactContext)
+              new RNIronSourceOfferwallModule(reactContext),
+              new RNIronSourceInterstitialsModule(reactContext)
       );
     }
 
