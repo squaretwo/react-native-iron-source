@@ -34,10 +34,7 @@ const addEventListener = (type, handler) => {
 };
 
 const removeEventListener = (type, handler) => {
-  if (!eventHandlers[type]) {
-    return;
-  }
-  if (!eventHandlers[type].has(handler)) {
+  if (!eventHandlers[type] || !eventHandlers[type].has(handler)) {
     return;
   }
   eventHandlers[type].get(handler).remove();
