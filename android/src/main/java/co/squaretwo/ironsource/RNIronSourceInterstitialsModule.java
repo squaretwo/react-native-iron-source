@@ -94,9 +94,7 @@ public class RNIronSourceInterstitialsModule extends ReactContextBaseJavaModule 
 
     @ReactMethod
     public void showInterstitial(String placementName) {
-        if (!IronSource.isInterstitialPlacementCapped(placementName)) {
-            IronSource.showInterstitial(placementName);
-        }
+        IronSource.showInterstitial(placementName);
     }
 
 
