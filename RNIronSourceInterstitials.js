@@ -44,7 +44,7 @@ const removeEventListener = (type, handler) => {
 const removeAllListeners = () => {
   const count = eventNames.length;
   for (let i = 0; i < count; i++) {
-    IronSourceRewardedVideoEventEmitter.removeAllListeners(eventNames[i]);
+    IronSourceInterstialsEventEmitter.removeAllListeners(eventNames[i]);
   }
 };
 
