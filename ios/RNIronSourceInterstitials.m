@@ -39,7 +39,7 @@ RCT_EXPORT_METHOD(showInterstitial:(NSString*) placementName)
 // Called if showing the Interstitial for the user has failed.
 //You can learn about the reason by examining the ‘error’ value
 -(void)interstitialDidFailToShowWithError:(NSError *)error {
-    [self sendEventWithName:@"interstitialDidFailToShowWithError" body:error];
+    [self sendEventWithName:@"interstitialDidFailToShowWithError" body:error.userInfo[@"NSLocalizedDescription"]];
 }
 //Called each time the end user has clicked on the Interstitial ad.
 -(void)didClickInterstitial {
@@ -55,6 +55,6 @@ RCT_EXPORT_METHOD(showInterstitial:(NSString*) placementName)
 }
 //Invoked when there is no Interstitial Ad available after calling load //function. @param error - will contain the failure code and description.
 -(void)interstitialDidFailToLoadWithError:(NSError *)error {
-    [self sendEventWithName:@"interstitialDidFailToLoadWithError" body:error];
+    [self sendEventWithName:@"interstitialDidFailToLoadWithError" body:error.userInfo[@"NSLocalizedDescription"]];
 }
 @end
