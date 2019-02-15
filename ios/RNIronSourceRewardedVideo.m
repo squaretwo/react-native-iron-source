@@ -6,6 +6,7 @@ NSString *const kIronSourceRewardedVideoAdRewarded = @"ironSourceRewardedVideoAd
 NSString *const kIronSourceRewardedVideoClosedByError = @"ironSourceRewardedVideoClosedByError";
 NSString *const kIronSourceRewardedVideoClosedByUser = @"ironSourceRewardedVideoClosedByUser";
 NSString *const kIronSourceRewardedVideoDidStart = @"ironSourceRewardedVideoDidStart";
+NSString *const kIronSourceRewardedVideoDidOpen = @"ironSourceRewardedVideoDidOpen";
 NSString *const kIronSourceRewardedVideoAdStarted = @"ironSourceRewardedVideoAdStarted";
 NSString *const kIronSourceRewardedVideoAdEnded = @"ironSourceRewardedVideoAdEnded";
 
@@ -27,6 +28,7 @@ RCT_EXPORT_MODULE()
              kIronSourceRewardedVideoClosedByError,
              kIronSourceRewardedVideoClosedByUser,
              kIronSourceRewardedVideoDidStart,
+             kIronSourceRewardedVideoDidOpen,
              kIronSourceRewardedVideoAdStarted,
              kIronSourceRewardedVideoAdEnded
              ];
@@ -68,6 +70,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
          [self sendEventWithName:kIronSourceRewardedVideoAvailable body:nil];
      } else {
          NSLog(@">>>>>>>>>>>> RewardedVideo NOT available");
+         [self sendEventWithName:kIronSourceRewardedVideoUnvailable body:nil];
      }
  }
 
@@ -93,7 +96,9 @@ RCT_EXPORT_METHOD(showRewardedVideo)
  */
 - (void)rewardedVideoDidOpen{
     NSLog(@">>>>>>>>>>>> RewardedVideo opened!");
+    // @Deprecated kIronSourceRewardedVideoDidStart
     [self sendEventWithName:kIronSourceRewardedVideoDidStart body:nil];
+    [self sendEventWithName:kIronSourceRewardedVideoDidOpen body:nil];
 }
 
 /**
@@ -106,12 +111,12 @@ RCT_EXPORT_METHOD(showRewardedVideo)
 }
 
 /**
- * Note: the events below are not available for all supported Rewarded Video
- * Ad Networks.
- * Check which events are available per Ad Network you choose to include in
- * your build.
- * We recommend only using events which register to ALL Ad Networks you
- * include in your build.
+ * Note: the events below are not available
+ * for all supported Rewarded Video Ad Networks.
+ * Check which events are available per Ad Network
+ * you choose to include in your build.
+ * We recommend only using events which register to
+ * ALL Ad Networks you include in your build.
  */
 /**
  * Available for: AdColony, Vungle, AppLovin, UnityAds
