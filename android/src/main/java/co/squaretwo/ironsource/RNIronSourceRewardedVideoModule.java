@@ -35,7 +35,9 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
             @Override
             public void onRewardedVideoAdOpened() {
                 Log.d(TAG, "onRewardedVideoAdOpened() called!");
+                // @Deprecated "ironSourceRewardedVideoDidStart"
                 sendEvent("ironSourceRewardedVideoDidStart", null);
+                sendEvent("ironSourceRewardedVideoDidOpen", null);
             }
             @Override
             public void onRewardedVideoAdClosed() {
@@ -44,39 +46,58 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
             }
             @Override
             public void onRewardedVideoAvailabilityChanged(boolean available) {
-                Log.d(TAG, "onVideoAvailabilityChanged() called!");
+                Log.d(TAG, "onRewardedVideoAvailabilityChanged() called!");
                 if (available) {
                     Log.d(TAG, "ironSourceRewardedVideoAvailable!" );
                     sendEvent("ironSourceRewardedVideoAvailable", null);
                 } else {
+                    Log.d(TAG, "ironSourceRewardedVideoUnavailable!" );
                     sendEvent("ironSourceRewardedVideoUnavailable", null);
                 }
-            }
-            @Override
-            public void onRewardedVideoAdStarted() {
-                Log.d(TAG, "onVideoStart() called!");
-                sendEvent("ironSourceRewardedVideoAdStarted", null);
-            }
-            @Override
-            public void onRewardedVideoAdEnded() {
-                Log.d(TAG, "onVideoEnd() called!");
-                sendEvent("ironSourceRewardedVideoAdEnded", null);
             }
             @Override
             public void onRewardedVideoAdRewarded(Placement placement) {
                 //TODO - here you can reward the user according to the given amount.
                 String rewardName = placement.getRewardName();
                 int rewardAmount = placement.getRewardAmount();
+                Log.d(TAG, "onRewardedVideoAdRewarded() called! " + rewardName + " " + rewardAmount);
+                sendEvent("ironSourceRewardedVideoAdRewarded", null);
             }
             @Override
             public void onRewardedVideoAdShowFailed(IronSourceError se) {
-                Log.d(TAG, "onRewardedVideoShowFail() called!");
+                Log.d(TAG, "onRewardedVideoAdShowFailed() called!");
                 sendEvent("ironSourceRewardedVideoClosedByError", null);
             }
 
             @Override
             public void onRewardedVideoAdClicked(Placement placement) {
                 Log.d(TAG, "onRewardedVideoAdClicked() called!");
+            }
+            /*
+             * Note: the events below are not available for
+             * all supported Rewarded Video Ad Networks.
+             * Check which events are available per Ad Network
+             * you choose to include in your build.
+             * We recommend only using events which register to
+             * ALL Ad Networks you include in your build.
+             */
+            /*
+             * Available for: AdColony, Vungle, AppLovin, UnityAds
+             * Invoked when the video ad starts playing.
+             */
+            @Override
+            public void onRewardedVideoAdStarted() {
+                Log.d(TAG, "onRewardedVideoAdStarted() called!");
+                sendEvent("ironSourceRewardedVideoAdStarted", null);
+            }
+            /*
+             * Available for: AdColony, Vungle, AppLovin, UnityAds
+             * Invoked when the video ad finishes playing.
+             */
+            @Override
+            public void onRewardedVideoAdEnded() {
+                Log.d(TAG, "onRewardedVideoAdEnded() called!");
+                sendEvent("ironSourceRewardedVideoAdEnded", null);
             }
         });
     }
