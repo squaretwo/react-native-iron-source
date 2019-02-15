@@ -6,6 +6,7 @@ const IronSourceRewardedVideoEventEmitter = new NativeEventEmitter(RNIronSourceR
 const eventHandlers = {
   ironSourceRewardedVideoAvailable: new Map(),
   ironSourceRewardedVideoUnavailable: new Map(),
+  ironSourceRewardedVideoDidOpen: new Map(),
   ironSourceRewardedVideoDidStart: new Map(),
   ironSourceRewardedVideoClosedByUser: new Map(),
   ironSourceRewardedVideoClosedByError: new Map(),
@@ -18,6 +19,7 @@ const addEventListener = (type, handler) => {
   switch (type) {
     case 'ironSourceRewardedVideoAvailable':
     case 'ironSourceRewardedVideoUnavailable':
+    case 'ironSourceRewardedVideoDidOpen':
     case 'ironSourceRewardedVideoDidStart':
     case 'ironSourceRewardedVideoClosedByUser':
     case 'ironSourceRewardedVideoClosedByError':
@@ -42,6 +44,7 @@ const removeEventListener = (type, handler) => {
 const removeAllListeners = () => {
   IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoAvailable');
   IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoUnavailable');
+  IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoDidOpen');
   IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoDidStart');
   IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoClosedByUser');
   IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoClosedByError');
