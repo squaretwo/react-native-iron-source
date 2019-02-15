@@ -70,7 +70,7 @@ RCT_EXPORT_METHOD(showRewardedVideo)
          [self sendEventWithName:kIronSourceRewardedVideoAvailable body:nil];
      } else {
          NSLog(@">>>>>>>>>>>> RewardedVideo NOT available");
-         [self sendEventWithName:kIronSourceRewardedVideoUnvailable body:nil];
+         [self sendEventWithName:kIronSourceRewardedVideoUnavailable body:nil];
      }
  }
 
