@@ -12,6 +12,7 @@
 #endif
 
 #import "IronSource/IronSource.h"
+#import "IronSource/ISConfigurations.h"
 
 @interface RNIronSourceOfferwall : RCTEventEmitter <RCTBridgeModule, ISOfferwallDelegate>
 

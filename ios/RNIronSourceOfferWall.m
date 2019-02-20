@@ -5,6 +5,8 @@ NSString *const kIronSourceOfferwallUnavailable = @"ironSourceOfferwallUnavailab
 NSString *const kIronSourceOfferwallDidShow = @"ironSourceOfferwallDidShow";
 NSString *const kIronSourceOfferwallClosedByError = @"ironSourceOfferwallClosedByError";
 NSString *const kIronSourceOfferwallClosedByUser = @"ironSourceOfferwallClosedByUser";
+NSString *const kIronSourceOfferwallReceivedCredits = @"ironSourceOfferwallReceivedCredits";
+NSString *const kIronSourceOfferwallFailedToReceiveCreditsByError = @"ironSourceOfferwallFailedToReceiveCreditsByError";
 
 @implementation RNIronSourceOfferwall {
     RCTResponseSenderBlock _requestOfferwallCallback;
@@ -22,7 +24,9 @@ RCT_EXPORT_MODULE()
              kIronSourceOfferwallUnavailable,
              kIronSourceOfferwallDidShow,
              kIronSourceOfferwallClosedByError,
-             kIronSourceOfferwallClosedByUser
+             kIronSourceOfferwallClosedByUser,
+             kIronSourceOfferwallReceivedCredits,
+             kIronSourceOfferwallFailedToReceiveCreditsByError,
              ];
 }
 
@@ -31,6 +35,7 @@ RCT_EXPORT_METHOD(initializeOfferwall)
 {
     NSLog(@"initializeOfferwall called!!");
     [IronSource setOfferwallDelegate:self];
+    [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = [NSNumber numberWithInt:1];
 }
 
 //
@@ -40,11 +45,11 @@ RCT_EXPORT_METHOD(showOfferwall)
 {
     if ([IronSource hasOfferwall]) {
         NSLog(@"showOfferwall - offerwall available");
-        [self sendEventWithName:@"ironSourceOfferwallAvailable" body:nil];
+        [self sendEventWithName:kIronSourceOfferwallAvailable body:nil];
         [IronSource showOfferwallWithViewController:[UIApplication sharedApplication].delegate.window.rootViewController];
     } else {
         NSLog(@"showOfferwall - offerwall unavailable");
-        [self sendEventWithName:@"ironSourceOfferwallUnavailable" body:nil];
+        [self sendEventWithName:kIronSourceOfferwallUnavailable body:nil];
     }
 }
 
@@ -59,7 +64,7 @@ RCT_EXPORT_METHOD(showOfferwall)
 - (void)offerwallHasChangedAvailability:(BOOL)available {
     if(available == YES){
         NSLog(@">>>>>>>>>>>> Offerwall available");
-        [self sendEventWithName:@"ironSourceOfferwallAvailable" body:nil];
+        [self sendEventWithName:kIronSourceOfferwallAvailable body:nil];
     } else {
         NSLog(@">>>>>>>>>>>> Offerwall NOT available");
     }
@@ -68,28 +73,29 @@ RCT_EXPORT_METHOD(showOfferwall)
 //Called each time the Offerwall successfully loads for the user
 -(void)offerwallDidShow {
     NSLog(@">>>>>>>>>>>> Offerwall did show!");
-    [self sendEventWithName:@"ironSourceOfferwallDidShow" body:nil];
+    [self sendEventWithName:kIronSourceOfferwallDidShow body:nil];
 }
 
 //Called each time the Offerwall fails to show
 //@param error - will contain the failure code and description
 - (void)offerwallDidFailToShowWithError:(NSError *)error {
     NSLog(@">>>>>>>>>>>> Offerwall closed due to an error: %@!", error);
-    [self sendEventWithName:@"ironSourceOfferwallClosedByError" body:nil];
+    [self sendEventWithName:kIronSourceOfferwallClosedByError body:nil];
 }
 
 //Called when the user closes the Offerwall
 -(void)offerwallDidClose{
     NSLog(@">>>>>>>>>>>> Offerwall closed!");
-    [self sendEventWithName:@"ironSourceOfferwallClosedByUser" body:nil];
+    [self sendEventWithName:kIronSourceOfferwallClosedByUser body:nil];
 }
 
 - (BOOL)didReceiveOfferwallCredits:(NSDictionary *)creditInfo{
+    [self sendEventWithName:kIronSourceOfferwallReceivedCredits body:creditInfo];
     return YES;
 }
 
 - (void)didFailToReceiveOfferwallCreditsWithError:(NSError *)error{
+    [self sendEventWithName:kIronSourceOfferwallFailedToReceiveCreditsByError body:nil];
 }
-
 
 @end
