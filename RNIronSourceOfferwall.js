@@ -16,7 +16,7 @@ const eventHandlers = {
 
 const addEventListener = (type, handler) => {
   switch (type) {
-    case 'ironSourceOfferwallOfferwallAvailable':
+    case 'ironSourceOfferwallAvailable':
     case 'ironSourceOfferwallUnavailable':
     case 'ironSourceOfferwallDidShow':
     case 'ironSourceOfferwallClosedByUser':
