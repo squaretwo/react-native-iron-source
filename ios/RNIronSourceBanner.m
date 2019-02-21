@@ -1,0 +1,111 @@
+//
+//  RNIronSourceBanner.m
+//  RNIronSource
+//
+//  Created by Kazlouski Dmitriy on 2/21/19.
+//
+
+#import "RNIronSourceBanner.h"
+
+NSString *const kIronSourceBannerDidLoad = @"ironSourceBannerDidLoad";
+NSString *const kIronSourceBannerDidFailToLoadWithError = @"ironSourceBannerDidFailToLoadWithError";
+NSString *const kIronSourceBannerDidDismissScreen = @"ironSourceBannerDidDismissScreen";
+NSString *const kIronSourceBannerWillLeaveApplication = @"ironSourceBannerWillLeaveApplication";
+NSString *const kIronSourceBannerWillPresentScreen = @"ironSourceBannerWillPresentScreen";
+NSString *const kIronSourceDidClickBanner = @"ironSourceDidClickBanner";
+
+@implementation RNIronSourceBanner
+{
+    bool hasListeners;
+}
+
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
+}
+
+RCT_EXPORT_MODULE()
+
+- (NSArray<NSString *> *)supportedEvents {
+    return @[kIronSourceBannerDidLoad,
+             kIronSourceBannerDidFailToLoadWithError,
+             kIronSourceBannerDidDismissScreen,
+             kIronSourceBannerWillLeaveApplication,
+             kIronSourceBannerWillPresentScreen,
+             kIronSourceDidClickBanner,
+             ];
+}
+
+- (void)startObserving {
+    hasListeners = YES;
+}
+
+- (void)stopObserving {
+    hasListeners = NO;
+}
+
+RCT_EXPORT_METHOD(initializeBanner) {
+    [IronSource setBannerDelegate:self];
+    self.viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+}
+
+RCT_EXPORT_METHOD(loadBanner:(NSString *)bannerSizeDescription) {
+    if (self.bannerView) {
+        [self destroyBanner];
+    }
+    [IronSource loadBannerWithViewController:self.viewController
+                                        size:[[ISBannerSize alloc] initWithDescription:bannerSizeDescription]];
+}
+
+RCT_EXPORT_METHOD(destroyBanner) {
+    if (self.bannerView) {
+        [IronSource destroyBanner:self.bannerView];
+        self.bannerView = nil;
+    }
+}
+
+- (void)bannerDidLoad:(ISBannerView *)bannerView {
+    if (hasListeners) {
+        [self sendEventWithName:kIronSourceBannerDidLoad body:nil];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.bannerView = bannerView;
+        self.bannerView.center = CGPointMake(self.viewController.view.center.x, self.viewController.view.frame.size.height - self.bannerView.frame.size.height / 2);
+        [self.viewController.view addSubview:self.bannerView];
+    });
+}
+
+- (void)bannerDidFailToLoadWithError:(NSError *)error {
+    if (hasListeners) {
+        [self sendEventWithName:kIronSourceBannerDidFailToLoadWithError body:nil];
+    }
+}
+
+- (void)bannerDidDismissScreen {
+    if (hasListeners) {
+        [self sendEventWithName:kIronSourceBannerDidDismissScreen body:nil];
+    }
+}
+
+
+- (void)bannerWillLeaveApplication {
+    if (hasListeners) {
+        [self sendEventWithName:kIronSourceBannerWillLeaveApplication body:nil];
+    }
+}
+
+
+- (void)bannerWillPresentScreen {
+    if (hasListeners) {
+        [self sendEventWithName:kIronSourceBannerWillPresentScreen body:nil];
+    }
+}
+
+
+- (void)didClickBanner {
+    if (hasListeners) {
+        [self sendEventWithName:kIronSourceDidClickBanner body:nil];
+    }
+}
+
+@end

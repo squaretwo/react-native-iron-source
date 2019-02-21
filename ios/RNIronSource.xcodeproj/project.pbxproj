@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A840440221EA7920088739D /* RNIronSourceBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A84043F221EA7920088739D /* RNIronSourceBanner.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNIronSourceRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNIronSourceRewardedVideo.m */; };
 		B58FBD931E9708C0001125A5 /* IronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58FBD921E9708C0001125A5 /* IronSource.framework */; };
 		DC1FC5791FF20BB9002C4213 /* RNIronSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1FC5751FF20BB9002C4213 /* RNIronSource.m */; };
@@ -28,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNIronSource.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNIronSource.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A84043F221EA7920088739D /* RNIronSourceBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNIronSourceBanner.m; sourceTree = "<group>"; };
+		7A840441221EA7C30088739D /* RNIronSourceBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNIronSourceBanner.h; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNIronSourceRewardedVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNIronSourceRewardedVideo.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNIronSourceRewardedVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNIronSourceRewardedVideo.m; sourceTree = "<group>"; };
 		B58FBD921E9708C0001125A5 /* IronSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IronSource.framework; path = ../../../../Downloads/IronSource/IronSource.framework; sourceTree = "<group>"; };
@@ -66,6 +69,8 @@
 				DC1FC5771FF20BB9002C4213 /* RNIronSource.h */,
 				DC1FC5751FF20BB9002C4213 /* RNIronSource.m */,
 				DC1FC5741FF20BB8002C4213 /* RNIronSourceOfferwall.h */,
+				7A84043F221EA7920088739D /* RNIronSourceBanner.m */,
+				7A840441221EA7C30088739D /* RNIronSourceBanner.h */,
 				DC1FC5761FF20BB9002C4213 /* RNIronSourceOfferwall.m */,
 				B3E7B5881CC2AC0600A0062D /* RNIronSourceRewardedVideo.h */,
 				B3E7B5891CC2AC0600A0062D /* RNIronSourceRewardedVideo.m */,
@@ -142,6 +147,7 @@
 				DC1FC5791FF20BB9002C4213 /* RNIronSource.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNIronSourceRewardedVideo.m in Sources */,
 				DC1FC57A1FF20BB9002C4213 /* RNIronSourceOfferwall.m in Sources */,
+				7A840440221EA7920088739D /* RNIronSourceBanner.m in Sources */,
 				DC678CC4213F9CE200C1A71C /* RNIronSourceInterstitials.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
