@@ -108,3 +108,25 @@ IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res =
   console.warn('Got credits', res)
 });
 ```
+
+## Mediation Setup
+
+#### iOS (via CocoaPods)
+```
+pod 'RNIronSource', :path => '../node_modules/react-native-iron-source';
+pod 'RNIronSource', :path => '../node_modules/react-native-iron-source', :subspecs => [
+    'AdColony',
+    'Admob',
+    'AppLoving',
+    'Chartboost',
+    'Facebook',
+    'HyprMX',
+    'InMobi',
+    'Maio',
+    'MediaBrix',
+    'MoPub',
+    'Tapjoy',
+    'UnityAds',
+    'Vungle'
+]
+```
