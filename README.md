@@ -57,4 +57,54 @@ Do nothing.
 
 ## Usage
 
-See the `ExampleApp`
+### Initialization
+
+First initialize IronSource SDK
+
+```javascript
+IronSource.initializeIronSource('12345678', 'userId');
+```
+
+### Interstitial
+
+```javascript
+import { IronSourceInterstitials } from 'react-native-iron-source';
+
+IronSourceInterstitials.loadInterstitial();
+IronSourceInterstitials.addEventListener('interstitialDidLoad', () => {
+  IronSourceInterstitials.showInterstitial();
+});
+```
+### Rewarded Video
+
+```javascript
+import { IronSourceRewardedVideo } from 'react-native-iron-source';
+
+IronSourceRewardedVideo.initializeRewardedVideo();
+IronSourceRewardedVideo.showRewardedVideo();
+IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', res => {
+  console.warn('Rewarded!', res)
+});
+```
+### Banner
+
+```javascript
+import { IronSourceBanner } from 'react-native-iron-source';
+
+IronSourceBanner.initializeBanner();
+IronSourceBanner.loadBanner('LARGE');
+IronSourceBanner.addEventListener('ironSourceBannerDidLoad', () => {
+  console.warn('Iron Source banner loaded');
+});
+```
+### Offerwall
+
+```javascript
+import { IronSourceOfferwall } from 'react-native-iron-source';
+
+IronSourceOfferwall.initializeOfferwall();
+IronSourceOfferwall.showOfferwall();
+IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res => {
+  console.warn('Got credits', res)
+});
+```
