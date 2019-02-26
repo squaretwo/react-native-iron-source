@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.ironsource.adapters.supersonicads.SupersonicConfig;
 import com.ironsource.mediationsdk.IronSource;
 import com.ironsource.mediationsdk.logger.IronSourceError;
 import com.ironsource.mediationsdk.model.Placement;
@@ -33,6 +34,8 @@ public class RNIronSourceOfferwallModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void initializeOfferwall() {
+        SupersonicConfig.getConfigObj().setClientSideCallbacks(true);
+
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {

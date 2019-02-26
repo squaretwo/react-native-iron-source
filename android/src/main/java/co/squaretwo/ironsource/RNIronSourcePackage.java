@@ -19,7 +19,8 @@ public class RNIronSourcePackage implements ReactPackage {
               new RNIronSourceModule(reactContext),
               new RNIronSourceRewardedVideoModule(reactContext),
               new RNIronSourceOfferwallModule(reactContext),
-              new RNIronSourceInterstitialsModule(reactContext)
+              new RNIronSourceInterstitialsModule(reactContext),
+              new RNIronSourceBannerModule(reactContext)
       );
     }
 
