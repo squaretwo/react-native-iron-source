@@ -113,8 +113,8 @@ IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res =
 
 #### iOS (via CocoaPods)
 ```
-pod 'RNIronSource', :path => '../node_modules/react-native-iron-source';
 pod 'RNIronSource', :path => '../node_modules/react-native-iron-source', :subspecs => [
+    'Core', # required
     'AdColony',
     'Admob',
     'AppLoving',
