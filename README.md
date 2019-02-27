@@ -40,19 +40,30 @@ Iron Source SDK React Native bridge
       compile project(':react-native-iron-source')
   	```
 
-## IronSource iOS SDK
+## Manual Setup
 
-### For projects with CocoaPods
+### IronSource iOS SDK
+
+#### For projects with CocoaPods
 
 Do nothing.
 
-### For other project
+#### For other project
 
 1. Download the iOS SDK from [Ironsrc.com](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/)
 2. Unzip and rename the directory to `IronSourceSDK`
 3. Copy the SDK to `~/Documents/IronSourceSDK`
 4. Drag the `IronSource.framework` to your react native target build phases from the `~/Documents/IronSourceSDK` directory
 5. Add `~/Documents/IronSourceSDK` to your target's Framework Search Paths in Build Settings
+
+
+### Android
+Add a repo to your `app/build.gradle` file 
+```
+repositories {
+    maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }
+}
+```
 
 
 ## Usage
