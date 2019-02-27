@@ -141,3 +141,6 @@ pod 'RNIronSource', :path => '../node_modules/react-native-iron-source', :subspe
     'Vungle'
 ]
 ```
+
+#### Android
+Follow the official doc [here](https://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/#step-1).
