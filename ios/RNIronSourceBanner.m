@@ -57,6 +57,22 @@ RCT_EXPORT_METHOD(loadBanner:(NSString *)bannerSizeDescription) {
                                         size:[[ISBannerSize alloc] initWithDescription:bannerSizeDescription]];
 }
 
+RCT_EXPORT_METHOD(showBanner) {
+    if (self.bannerView) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.bannerView.hidden = NO;
+        });
+    }
+}
+
+RCT_EXPORT_METHOD(hideBanner) {
+    if (self.bannerView) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.bannerView.hidden = YES;
+        });
+    }
+}
+
 RCT_EXPORT_METHOD(destroyBanner) {
     if (self.bannerView) {
         [IronSource destroyBanner:self.bannerView];
@@ -72,6 +88,7 @@ RCT_EXPORT_METHOD(destroyBanner) {
         self.bannerView = bannerView;
         self.bannerView.center = CGPointMake(self.viewController.view.center.x, self.viewController.view.frame.size.height - self.bannerView.frame.size.height / 2);
         [self.viewController.view addSubview:self.bannerView];
+        self.bannerView.hidden = YES;
     });
 }
 

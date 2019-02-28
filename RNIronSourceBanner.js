@@ -41,6 +41,8 @@ module.exports = {
   ...RNIronSourceBanner,
   initializeBanner: () => RNIronSourceBanner.initializeBanner(),
   loadBanner: (size = 'BANNER') => RNIronSourceBanner.loadBanner(size),
+  showBanner: () => RNIronSourceBanner.showBanner(),
+  hideBanner: () => RNIronSourceBanner.hideBanner(),
   destroyBanner: () => RNIronSourceBanner.destroyBanner(),
   addEventListener,
   removeEventListener,
