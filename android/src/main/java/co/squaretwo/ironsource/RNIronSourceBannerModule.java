@@ -70,6 +70,7 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
                         FrameLayout.LayoutParams.WRAP_CONTENT
                 );
                 bannerLayout.setLayoutParams(layoutParams);
+                bannerLayout.setVisibility(View.INVISIBLE);
                 layoutParams.gravity = Gravity.BOTTOM;
                 rootView.addView(bannerLayout);
             }
@@ -81,10 +82,33 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
         IronSource.destroyBanner(bannerLayout);
     }
 
+    @ReactMethod
+    public void showBanner() {
+        if (bannerLayout != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    bannerLayout.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+    }
+
+    @ReactMethod
+    public void hideBanner() {
+        if (bannerLayout != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    bannerLayout.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
+    }
+
     @Override
     public void onBannerAdLoaded() {
         sendEvent("ironSourceBannerDidLoad", null);
-        bannerLayout.setVisibility(View.VISIBLE);
     }
 
     @Override

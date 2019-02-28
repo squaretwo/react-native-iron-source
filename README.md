@@ -106,6 +106,7 @@ IronSourceBanner.initializeBanner();
 IronSourceBanner.loadBanner('LARGE');
 IronSourceBanner.addEventListener('ironSourceBannerDidLoad', () => {
   console.warn('Iron Source banner loaded');
+  IronSourceBanner.showBanner();
 });
 ```
 ### Offerwall
