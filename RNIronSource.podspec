@@ -23,43 +23,43 @@ Pod::Spec.new do |s|
     ss.source_files  = "ios/**/*.{h,m}"
   end
   s.subspec "AdColony" do |ss|
-    ss.dependency         "IronSourceAdColonyAdapter"
+    ss.dependency         "IronSourceAdColonyAdapter", "4.1.4"
   end
   s.subspec "Admob" do |ss|
-    ss.dependency         "IronSourceAdMobAdapter"
+    ss.dependency         "IronSourceAdMobAdapter", "4.3.1"
   end
   s.subspec "AppLoving" do |ss|
-    ss.dependency         "IronSourceAppLovinAdapter"
+    ss.dependency         "IronSourceAppLovinAdapter", "4.3.2"
   end
   s.subspec "Chartboost" do |ss|
-    ss.dependency         "IronSourceChartboostAdapter"
+    ss.dependency         "IronSourceChartboostAdapter", "4.1.5"
   end
   s.subspec "Facebook" do |ss|
-    ss.dependency         "IronSourceFacebookAdapter"
+    ss.dependency         "IronSourceFacebookAdapter", "4.3.3"
   end
   s.subspec "HyprMX" do |ss|
-    ss.dependency         "IronSourceHyprMXAdapter"
+    ss.dependency         "IronSourceHyprMXAdapter", "4.1.0"
   end
   s.subspec "InMobi" do |ss|
-    ss.dependency         "IronSourceInMobiAdapter"
+    ss.dependency         "IronSourceInMobiAdapter", "4.3.0"
   end
   s.subspec "Maio" do |ss|
-    ss.dependency         "IronSourceMaioAdapter"
+    ss.dependency         "IronSourceMaioAdapter", "4.1.2"
   end
   s.subspec "MediaBrix" do |ss|
-    ss.dependency         "IronSourceMediaBrixAdapter"
+    ss.dependency         "IronSourceMediaBrixAdapter", "4.1.1"
   end
   s.subspec "MoPub" do |ss|
-    ss.dependency         "IronSourceMoPubAdapter"
+    ss.dependency         "IronSourceMoPubAdapter", "4.1.2"
   end
   s.subspec "Tapjoy" do |ss|
-    ss.dependency         "IronSourceTapjoyAdapter"
+    ss.dependency         "IronSourceTapjoyAdapter", "4.1.2.3"
   end
   s.subspec "UnityAds" do |ss|
-    ss.dependency         "IronSourceUnityAdsAdapter"
+    ss.dependency         "IronSourceUnityAdsAdapter", "4.1.2.2"
   end
   s.subspec "Vungle" do |ss|
-    ss.dependency         "IronSourceVungleAdapter"
+    ss.dependency         "IronSourceVungleAdapter", "4.1.6"
   end
 
 end
