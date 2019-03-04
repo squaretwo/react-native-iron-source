@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.subspec "Admob" do |ss|
     ss.dependency         "IronSourceAdMobAdapter", "4.3.1"
   end
-  s.subspec "AppLoving" do |ss|
+  s.subspec "AppLovin" do |ss|
     ss.dependency         "IronSourceAppLovinAdapter", "4.3.2"
   end
   s.subspec "Chartboost" do |ss|

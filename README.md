@@ -129,7 +129,7 @@ pod 'RNIronSource', :path => '../node_modules/react-native-iron-source', :subspe
     'Core', # required
     'AdColony',
     'Admob',
-    'AppLoving',
+    'AppLovin',
     'Chartboost',
     'Facebook',
     'HyprMX',
