@@ -1,10 +1,13 @@
 package co.squaretwo.ironsource;
 
+import android.app.Activity;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.facebook.react.ReactActivity;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -50,19 +53,23 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
 
     @ReactMethod
     public void loadBanner(final String sizeDescription) {
+        final Activity activity = getReactApplicationContext().getCurrentActivity();
+        if (activity == null) {
+            return;
+        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                FrameLayout rootView = (FrameLayout) getReactApplicationContext().getCurrentActivity().findViewById(android.R.id.content);
+                final FrameLayout rootView = activity.findViewById(android.R.id.content);
 
-                ISBannerSize bannerSize = RNIronSourceBannerModule.this.getBannerSize(sizeDescription);
+                final ISBannerSize bannerSize = RNIronSourceBannerModule.this.getBannerSize(sizeDescription);
 
                 if (bannerLayout != null) {
-                    RNIronSourceBannerModule.this.destroyBanner();
                     rootView.removeView(bannerLayout);
+                    RNIronSourceBannerModule.this.destroyBanner();
                 }
 
-                bannerLayout = IronSource.createBanner(getReactApplicationContext().getCurrentActivity(), bannerSize);
+                bannerLayout = IronSource.createBanner(activity, bannerSize);
                 IronSource.loadBanner(bannerLayout);
 
                 final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
@@ -79,7 +86,9 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
 
     @ReactMethod
     public void destroyBanner() {
-        IronSource.destroyBanner(bannerLayout);
+        if (bannerLayout != null) {
+            IronSource.destroyBanner(bannerLayout);
+        }
     }
 
     @ReactMethod
@@ -158,6 +167,6 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
 
     @Override
     public void onHostDestroy() {
-
+        this.destroyBanner();
     }
 }
