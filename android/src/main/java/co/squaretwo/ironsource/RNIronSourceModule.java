@@ -2,6 +2,8 @@ package co.squaretwo.ironsource;
 
 import android.os.Handler;
 import android.os.Looper;
+
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -23,10 +25,11 @@ public class RNIronSourceModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initializeIronSource(final String appId, final String userId) {
+    public void initializeIronSource(final String appId, final String userId, final Promise promise) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
+                promise.resolve(null);
                 IronSource.setUserId(userId);
                 IronSource.init(reactContext.getCurrentActivity(), appId);
             }

@@ -35,10 +35,12 @@ RCT_EXPORT_MODULE()
 }
 
 // Initialize IronSource before showing the Rewarded Video
-RCT_EXPORT_METHOD(initializeRewardedVideo)
+RCT_EXPORT_METHOD(initializeRewardedVideo:(RCTPromiseResolveBlock)resolve
+                  rejector:(RCTPromiseRejectBlock)reject)
 {
     NSLog(@"initializeRewardedVideo called!!");
     [IronSource setRewardedVideoDelegate:self];
+    resolve(nil);
 }
 
 //
