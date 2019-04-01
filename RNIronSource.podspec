@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
   s.author       = { "Ben Yee" => "benyee@gmail.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/wowmaking/react-native-iron-source" }
-  s.source_files  = "ios/**/*.{h,m}"
   s.requires_arc = true
+  s.default_subspec = 'Core'
 
   s.dependency "React"
   s.dependency "IronSourceSDK", "6.8.1.0"
