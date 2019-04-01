@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
     ss.dependency         "IronSourceHyprMXAdapter", "4.1.0.11"
   end
   s.subspec "InMobi" do |ss|
-    ss.dependency         "IronSourceInMobiAdapter", "4.3.0"
+    ss.dependency         "IronSourceInMobiAdapter", "4.3.1.0"
   end
   s.subspec "Maio" do |ss|
     ss.dependency         "IronSourceMaioAdapter", "4.1.2.1"
