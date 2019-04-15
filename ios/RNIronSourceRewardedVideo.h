@@ -14,4 +14,6 @@
 
 @interface RNIronSourceRewardedVideo : RCTEventEmitter <RCTBridgeModule, ISRewardedVideoDelegate>
 
+@property (nonatomic, weak) UIViewController *viewController;
+
 @end
