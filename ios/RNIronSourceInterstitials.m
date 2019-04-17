@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "RNIronSourceInterstitials.h"
+#import "RCTUtils.h"
 
 @implementation RNIronSourceInterstitials
 
@@ -24,7 +25,7 @@ RCT_EXPORT_METHOD(loadInterstitial)
 
 RCT_EXPORT_METHOD(showInterstitial:(NSString*) placementName)
 {
-    [IronSource showInterstitialWithViewController:[UIApplication sharedApplication].delegate.window.rootViewController placement:placementName];
+    [IronSource showInterstitialWithViewController:RCTPresentedViewController() placement:placementName];
 }
 
 #pragma mark - ISInterstitialDelegate

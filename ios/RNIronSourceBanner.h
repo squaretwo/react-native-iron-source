@@ -16,7 +16,6 @@
 @interface RNIronSourceBanner : RCTEventEmitter <RCTBridgeModule, ISBannerDelegate>
 
 @property (nonatomic, assign)   ISBannerView*   bannerView;
-@property (nonatomic, assign)   UIViewController*   viewController;
 
 @end
 

@@ -1,5 +1,7 @@
 #import "RNIronSourceRewardedVideo.h"
 
+#import "RCTUtils.h"
+
 NSString *const kIronSourceRewardedVideoAvailable = @"ironSourceRewardedVideoAvailable";
 NSString *const kIronSourceRewardedVideoUnavailable = @"ironSourceRewardedVideoUnavailable";
 NSString *const kIronSourceRewardedVideoAdRewarded = @"ironSourceRewardedVideoAdRewarded";
@@ -51,14 +53,12 @@ RCT_EXPORT_METHOD(showRewardedVideo)
     if ([IronSource hasRewardedVideo]) {
         NSLog(@"showRewardedVideo - video available");
         [self sendEventWithName:kIronSourceRewardedVideoAvailable body:nil];
-        [IronSource showRewardedVideoWithViewController:self.viewController];
-
+        [IronSource showRewardedVideoWithViewController:RCTPresentedViewController()];
     } else {
         NSLog(@"showRewardedVideo - video unavailable");
         [self sendEventWithName:kIronSourceRewardedVideoUnavailable body:nil];
     }
 }
-
 
 #pragma mark delegate events
 

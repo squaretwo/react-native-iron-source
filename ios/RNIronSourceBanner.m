@@ -6,6 +6,7 @@
 //
 
 #import "RNIronSourceBanner.h"
+#import "RCTUtils.h"
 
 NSString *const kIronSourceBannerDidLoad = @"ironSourceBannerDidLoad";
 NSString *const kIronSourceBannerDidFailToLoadWithError = @"ironSourceBannerDidFailToLoadWithError";
@@ -46,14 +47,13 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(initializeBanner) {
     [IronSource setBannerDelegate:self];
-    self.viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
 }
 
 RCT_EXPORT_METHOD(loadBanner:(NSString *)bannerSizeDescription) {
     if (self.bannerView) {
         [self destroyBanner];
     }
-    [IronSource loadBannerWithViewController:self.viewController
+    [IronSource loadBannerWithViewController:RCTPresentedViewController()
                                         size:[[ISBannerSize alloc] initWithDescription:bannerSizeDescription]];
 }
 
@@ -85,15 +85,16 @@ RCT_EXPORT_METHOD(destroyBanner) {
         [self sendEventWithName:kIronSourceBannerDidLoad body:nil];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *viewController = RCTPresentedViewController();
         CGFloat bottomSafeAreaLength = 0;
         if (@available(iOS 11.0, *)) {
-            bottomSafeAreaLength = self.viewController.view.safeAreaInsets.bottom;
+            bottomSafeAreaLength = viewController.view.safeAreaInsets.bottom;
         } else {
-            bottomSafeAreaLength = self.viewController.bottomLayoutGuide.length;
+            bottomSafeAreaLength = viewController.bottomLayoutGuide.length;
         }
         self.bannerView = bannerView;
-        self.bannerView.center = CGPointMake(self.viewController.view.center.x, self.viewController.view.frame.size.height - self.bannerView.frame.size.height / 2 - bottomSafeAreaLength);
-        [self.viewController.view addSubview:self.bannerView];
+        self.bannerView.center = CGPointMake(viewController.view.center.x, viewController.view.frame.size.height - self.bannerView.frame.size.height / 2 - bottomSafeAreaLength);
+        [viewController.view addSubview:self.bannerView];
         self.bannerView.hidden = YES;
     });
 }
