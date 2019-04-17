@@ -85,8 +85,14 @@ RCT_EXPORT_METHOD(destroyBanner) {
         [self sendEventWithName:kIronSourceBannerDidLoad body:nil];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        CGFloat bottomSafeAreaLength = 0;
+        if (@available(iOS 11.0, *)) {
+            bottomSafeAreaLength = self.viewController.view.safeAreaInsets.bottom;
+        } else {
+            bottomSafeAreaLength = self.viewController.bottomLayoutGuide.length;
+        }
         self.bannerView = bannerView;
-        self.bannerView.center = CGPointMake(self.viewController.view.center.x, self.viewController.view.frame.size.height - self.bannerView.frame.size.height / 2);
+        self.bannerView.center = CGPointMake(self.viewController.view.center.x, self.viewController.view.frame.size.height - self.bannerView.frame.size.height / 2 - bottomSafeAreaLength);
         [self.viewController.view addSubview:self.bannerView];
         self.bannerView.hidden = YES;
     });
