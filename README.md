@@ -205,4 +205,4 @@ pod 'RNIronSource', :path => '../node_modules/react-native-iron-source', :subspe
 ```
 
 ## Known issues
-Ads may stop loading properly when "Reload" option in your React Native app is used (or CMD+R). You have to restart the app completely if you want to check that ads load and display correctly.
+Ads may stop loading properly when "Reload" option (or CMD+R) in your React Native app was used. You have to restart the app completely if you want to check that ads load and display correctly.
