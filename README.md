@@ -129,44 +129,56 @@ IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res =
 ## Events
 
 ### Banner events
-- ironSourceBannerDidFailToLoadWithError
-- ironSourceBannerDidDismissScreen
-- ironSourceBannerWillLeaveApplication
-- ironSourceBannerWillPresentScreen
-- ironSourceDidClickBanner
+| Name | Description |
+| ---- | ----------- |
+| ironSourceBannerDidLoad | Called after a banner ad has been successfully loaded |
+| ironSourceBannerDidFailToLoadWithError | Called after a banner has attempted to load an ad but failed |
+| ironSourceBannerDidDismissScreen | Called after a full screen content has been dismissed |
+| ironSourceBannerWillLeaveApplication | Called when a user would be taken out of the application context |
+| ironSourceBannerWillPresentScreen | Called when a banner is about to present a full screen content |
+| ironSourceDidClickBanner | Called after a banner has been clicked |
 
 ### Rewarded video events
-- ironSourceRewardedVideoAvailable
-- ironSourceRewardedVideoUnavailable
-- ironSourceRewardedVideoDidOpen
-- ironSourceRewardedVideoDidStart
-- ironSourceRewardedVideoClosedByUser
-- ironSourceRewardedVideoClosedByError
-- ironSourceRewardedVideoAdStarted
-- ironSourceRewardedVideoAdEnded
-- ironSourceRewardedVideoAdRewarded
+| Name | Description |
+| ---- | ----------- |
+| ironSourceRewardedVideoAvailable | Called after a rewarded video has changed its availability to YES. It means that now you can show the ad |
+| ironSourceRewardedVideoUnavailable | Called after a rewarded video has changed its availability to NO |
+| ironSourceRewardedVideoClosedByUser | Called after a rewarded video has been dismissed |
+| ironSourceRewardedVideoDidStart | Called after a rewarded video has started playing. Note: this event is not available for all supported rewarded video ad networks. Check which events are available per ad network you choose |
+| ironSourceRewardedVideoClosedByError | Called after a rewarded video has attempted to show but failed |
+| ironSourceRewardedVideoDidOpen | Called after a rewarded video has been opened |
+| ironSourceRewardedVideoAdStarted | Called after a rewarded video has been opened |
+| ironSourceRewardedVideoAdEnded | Called after a rewarded video has finished playing. Note: this event is not available for all supported rewarded video ad networks. Check which events are available per ad network you choose |
+| ironSourceRewardedVideoAdRewarded | Invoked when the user completed the video and should be rewarded |
 
 ### Interstitial events
-- interstitialDidLoad
-- interstitialDidShow
-- interstitialDidFailToShowWithError
-- didClickInterstitial
-- interstitialDidClose
-- interstitialDidOpen
-- interstitialDidFailToLoadWithError
+| Name | Description |
+| ---- | ----------- |
+| interstitialDidLoad | Invoked when Interstitial Ad is ready to be shown after load function was called |
+| interstitialDidShow | Called each time the Interstitial window has opened successfully |
+| interstitialDidFailToShowWithError | Called if showing the Interstitial for the user has failed |
+| didClickInterstitial | Called each time the end user has clicked on the Interstitial ad |
+| interstitialDidClose | Called each time the Interstitial window is about to close |
+| interstitialDidOpen | Called each time the Interstitial window is about to open |
+| interstitialDidFailToLoadWithError | Invoked when there is no Interstitial Ad available after calling load function |
 
-#### Offerwall events
-- ironSourceOfferwallAvailable
-- ironSourceOfferwallUnavailable
-- ironSourceOfferwallDidShow
-- ironSourceOfferwallClosedByUser
-- ironSourceOfferwallClosedByError
-- ironSourceOfferwallReceivedCredits
-- ironSourceOfferwallFailedToReceiveCreditsByError
+
+### Offerwall events
+| Name | Description |
+| ---- | ----------- |
+| ironSourceOfferwallAvailable | Invoked when there is a change in the Offerwall availability status to YES |
+| ironSourceOfferwallUnavailable | Invoked when there is a change in the Offerwall availability status to NO |
+| ironSourceOfferwallDidShow | Called each time the Offerwall successfully loads for the user |
+| ironSourceOfferwallClosedByUser | Called when the user closes the Offerwall |
+| ironSourceOfferwallClosedByError | Called each time the Offerwall fails to show |
+| ironSourceOfferwallReceivedCredits | Called each time the user completes an offer |
+| ironSourceOfferwallFailedToReceiveCreditsByError | Called when failed to retrieve the users credit balance info |
+
+You can find out more about events in the official doc. Start [here](https://developers.ironsrc.com/ironsource-mobile/ios/rewarded-video-integration-ios/) if you wish.
 
 ## Mediation Setup
 
-WARNING! Make sure you following the doc carefully. If you miss something in the mediation setup process for some network it may not work partially or entirely.
+**WARNING!** Make sure you following the doc carefully. If you miss something in the mediation setup process for some network it may not work partially or entirely.
 
 Official doc:
 - [Android](https://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/#step-1).
@@ -192,5 +204,5 @@ pod 'RNIronSource', :path => '../node_modules/react-native-iron-source', :subspe
 ]
 ```
 
-### Known issues
+## Known issues
 Ads may stop loading properly when "Reload" option in your React Native app is used (or CMD+R). You have to restart the app completely if you want to check that ads load and display correctly.
