@@ -5,7 +5,11 @@ Iron Source SDK React Native bridge
 
 ## Getting started
 
-`$ npm install https://github.com/wowmaking/react-native-iron-source --save`
+It is recommended to use version tags. Example:
+
+`npm install https://github.com/wowmaking/react-native-iron-source\#v2.5.0 --save`
+
+You can find available version tags [here](https://github.com/wowmaking/react-native-iron-source/releases).
 
 ### Mostly automatic installation
 
