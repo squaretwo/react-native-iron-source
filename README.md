@@ -48,7 +48,7 @@ Iron Source SDK React Native bridge
 
 Do nothing.
 
-#### For other project
+#### For other projects
 
 1. Download the iOS SDK from [Ironsrc.com](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/)
 2. Unzip and rename the directory to `IronSourceSDK`
@@ -65,7 +65,6 @@ repositories {
 }
 ```
 
-
 ## Usage
 
 ### Initialization
@@ -73,6 +72,8 @@ repositories {
 First initialize IronSource SDK
 
 ```javascript
+import { IronSource } from 'react-native-iron-source';
+
 IronSource.initializeIronSource('12345678', 'userId');
 ```
 
@@ -121,9 +122,53 @@ IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res =
 });
 ```
 
+## Events
+
+### Banner events
+- ironSourceBannerDidFailToLoadWithError
+- ironSourceBannerDidDismissScreen
+- ironSourceBannerWillLeaveApplication
+- ironSourceBannerWillPresentScreen
+- ironSourceDidClickBanner
+
+### Rewarded video events
+- ironSourceRewardedVideoAvailable
+- ironSourceRewardedVideoUnavailable
+- ironSourceRewardedVideoDidOpen
+- ironSourceRewardedVideoDidStart
+- ironSourceRewardedVideoClosedByUser
+- ironSourceRewardedVideoClosedByError
+- ironSourceRewardedVideoAdStarted
+- ironSourceRewardedVideoAdEnded
+- ironSourceRewardedVideoAdRewarded
+
+### Interstitial events
+- interstitialDidLoad
+- interstitialDidShow
+- interstitialDidFailToShowWithError
+- didClickInterstitial
+- interstitialDidClose
+- interstitialDidOpen
+- interstitialDidFailToLoadWithError
+
+#### Offerwall events
+- ironSourceOfferwallAvailable
+- ironSourceOfferwallUnavailable
+- ironSourceOfferwallDidShow
+- ironSourceOfferwallClosedByUser
+- ironSourceOfferwallClosedByError
+- ironSourceOfferwallReceivedCredits
+- ironSourceOfferwallFailedToReceiveCreditsByError
+
 ## Mediation Setup
 
-#### iOS (via CocoaPods)
+WARNING! Make sure you following the doc carefully. If you miss something in the mediation setup process for some network it may not work partially or entirely.
+
+Official doc:
+- [Android](https://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/#step-1).
+- [iOS](https://developers.ironsrc.com/ironsource-mobile/ios/mediation-networks-ios/#step-1).
+
+You can optionally use this syntax to add iOS mediation adapters instead of suggested by the doc.
 ```
 pod 'RNIronSource', :path => '../node_modules/react-native-iron-source', :subspecs => [
     'Core', # required
@@ -143,5 +188,5 @@ pod 'RNIronSource', :path => '../node_modules/react-native-iron-source', :subspe
 ]
 ```
 
-#### Android
-Follow the official doc [here](https://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/#step-1).
+### Known issues
+Ads may stop loading properly when "Reload" option in your React Native app is used (or CMD+R). You have to restart the app completely if you want to check that ads load and display correctly.
