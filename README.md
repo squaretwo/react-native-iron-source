@@ -22,7 +22,7 @@ You can find available versions [here](https://github.com/wowmaking/react-native
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-iron-source`
+`$ react-native link @wowmaking/react-native-iron-source`
 
 ### Manual installation
 
