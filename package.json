@@ -1,5 +1,5 @@
 {
-  "name": "react-native-iron-source",
+  "name": "@wowmaking/react-native-iron-source",
   "version": "2.5.0",
   "description": "React Native package to interface the ironSource SDK.  https://ironsrc.com",
   "main": "index.js",
@@ -11,7 +11,16 @@
     "ironsrc",
     "iron source"
   ],
-  "author": "Ben Yee <benyee@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wowmaking/react-native-iron-source.git"
+  },
+  "homepage": "https://github.com/wowmaking/react-native-iron-source#README",
+  "author": {
+    "name": "Dmitriy Kazlouski",
+    "email": "d.kazlouski@wowmaking.net",
+    "url": "https://github.com/wowmaking"
+  },
   "license": "MIT",
   "dependencies": {
     "react-native": ">= 0.40.0"

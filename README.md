@@ -1,15 +1,24 @@
 
-# react-native-iron-source
+# @wowmaking/react-native-iron-source
 
-Iron Source SDK React Native bridge
+[Iron Source SDK](https://developers.ironsrc.com/) React Native bridge. 
+Supports all ad units (Rewarded Video, Interstitial, Banner, Offerwall).
+
+Many thanks to all contributors of [squaretwo/react-native-iron-source](https://github.com/squaretwo/react-native-iron-source). 
+
+The fork includes following improvements:
+* Banner implementation
+* Bug fixes for Offerwall, Interstitial, Rewarded
+* Documentation
+* Installation using CocoaPods
+* Easier installation on android 
+* etc
 
 ## Getting started
 
-It is recommended to use version tags. Example:
+`npm install @wowmaking/react-native-iron-source --save`
 
-`npm install https://github.com/wowmaking/react-native-iron-source\#v2.5.0 --save`
-
-You can find available version tags [here](https://github.com/wowmaking/react-native-iron-source/releases).
+You can find available versions [here](https://github.com/wowmaking/react-native-iron-source/releases).
 
 ### Mostly automatic installation
 
