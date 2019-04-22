@@ -35,7 +35,7 @@ You can find available versions [here](https://github.com/wowmaking/react-native
 4. Run your project (`Cmd+R`)
 
 #### iOS CocoaPods
-1. Add `pod 'RNIronSource', :path => '../node_modules/react-native-iron-source'` to your `ios/Podfile`
+1. Add `pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source'` to your `ios/Podfile`
 2. Run `pod install` while in `ios` directory
 
 #### Android
@@ -46,7 +46,7 @@ You can find available versions [here](https://github.com/wowmaking/react-native
 2. Append the following lines to `android/settings.gradle`:
   	```
   	include ':react-native-iron-source'
-  	project(':react-native-iron-source').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-iron-source/android')
+  	project(':react-native-iron-source').projectDir = new File(rootProject.projectDir, 	'../node_modules/@wowmaking/react-native-iron-source/android')
   	```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
@@ -195,7 +195,7 @@ Official doc:
 
 You can optionally use this syntax to add iOS mediation adapters instead of suggested by the doc.
 ```
-pod 'RNIronSource', :path => '../node_modules/react-native-iron-source', :subspecs => [
+pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source', :subspecs => [
     'Core', # required
     'AdColony',
     'Admob',
