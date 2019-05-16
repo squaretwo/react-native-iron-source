@@ -2,16 +2,19 @@ package co.squaretwo.ironsource;
 
 import android.app.Activity;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.facebook.react.ReactActivity;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.ironsource.mediationsdk.ISBannerSize;
@@ -19,6 +22,8 @@ import com.ironsource.mediationsdk.IronSource;
 import com.ironsource.mediationsdk.IronSourceBannerLayout;
 import com.ironsource.mediationsdk.logger.IronSourceError;
 import com.ironsource.mediationsdk.sdk.BannerListener;
+
+import java.util.HashMap;
 
 import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 
@@ -28,6 +33,10 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
         super(reactContext);
     }
 
+    static HashMap<ISBannerSize, HashMap> sizeMap = createSizeMap();
+
+    static HashMap<String, ISBannerSize> sizeDescriptionMap = createSizeDescriptionMap();
+
     @Override
     public String getName() {
         return "RNIronSourceBanner";
@@ -35,25 +44,83 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
 
     private IronSourceBannerLayout bannerLayout;
 
+    private Activity activity;
+
+    private WritableMap bannerSize;
+
+    private Promise loadPromise;
+
     @ReactMethod
     public void initializeBanner() {
+        activity = getReactApplicationContext().getCurrentActivity();
     }
 
-    private ISBannerSize getBannerSize(String sizeDescription) {
-        ISBannerSize bannerSize = ISBannerSize.BANNER;
-        if (sizeDescription.equals("LARGE")) {
-            bannerSize = ISBannerSize.LARGE;
-        } else if (sizeDescription.equals("RECTANGLE")) {
-            bannerSize = ISBannerSize.RECTANGLE;
-        } else if (sizeDescription.equals("SMART")) {
-            bannerSize = ISBannerSize.SMART;
+    private static HashMap<ISBannerSize, HashMap> createSizeMap() {
+        final HashMap<ISBannerSize, HashMap> sizeMap = new HashMap<>();
+        final HashMap<String, Integer> normalSize = new HashMap<>();
+        final HashMap<String, Integer> largeSize = new HashMap<>();
+        final HashMap<String, Integer> rectangleSize = new HashMap<>();
+        final HashMap<String, Integer> smartSize = new HashMap<>();
+
+        normalSize.put("width", 320);
+        normalSize.put("height", 50);
+        sizeMap.put(ISBannerSize.BANNER, normalSize);
+
+        largeSize.put("width", 320);
+        largeSize.put("height", 90);
+        sizeMap.put(ISBannerSize.LARGE, largeSize);
+
+        rectangleSize.put("width", 300);
+        rectangleSize.put("height", 250);
+        sizeMap.put(ISBannerSize.RECTANGLE, rectangleSize);
+
+        smartSize.put("width", 320);
+        smartSize.put("height", 50);
+        sizeMap.put(ISBannerSize.SMART, smartSize);
+
+        smartSize.put("altWidth", 320);
+        smartSize.put("altHeight", 50);
+        sizeMap.put(ISBannerSize.SMART, smartSize);
+
+        return sizeMap;
+    }
+
+    private static HashMap<String, ISBannerSize> createSizeDescriptionMap() {
+        final HashMap<String, ISBannerSize> map = new HashMap<>();
+        map.put("BANNER", ISBannerSize.BANNER);
+        map.put("LARGE", ISBannerSize.LARGE);
+        map.put("RECTANGLE", ISBannerSize.RECTANGLE);
+        map.put("SMART", ISBannerSize.SMART);
+        return map;
+    }
+
+    private HashMap getBannerSize(ISBannerSize bannerSizeDescription) {
+        if (bannerSizeDescription.equals(ISBannerSize.SMART)) {
+            final DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
+            if (displayMetrics.widthPixels / displayMetrics.density > 720) {
+                final HashMap<String, Integer> altSize = new HashMap<>();
+                final HashMap<String, Integer> smartSize = sizeMap.get(ISBannerSize.SMART);
+                altSize.put("width", smartSize.get("altWidth"));
+                altSize.put("height", smartSize.get("altHeight"));
+                return altSize;
+            }
+            return sizeMap.get(ISBannerSize.SMART);
+        }
+        return sizeMap.get(bannerSizeDescription);
+    }
+
+    private ISBannerSize getBannerSizeDescription(String sizeDescriptionString) {
+        ISBannerSize bannerSize = sizeDescriptionMap.get(sizeDescriptionString);
+        if (bannerSize == null) {
+            bannerSize = ISBannerSize.BANNER;
         }
         return bannerSize;
     }
 
     @ReactMethod
-    public void loadBanner(final String sizeDescription) {
-        final Activity activity = getReactApplicationContext().getCurrentActivity();
+    public void loadBanner(final String sizeDescriptionString, ReadableMap options, final Promise promise) {
+        loadPromise = promise;
+        final boolean scaleToFitWidth = options.getBoolean("scaleToFitWidth");
         if (activity == null) {
             return;
         }
@@ -61,15 +128,14 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
             @Override
             public void run() {
                 final FrameLayout rootView = activity.findViewById(android.R.id.content);
-
-                final ISBannerSize bannerSize = RNIronSourceBannerModule.this.getBannerSize(sizeDescription);
+                final ISBannerSize bannerSizeDescription = RNIronSourceBannerModule.this.getBannerSizeDescription(sizeDescriptionString);
 
                 if (bannerLayout != null) {
-                    rootView.removeView(bannerLayout);
                     RNIronSourceBannerModule.this.destroyBanner();
+                    rootView.removeView(bannerLayout);
                 }
 
-                bannerLayout = IronSource.createBanner(activity, bannerSize);
+                bannerLayout = IronSource.createBanner(activity, bannerSizeDescription);
                 bannerLayout.setBannerListener(RNIronSourceBannerModule.this);
                 IronSource.loadBanner(bannerLayout);
 
@@ -79,9 +145,32 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
                 );
                 bannerLayout.setLayoutParams(layoutParams);
                 bannerLayout.setVisibility(View.INVISIBLE);
+
+                final HashMap bannerSizeMap = getBannerSize(bannerSizeDescription);
+                int bannerWidth = (int) bannerSizeMap.get("width");
+                int bannerHeight = (int) bannerSizeMap.get("height");
+
+                if (scaleToFitWidth) {
+                    final float displayDensity = activity.getResources().getDisplayMetrics().density;
+                    final double rootViewWidth = rootView.getWidth() / displayDensity;
+                    float scale = (float) rootViewWidth / (float) bannerWidth;
+                    float translateY = (float) bannerHeight * (1 - scale) * displayDensity / 2;
+
+                    bannerLayout.setScaleX(scale);
+                    bannerLayout.setScaleY(scale);
+                    bannerLayout.setTranslationY(translateY);
+
+                    bannerSize = Arguments.createMap();
+                    bannerSize.putDouble("width", bannerWidth * scale);
+                    bannerSize.putDouble("height", bannerHeight * scale);
+                } else {
+                    bannerSize = Arguments.createMap();
+                    bannerSize.putDouble("width", bannerWidth);
+                    bannerSize.putDouble("height", bannerHeight);
+                }
+
                 layoutParams.gravity = Gravity.BOTTOM;
                 rootView.addView(bannerLayout);
-
             }
         });
     }
@@ -120,6 +209,7 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
     @Override
     public void onBannerAdLoaded() {
         sendEvent("ironSourceBannerDidLoad", null);
+        loadPromise.resolve(bannerSize);
     }
 
     @Override
@@ -131,6 +221,7 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
                 bannerLayout.removeAllViews();
             }
         });
+        loadPromise.reject("E_LOAD", "Failed to load banner");
     }
 
     @Override
@@ -159,12 +250,12 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
 
     @Override
     public void onHostResume() {
-        IronSource.onResume(getReactApplicationContext().getCurrentActivity());
+        IronSource.onResume(activity);
     }
 
     @Override
     public void onHostPause() {
-        IronSource.onPause(getReactApplicationContext().getCurrentActivity());
+        IronSource.onPause(activity);
     }
 
     @Override

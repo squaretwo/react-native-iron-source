@@ -18,6 +18,9 @@ NSString *const kIronSourceDidClickBanner = @"ironSourceDidClickBanner";
 @implementation RNIronSourceBanner
 {
     bool hasListeners;
+    RCTPromiseResolveBlock resolveLoadBanner;
+    RCTPromiseRejectBlock rejectLoadBanner;
+    bool scaleToFitWidth;
 }
 
 - (dispatch_queue_t)methodQueue
@@ -49,7 +52,14 @@ RCT_EXPORT_METHOD(initializeBanner) {
     [IronSource setBannerDelegate:self];
 }
 
-RCT_EXPORT_METHOD(loadBanner:(NSString *)bannerSizeDescription) {
+RCT_EXPORT_METHOD(loadBanner:(NSString *)bannerSizeDescription
+                  options:(NSDictionary *)options
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejector:(RCTPromiseRejectBlock)reject) {
+    
+    scaleToFitWidth = [RCTConvert BOOL:options[@"scaleToFitWidth"]];
+    resolveLoadBanner = resolve;
+    rejectLoadBanner = reject;
     if (self.bannerView) {
         [self destroyBanner];
     }
@@ -80,22 +90,67 @@ RCT_EXPORT_METHOD(destroyBanner) {
     }
 }
 
+- (CGSize)getBannerSize:(ISBannerView *)bannerView {
+    CGSize bannerSize = CGSizeMake(100, 100);
+    for (UIView *view in bannerView.subviews){
+        bannerSize = view.frame.size;
+    }
+    return bannerSize;
+}
+
+
+- (CGSize)getScaledBannerSize:(ISBannerView *)bannerView {
+    CGSize bannerSize = [self getBannerSize:bannerView];
+    CGFloat scale = [self getBannerScale:bannerView];
+    return CGSizeMake(bannerSize.width * scale, bannerSize.height * scale);
+}
+
+- (CGFloat)getBottomSafeAreaLength {
+    UIViewController *viewController = RCTPresentedViewController();
+    CGFloat bottomSafeAreaLength = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomSafeAreaLength = viewController.view.safeAreaInsets.bottom;
+    } else {
+        bottomSafeAreaLength = viewController.bottomLayoutGuide.length;
+    }
+    return bottomSafeAreaLength;
+}
+
+- (CGFloat)getBannerScale:(ISBannerView *)bannerView {
+    CGSize bannerSize = [self getBannerSize:bannerView];
+    UIViewController *viewController = RCTPresentedViewController();
+    return viewController.view.frame.size.width / bannerSize.width;
+}
+
 - (void)bannerDidLoad:(ISBannerView *)bannerView {
     if (hasListeners) {
         [self sendEventWithName:kIronSourceBannerDidLoad body:nil];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         UIViewController *viewController = RCTPresentedViewController();
-        CGFloat bottomSafeAreaLength = 0;
-        if (@available(iOS 11.0, *)) {
-            bottomSafeAreaLength = viewController.view.safeAreaInsets.bottom;
-        } else {
-            bottomSafeAreaLength = viewController.bottomLayoutGuide.length;
-        }
+        
         self.bannerView = bannerView;
-        self.bannerView.center = CGPointMake(viewController.view.center.x, viewController.view.frame.size.height - self.bannerView.frame.size.height / 2 - bottomSafeAreaLength);
-        [viewController.view addSubview:self.bannerView];
+        
+        CGFloat bottomSafeAreaLength = [self getBottomSafeAreaLength];
+        
+        CGSize bannerSize = self->scaleToFitWidth ? [self getScaledBannerSize:bannerView] : [self getBannerSize:bannerView];
+        
+        CGFloat bannerX = viewController.view.center.x;
+        CGFloat bannerY = viewController.view.frame.size.height - bannerSize.height / 2;
+        
+        self.bannerView.center = CGPointMake(
+             bannerX, bannerY - bottomSafeAreaLength);
+        if (self->scaleToFitWidth) {
+            CGFloat bannerScale = [self getBannerScale:bannerView];
+            self.bannerView.transform = CGAffineTransformMakeScale(bannerScale, bannerScale);
+        }
         self.bannerView.hidden = YES;
+        [viewController.view addSubview:self.bannerView];
+        
+        self->resolveLoadBanner(@{
+                                  @"width": [NSNumber numberWithFloat:bannerSize.width],
+                                  @"height": [NSNumber numberWithFloat:bannerSize.height],
+                                  });
     });
 }
 
@@ -103,6 +158,7 @@ RCT_EXPORT_METHOD(destroyBanner) {
     if (hasListeners) {
         [self sendEventWithName:kIronSourceBannerDidFailToLoadWithError body:nil];
     }
+    self->rejectLoadBanner(@"Error", @"Failed to load banner", error);
 }
 
 - (void)bannerDidDismissScreen {
