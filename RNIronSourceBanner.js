@@ -12,6 +12,10 @@ const supportedEvents = [
   'ironSourceDidClickBanner',
 ]
 
+const loadBannerDefaultOptions = {
+  scaleToFitWidth: false,
+};
+
 const eventHandlers = supportedEvents.reduce((acc, eventName) => {
   acc[eventName] = new Map();
   return acc;
@@ -40,7 +44,10 @@ const removeAllListeners = () => {
 module.exports = {
   ...RNIronSourceBanner,
   initializeBanner: () => RNIronSourceBanner.initializeBanner(),
-  loadBanner: (size = 'BANNER') => RNIronSourceBanner.loadBanner(size),
+  loadBanner: (size = 'BANNER', options) => RNIronSourceBanner.loadBanner(size, {
+    ...loadBannerDefaultOptions,
+    ...options,
+  }),
   showBanner: () => RNIronSourceBanner.showBanner(),
   hideBanner: () => RNIronSourceBanner.hideBanner(),
   destroyBanner: () => RNIronSourceBanner.destroyBanner(),

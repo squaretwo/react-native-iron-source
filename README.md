@@ -135,6 +135,30 @@ IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res =
 });
 ```
 
+
+## API (Incomplete)
+
+### IronSourceBanner.loadBanner(options)
+Loads IronSource banner. Returns a promise that will be resolved when banner loads successfully and rejected when it fails.
+
+#### Parameter(s)
+* **options:** Object (optional)
+    * **scaleToFitWidth:** Boolean
+#### Returns Promise of
+* **response:** Object
+    * **width:** Number
+    * **height:** Number
+
+```javascript
+IronSourceBanner.loadBanner()
+  .then((response) => {
+    console.warn(`width: ${response.width}, height: ${response.height}`);
+  })
+  .catch(err => {
+    console.warn(err.message);
+  });
+```
+
 ## Events
 
 ### Banner events
