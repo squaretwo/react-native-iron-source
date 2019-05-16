@@ -17,6 +17,7 @@ NSString *const kIronSourceDidClickBanner = @"ironSourceDidClickBanner";
 
 @implementation RNIronSourceBanner
 {
+    bool initialized;
     bool hasListeners;
     RCTPromiseResolveBlock resolveLoadBanner;
     RCTPromiseRejectBlock rejectLoadBanner;
@@ -49,15 +50,11 @@ RCT_EXPORT_MODULE()
     hasListeners = NO;
 }
 
-RCT_EXPORT_METHOD(initializeBanner) {
-    [IronSource setBannerDelegate:self];
-}
-
 RCT_EXPORT_METHOD(loadBanner:(NSString *)bannerSizeDescription
                   options:(NSDictionary *)options
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejector:(RCTPromiseRejectBlock)reject) {
-    
+    [self initializeBanner];
     scaleToFitWidth = [RCTConvert BOOL:options[@"scaleToFitWidth"]];
     position = [RCTConvert NSString:options[@"position"]];
     resolveLoadBanner = resolve;
@@ -89,6 +86,13 @@ RCT_EXPORT_METHOD(destroyBanner) {
     if (self.bannerView) {
         [IronSource destroyBanner:self.bannerView];
         self.bannerView = nil;
+    }
+}
+
+- (void)initializeBanner {
+    if (!initialized) {
+        [IronSource setBannerDelegate:self];
+        initialized = YES;
     }
 }
 

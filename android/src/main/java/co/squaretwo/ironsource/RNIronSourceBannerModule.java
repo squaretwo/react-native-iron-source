@@ -51,10 +51,7 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
 
     private Promise loadPromise;
 
-    @ReactMethod
-    public void initializeBanner() {
-        activity = getReactApplicationContext().getCurrentActivity();
-    }
+    private boolean initialized;
 
     private static HashMap<ISBannerSize, HashMap> createSizeMap() {
         final HashMap<ISBannerSize, HashMap> sizeMap = new HashMap<>();
@@ -117,6 +114,13 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
         return sizeMap.get(bannerSizeDescription);
     }
 
+    private void initializeBanner() {
+        if (!initialized) {
+            activity = getReactApplicationContext().getCurrentActivity();
+            initialized = true;
+        }
+    }
+
     private ISBannerSize getBannerSizeDescription(String sizeDescriptionString) {
         ISBannerSize bannerSize = sizeDescriptionMap.get(sizeDescriptionString);
         if (bannerSize == null) {
@@ -130,7 +134,9 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
         loadPromise = promise;
         final String position = options.getString("position");
         final boolean scaleToFitWidth = options.getBoolean("scaleToFitWidth");
+        this.initializeBanner();
         if (activity == null) {
+            promise.reject("E_LOAD_ACTIVITY", "Found no activity");
             return;
         }
         runOnUiThread(new Runnable() {

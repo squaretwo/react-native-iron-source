@@ -116,7 +116,6 @@ IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', re
 ```javascript
 import { IronSourceBanner } from 'react-native-iron-source';
 
-IronSourceBanner.initializeBanner();
 IronSourceBanner.loadBanner('LARGE');
 IronSourceBanner.addEventListener('ironSourceBannerDidLoad', () => {
   console.warn('Iron Source banner loaded');
