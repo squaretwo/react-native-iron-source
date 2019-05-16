@@ -50,7 +50,6 @@ module.exports = {
   }),
   showBanner: () => RNIronSourceBanner.showBanner(),
   hideBanner: () => RNIronSourceBanner.hideBanner(),
-  getActualBannerSize: () => RNIronSourceBanner.getActualBannerSize(),
   destroyBanner: () => RNIronSourceBanner.destroyBanner(),
   addEventListener,
   removeEventListener,
