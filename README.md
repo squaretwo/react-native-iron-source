@@ -135,6 +135,30 @@ IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res =
 });
 ```
 
+
+## API (Incomplete)
+
+### IronSourceBanner.loadBanner(options)
+Loads IronSource banner. Returns a promise that will be resolved when banner loads successfully and rejected when it fails.
+
+#### Parameter(s)
+* **options:** Object (optional)
+    * **scaleToFitWidth:** Boolean
+#### Returns Promise of
+* **response:** Object
+    * **width:** Number
+    * **height:** Number
+
+```javascript
+IronSourceBanner.loadBanner()
+  .then((response) => {
+    console.warn(`width: ${response.width}, height: ${response.height}`);
+  })
+  .catch(err => {
+    console.warn(err.message);
+  });
+```
+
 ## Events
 
 ### Banner events
@@ -215,26 +239,3 @@ pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-sourc
 
 ## Known issues
 Ads may stop loading properly when "Reload" option (or CMD+R) in your React Native app was used. You have to restart the app completely if you want to check that ads load and display correctly.
-
-## API
-
-### IronSourceBanner.loadBanner(options)
-Loads IronSource banner
-
-#### Parameter(s)
-* **options:** Object (optional)
-    * **scaleToFitWidth:** Boolean
-#### Returns Promise of
-* **response:** Object
-    * **width:** Number
-    * **height:** Number
-
-```javascript
-IronSourceBanner.loadBanner()
-  .then((response) => {
-    console.warn(`width: ${response.width}, height: ${response.height}`);
-  })
-  .catch(err => {
-    console.warn(err.message);
-  });
-```
