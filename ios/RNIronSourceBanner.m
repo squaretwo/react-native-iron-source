@@ -21,6 +21,7 @@ NSString *const kIronSourceDidClickBanner = @"ironSourceDidClickBanner";
     RCTPromiseResolveBlock resolveLoadBanner;
     RCTPromiseRejectBlock rejectLoadBanner;
     bool scaleToFitWidth;
+    NSString *position;
 }
 
 - (dispatch_queue_t)methodQueue
@@ -58,6 +59,7 @@ RCT_EXPORT_METHOD(loadBanner:(NSString *)bannerSizeDescription
                   rejector:(RCTPromiseRejectBlock)reject) {
     
     scaleToFitWidth = [RCTConvert BOOL:options[@"scaleToFitWidth"]];
+    position = [RCTConvert NSString:options[@"position"]];
     resolveLoadBanner = resolve;
     rejectLoadBanner = reject;
     if (self.bannerView) {
@@ -116,6 +118,17 @@ RCT_EXPORT_METHOD(destroyBanner) {
     return bottomSafeAreaLength;
 }
 
+- (CGFloat)getTopSafeAreaLength {
+    UIViewController *viewController = RCTPresentedViewController();
+    CGFloat topSafeAreaLength = 0;
+    if (@available(iOS 11.0, *)) {
+        topSafeAreaLength = viewController.view.safeAreaInsets.top;
+    } else {
+        topSafeAreaLength = viewController.topLayoutGuide.length;
+    }
+    return topSafeAreaLength;
+}
+
 - (CGFloat)getBannerScale:(ISBannerView *)bannerView {
     CGSize bannerSize = [self getBannerSize:bannerView];
     UIViewController *viewController = RCTPresentedViewController();
@@ -131,15 +144,20 @@ RCT_EXPORT_METHOD(destroyBanner) {
         
         self.bannerView = bannerView;
         
-        CGFloat bottomSafeAreaLength = [self getBottomSafeAreaLength];
-        
         CGSize bannerSize = self->scaleToFitWidth ? [self getScaledBannerSize:bannerView] : [self getBannerSize:bannerView];
         
         CGFloat bannerX = viewController.view.center.x;
-        CGFloat bannerY = viewController.view.frame.size.height - bannerSize.height / 2;
+        CGFloat bannerY = 0;
         
-        self.bannerView.center = CGPointMake(
-             bannerX, bannerY - bottomSafeAreaLength);
+        if ([self->position isEqualToString:@"bottom"]) {
+            CGFloat bottomSafeAreaLength = [self getBottomSafeAreaLength];
+            bannerY = viewController.view.frame.size.height - bannerSize.height / 2 - bottomSafeAreaLength;
+        } else if ([self->position isEqualToString:@"top"]) {
+            CGFloat topSafeAreaLength = [self getTopSafeAreaLength];
+            bannerY = topSafeAreaLength + bannerSize.height / 2;
+        }
+        
+        self.bannerView.center = CGPointMake(bannerX, bannerY);
         if (self->scaleToFitWidth) {
             CGFloat bannerScale = [self getBannerScale:bannerView];
             self.bannerView.transform = CGAffineTransformMakeScale(bannerScale, bannerScale);

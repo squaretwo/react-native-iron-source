@@ -143,7 +143,8 @@ Loads IronSource banner. Returns a promise that will be resolved when banner loa
 
 #### Parameter(s)
 * **options:** Object (optional)
-    * **scaleToFitWidth:** Boolean
+    * **position:** String. Supported values: "top" or "bottom". Default: "bottom".
+    * **scaleToFitWidth:** Boolean. Default: false
 #### Returns Promise of
 * **response:** Object
     * **width:** Number

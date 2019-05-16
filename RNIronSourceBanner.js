@@ -13,6 +13,7 @@ const supportedEvents = [
 ]
 
 const loadBannerDefaultOptions = {
+  position: 'bottom',
   scaleToFitWidth: false,
 };
 

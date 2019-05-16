@@ -3,7 +3,6 @@ package co.squaretwo.ironsource;
 import android.app.Activity;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -36,6 +35,8 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
     static HashMap<ISBannerSize, HashMap> sizeMap = createSizeMap();
 
     static HashMap<String, ISBannerSize> sizeDescriptionMap = createSizeDescriptionMap();
+
+    static HashMap<String, Integer> positionsMap = createPositionsMap();
 
     @Override
     public String getName() {
@@ -85,6 +86,13 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
         return sizeMap;
     }
 
+    private static HashMap<String, Integer> createPositionsMap() {
+        final HashMap<String, Integer> positions = new HashMap<>();
+        positions.put("top", Gravity.TOP);
+        positions.put("bottom", Gravity.BOTTOM);
+        return positions;
+    }
+
     private static HashMap<String, ISBannerSize> createSizeDescriptionMap() {
         final HashMap<String, ISBannerSize> map = new HashMap<>();
         map.put("BANNER", ISBannerSize.BANNER);
@@ -118,8 +126,9 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
     }
 
     @ReactMethod
-    public void loadBanner(final String sizeDescriptionString, ReadableMap options, final Promise promise) {
+    public void loadBanner(final String sizeDescriptionString, final ReadableMap options, final Promise promise) {
         loadPromise = promise;
+        final String position = options.getString("position");
         final boolean scaleToFitWidth = options.getBoolean("scaleToFitWidth");
         if (activity == null) {
             return;
@@ -156,6 +165,10 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
                     float scale = (float) rootViewWidth / (float) bannerWidth;
                     float translateY = (float) bannerHeight * (1 - scale) * displayDensity / 2;
 
+                    if (position.equals("top")) {
+                        translateY = -translateY;
+                    }
+
                     bannerLayout.setScaleX(scale);
                     bannerLayout.setScaleY(scale);
                     bannerLayout.setTranslationY(translateY);
@@ -169,7 +182,7 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
                     bannerSize.putDouble("height", bannerHeight);
                 }
 
-                layoutParams.gravity = Gravity.BOTTOM;
+                layoutParams.gravity = positionsMap.get(position);
                 rootView.addView(bannerLayout);
             }
         });
