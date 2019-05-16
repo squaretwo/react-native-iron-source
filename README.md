@@ -150,7 +150,10 @@ Loads IronSource banner. Returns a promise that will be resolved when banner loa
     * **height:** Number
 
 ```javascript
-IronSourceBanner.loadBanner()
+IronSourceBanner.loadBanner({
+  position: 'top',
+  scaleToFitWidth: true
+})
   .then((response) => {
     console.warn(`width: ${response.width}, height: ${response.height}`);
   })
