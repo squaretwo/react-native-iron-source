@@ -13,6 +13,7 @@ const supportedEvents = [
 ]
 
 const loadBannerDefaultOptions = {
+  position: 'bottom',
   scaleToFitWidth: false,
 };
 
@@ -43,7 +44,7 @@ const removeAllListeners = () => {
 
 module.exports = {
   ...RNIronSourceBanner,
-  initializeBanner: () => RNIronSourceBanner.initializeBanner(),
+  initializeBanner: () => {}, // Deprecated. Here for backwards compatibility with 2.5.3
   loadBanner: (size = 'BANNER', options) => RNIronSourceBanner.loadBanner(size, {
     ...loadBannerDefaultOptions,
     ...options,

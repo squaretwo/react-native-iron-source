@@ -116,7 +116,6 @@ IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', re
 ```javascript
 import { IronSourceBanner } from 'react-native-iron-source';
 
-IronSourceBanner.initializeBanner();
 IronSourceBanner.loadBanner('LARGE');
 IronSourceBanner.addEventListener('ironSourceBannerDidLoad', () => {
   console.warn('Iron Source banner loaded');
@@ -143,14 +142,18 @@ Loads IronSource banner. Returns a promise that will be resolved when banner loa
 
 #### Parameter(s)
 * **options:** Object (optional)
-    * **scaleToFitWidth:** Boolean
+    * **position:** String. Supported values: "top" or "bottom". Default: "bottom".
+    * **scaleToFitWidth:** Boolean. Default: false
 #### Returns Promise of
 * **response:** Object
     * **width:** Number
     * **height:** Number
 
 ```javascript
-IronSourceBanner.loadBanner()
+IronSourceBanner.loadBanner({
+  position: 'top',
+  scaleToFitWidth: true
+})
   .then((response) => {
     console.warn(`width: ${response.width}, height: ${response.height}`);
   })
