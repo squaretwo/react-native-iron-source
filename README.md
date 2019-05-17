@@ -226,6 +226,7 @@ pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-sourc
     'Core', # required
     'AdColony',
     'Admob',
+    'Amazon',
     'AppLovin',
     'Chartboost',
     'Facebook',
@@ -233,7 +234,6 @@ pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-sourc
     'InMobi',
     'Maio',
     'MediaBrix',
-    'MoPub',
     'Tapjoy',
     'UnityAds',
     'Vungle'
