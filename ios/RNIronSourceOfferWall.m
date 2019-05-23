@@ -1,4 +1,5 @@
 #import "RNIronSourceOfferwall.h"
+#import "RCTUtils.h"
 
 NSString *const kIronSourceOfferwallAvailable = @"ironSourceOfferwallAvailable";
 NSString *const kIronSourceOfferwallUnavailable = @"ironSourceOfferwallUnavailable";
