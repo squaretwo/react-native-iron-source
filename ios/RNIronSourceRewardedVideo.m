@@ -53,7 +53,10 @@ RCT_EXPORT_METHOD(showRewardedVideo)
     if ([IronSource hasRewardedVideo]) {
         NSLog(@"showRewardedVideo - video available");
         [self sendEventWithName:kIronSourceRewardedVideoAvailable body:nil];
-        [IronSource showRewardedVideoWithViewController:RCTPresentedViewController()];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [IronSource showRewardedVideoWithViewController:RCTPresentedViewController()];
+        });
     } else {
         NSLog(@"showRewardedVideo - video unavailable");
         [self sendEventWithName:kIronSourceRewardedVideoUnavailable body:nil];

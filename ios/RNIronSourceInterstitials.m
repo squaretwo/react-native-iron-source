@@ -25,7 +25,9 @@ RCT_EXPORT_METHOD(loadInterstitial)
 
 RCT_EXPORT_METHOD(showInterstitial:(NSString*) placementName)
 {
-    [IronSource showInterstitialWithViewController:RCTPresentedViewController() placement:placementName];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [IronSource showInterstitialWithViewController:RCTPresentedViewController() placement:placementName];
+    });
 }
 
 #pragma mark - ISInterstitialDelegate
