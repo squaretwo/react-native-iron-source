@@ -1,4 +1,5 @@
 #import "RNIronSourceOfferwall.h"
+#import "RCTUtils.h"
 
 NSString *const kIronSourceOfferwallAvailable = @"ironSourceOfferwallAvailable";
 NSString *const kIronSourceOfferwallUnavailable = @"ironSourceOfferwallUnavailable";
@@ -46,7 +47,10 @@ RCT_EXPORT_METHOD(showOfferwall)
     if ([IronSource hasOfferwall]) {
         NSLog(@"showOfferwall - offerwall available");
         [self sendEventWithName:kIronSourceOfferwallAvailable body:nil];
-        [IronSource showOfferwallWithViewController:[UIApplication sharedApplication].delegate.window.rootViewController];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [IronSource showOfferwallWithViewController:RCTPresentedViewController()];
+        });
     } else {
         NSLog(@"showOfferwall - offerwall unavailable");
         [self sendEventWithName:kIronSourceOfferwallUnavailable body:nil];
