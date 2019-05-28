@@ -239,7 +239,7 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
                 bannerLayout.removeAllViews();
             }
         });
-        loadPromise.reject("E_LOAD", "Failed to load banner", Utility.formatIronSourceError(error));
+§        loadPromise.reject("E_LOAD", "Failed to load banner", null);
         sendEvent("ironSourceBannerDidFailToLoadWithError", Utility.formatIronSourceError(error));
     }
 
