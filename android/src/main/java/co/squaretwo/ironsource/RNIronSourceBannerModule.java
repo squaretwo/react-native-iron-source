@@ -232,15 +232,15 @@ public class RNIronSourceBannerModule extends ReactContextBaseJavaModule impleme
     }
 
     @Override
-    public void onBannerAdLoadFailed(IronSourceError ironSourceError) {
-        sendEvent("ironSourceBannerDidFailToLoadWithError", null);
+    public void onBannerAdLoadFailed(IronSourceError error) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 bannerLayout.removeAllViews();
             }
         });
-        loadPromise.reject("E_LOAD", "Failed to load banner");
+        loadPromise.reject("E_LOAD", "Failed to load banner", Utility.formatIronSourceError(error));
+        sendEvent("ironSourceBannerDidFailToLoadWithError", Utility.formatIronSourceError(error));
     }
 
     @Override

@@ -71,7 +71,7 @@ public class RNIronSourceOfferwallModule extends ReactContextBaseJavaModule {
                     @Override
                     public void onOfferwallShowFailed(IronSourceError error) {
                         Log.d(TAG, "onOfferwallShowFailed() called!");
-                        sendEvent("ironSourceOfferwallClosedByError", null);
+                        sendEvent("ironSourceOfferwallClosedByError", Utility.formatIronSourceError(error));
                     }
                     /**
                      * Invoked each time the user completes an Offer.
