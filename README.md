@@ -87,7 +87,11 @@ First initialize IronSource SDK
 ```javascript
 import { IronSource } from 'react-native-iron-source';
 
-IronSource.initializeIronSource('12345678', 'userId');
+IronSource.initializeIronSource('8a19a09d', 'userId', {
+  validateIntegration: true,
+}).then(() => {
+  console.warn('Init finished');
+});
 ```
 
 ### Interstitial
@@ -136,6 +140,25 @@ IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res =
 
 
 ## API (Incomplete)
+
+### IronSource.initializeIronSource(ironSourceAppKey, userId, options)
+Initializes IronSource SDK
+
+#### Parameter(s)
+* **ironSourceAppKey:** String. Can be found in Iron Source administrator's interface
+* **userId:** String. Any unique user id.
+* **options:** Object (optional)
+    * **validateIntegration:** Boolean. Default: false
+#### Returns Promise
+
+```javascript
+IronSource.initializeIronSource('8a19a09d', 'userId', {
+  validateIntegration: true
+})
+  .then(() => {
+    console.warn('Init finished');
+  });
+```
 
 ### IronSourceBanner.loadBanner(options)
 Loads IronSource banner. Returns a promise that will be resolved when banner loads successfully and rejected when it fails.
