@@ -50,7 +50,7 @@ const removeAllListeners = () => {
 
 module.exports = {
   ...RNIronSourceOfferwall,
-  initializeOfferwall: () => RNIronSourceOfferwall.initializeOfferwall(),
+  initializeOfferwall: () => {}, // Deprecated. Here for backwards compatibility with 2.8.0
   showOfferwall: () => RNIronSourceOfferwall.showOfferwall(),
   addEventListener,
   removeEventListener,

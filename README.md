@@ -109,7 +109,6 @@ IronSourceInterstitials.addEventListener('interstitialDidLoad', () => {
 ```javascript
 import { IronSourceRewardedVideo } from 'react-native-iron-source';
 
-IronSourceRewardedVideo.initializeRewardedVideo();
 IronSourceRewardedVideo.showRewardedVideo();
 IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', res => {
   console.warn('Rewarded!', res)
@@ -131,7 +130,6 @@ IronSourceBanner.addEventListener('ironSourceBannerDidLoad', () => {
 ```javascript
 import { IronSourceOfferwall } from 'react-native-iron-source';
 
-IronSourceOfferwall.initializeOfferwall();
 IronSourceOfferwall.showOfferwall();
 IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res => {
   console.warn('Got credits', res)
