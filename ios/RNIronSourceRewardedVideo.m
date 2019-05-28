@@ -38,7 +38,7 @@ RCT_EXPORT_MODULE()
 }
 
 // Initialize IronSource before showing the Rewarded Video
-- (void)safeInitializeRewardedVideo
+RCT_EXPORT_METHOD(initializeRewardedVideo)
 {
     if (!initialized) {
         [IronSource setRewardedVideoDelegate:self];
@@ -51,7 +51,6 @@ RCT_EXPORT_MODULE()
 //
 RCT_EXPORT_METHOD(showRewardedVideo)
 {
-    [self safeInitializeRewardedVideo];
     if ([IronSource hasRewardedVideo]) {
         NSLog(@"showRewardedVideo - video available");
         [self sendEventWithName:kIronSourceRewardedVideoAvailable body:nil];

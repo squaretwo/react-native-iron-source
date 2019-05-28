@@ -55,7 +55,7 @@ const removeAllListeners = () => {
 
 module.exports = {
   ...RNIronSourceRewardedVideo,
-  initializeRewardedVideo: () => {}, // Deprecated. Here for backwards compatibility with 2.8.0
+  initializeRewardedVideo: () => RNIronSourceRewardedVideo.initializeRewardedVideo(),
   showRewardedVideo: () => RNIronSourceRewardedVideo.showRewardedVideo(),
   addEventListener,
   removeEventListener,

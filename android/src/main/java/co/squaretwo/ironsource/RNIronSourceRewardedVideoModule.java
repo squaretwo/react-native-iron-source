@@ -33,8 +33,10 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
         return TAG;
     }
 
-    private void safeInitializeRewardedVideo() {
+    @ReactMethod
+    public void initializeRewardedVideo() {
         if (!initialized) {
+            initialized = true;
             IronSource.setRewardedVideoListener(new RewardedVideoListener() {
                 @Override
                 public void onRewardedVideoAdOpened() {
@@ -114,7 +116,6 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                safeInitializeRewardedVideo();
                 Log.d(TAG, "showRewardedVideo() called!!");
                 boolean available = IronSource.isRewardedVideoAvailable();
                 if (available) {
