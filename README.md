@@ -12,6 +12,7 @@ The fork includes following improvements:
 * Documentation
 * Installation using CocoaPods
 * Easier installation on android 
+* [Validate integration option](https://developers.ironsrc.com/ironsource-mobile/ios/integration-helper-ios/)
 * etc
 
 ## Getting started
@@ -140,8 +141,15 @@ IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res =
 ## API (Incomplete)
 
 ### IronSource.initializeIronSource(ironSourceAppKey, userId, options)
-Initializes IronSource SDK
+Initializes IronSource SDK. 
 
+ `validateIntegration` provides an easy way to verify 
+that you’ve successfully integrated the ironSource 
+SDK and any additional adapters; it also makes sure all
+ required dependencies and frameworks were added for 
+ the various mediated ad networks. It doesn't validate Amazon adapter in current version.
+ See official docs for [Android](https://developers.ironsrc.com/ironsource-mobile/android/integration-helper-android/), 
+ [iOS](https://developers.ironsrc.com/ironsource-mobile/ios/integration-helper-ios/).
 #### Parameter(s)
 * **ironSourceAppKey:** String. Can be found in Iron Source administrator's interface
 * **userId:** String. Any unique user id.
