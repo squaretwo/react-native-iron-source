@@ -150,6 +150,7 @@ SDK and any additional adapters; it also makes sure all
  the various mediated ad networks. It doesn't validate Amazon adapter in current version.
  See official docs for [Android](https://developers.ironsrc.com/ironsource-mobile/android/integration-helper-android/), 
  [iOS](https://developers.ironsrc.com/ironsource-mobile/ios/integration-helper-ios/).
+  There's known issue in ios 12. See known issue section.
 #### Parameter(s)
 * **ironSourceAppKey:** String. Can be found in Iron Source administrator's interface
 * **userId:** String. Any unique user id.
@@ -270,4 +271,15 @@ pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-sourc
 ```
 
 ## Known issues
+
 Ads may stop loading properly when "Reload" option (or CMD+R) in your React Native app was used. You have to restart the app completely if you want to check that ads load and display correctly.
+
+---
+Native sdk has a known issue with the integration validator- on iOS 12 it prints out that some frameworks are missing when they aren’t. It will be fix in next versions.
+You can safely ignore the following logs when you see them on iOS 12:
+
+
+>Missing system framework: CoreGraphics, please be sure to add it to your project. 
+Missing system framework: UIKit, please be sure to add it to your project.
+Missing system framework: MobileCoreServices, please be sure to add it to your project.
+
