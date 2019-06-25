@@ -43,6 +43,10 @@ RCT_EXPORT_METHOD(initializeRewardedVideo)
     if (!initialized) {
         [IronSource setRewardedVideoDelegate:self];
         initialized = YES;
+        if ([IronSource hasRewardedVideo]) {
+            NSLog(@"showRewardedVideo - video available");
+            [self sendEventWithName:kIronSourceRewardedVideoAvailable body:nil];
+        }
     }
 }
 

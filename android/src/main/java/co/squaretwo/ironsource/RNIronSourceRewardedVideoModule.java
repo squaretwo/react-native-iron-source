@@ -108,6 +108,11 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
                     sendEvent("ironSourceRewardedVideoAdEnded", null);
                 }
             });
+
+            boolean available = IronSource.isRewardedVideoAvailable();
+            if (available) {
+                sendEvent("ironSourceRewardedVideoAvailable", null);
+            }
         }
     }
 
