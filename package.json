@@ -22,9 +22,6 @@
     "url": "https://github.com/wowmaking"
   },
   "license": "MIT",
-  "dependencies": {
-    "react-native": ">= 0.40.0"
-  },
   "peerDependencies": {
     "react-native": ">= 0.40.0"
   }
