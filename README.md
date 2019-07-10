@@ -171,8 +171,9 @@ IronSource.initializeIronSource('8a19a09d', 'userId', {
 Loads IronSource banner. Returns a promise that will be resolved when banner loads successfully and rejected when it fails.
 
 #### Parameter(s)
+* **size**: String. Supported values: `"BANNER"`, `"LARGE"`, `"RECTANGLE"`, `"SMART"`
 * **options:** Object (optional)
-    * **position:** String. Supported values: "top" or "bottom". Default: "bottom".
+    * **position:** String. Supported values: `"top"` or `"bottom"`. Default: `"bottom"`.
     * **scaleToFitWidth:** Boolean. Default: false
 #### Returns Promise of
 * **response:** Object
@@ -180,16 +181,21 @@ Loads IronSource banner. Returns a promise that will be resolved when banner loa
     * **height:** Number
 
 ```javascript
-IronSourceBanner.loadBanner({
+IronSourceBanner.loadBanner('BANNER', {
   position: 'top',
-  scaleToFitWidth: true
+  scaleToFitWidth: true,
 })
-  .then((response) => {
+  .then(response => {
     console.warn(`width: ${response.width}, height: ${response.height}`);
   })
   .catch(err => {
     console.warn(err.message);
   });
+```
+
+### IronSourceBanner.hideBanner()
+```javascript
+IronSourceBanner.hideBanner();
 ```
 
 ## Events
