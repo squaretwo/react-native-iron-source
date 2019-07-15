@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Core'
 
   s.dependency "React"
-  s.dependency "IronSourceSDK", "6.8.3.0"
+  s.dependency "IronSourceSDK", ">= 6.8"
 
   s.subspec "Core" do |ss|
     ss.source_files  = "ios/**/*.{h,m}"
