@@ -256,7 +256,11 @@ Official doc:
 - [Android](https://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/#step-1).
 - [iOS](https://developers.ironsrc.com/ironsource-mobile/ios/mediation-networks-ios/#step-1).
 
-You can optionally use this syntax to add iOS mediation adapters instead of suggested by the doc.
+<details>
+ <summary>Optional syntax (not recommended)</summary>
+ 
+__Warning:__ Using this syntax means that you lock down your iOS CocoaPods dependencies to versions that we currently use in our organization. We don't recommend doing this because you might want another version at some point.
+
 ```
 pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source', :subspecs => [
     'Core', # required
@@ -275,6 +279,7 @@ pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-sourc
     'Vungle'
 ]
 ```
+</details>
 
 ## Known issues
 
