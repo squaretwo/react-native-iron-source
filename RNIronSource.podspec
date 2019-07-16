@@ -17,49 +17,49 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Core'
 
   s.dependency "React"
-  s.dependency "IronSourceSDK", ">= 6.8"
+  s.dependency "IronSourceSDK", "~> 6.8"
 
   s.subspec "Core" do |ss|
     ss.source_files  = "ios/**/*.{h,m}"
   end
   s.subspec "AdColony" do |ss|
-    ss.dependency         "IronSourceAdColonyAdapter", "4.1.4.1"
+    ss.dependency         "IronSourceAdColonyAdapter", "4.1.5.1"
   end
   s.subspec "Admob" do |ss|
-    ss.dependency         "IronSourceAdMobAdapter", "4.3.4"
+    ss.dependency         "IronSourceAdMobAdapter", "4.3.4.1"
   end
   s.subspec "Amazon" do |ss|
-    ss.dependency         "IronSourceAmazonAdapter", "4.3.0.0"
+    ss.dependency         "IronSourceAmazonAdapter", "4.3.0.1"
   end
   s.subspec "AppLovin" do |ss|
-    ss.dependency         "IronSourceAppLovinAdapter", "4.3.3.1"
+    ss.dependency         "IronSourceAppLovinAdapter", "4.3.3.2"
   end
   s.subspec "Chartboost" do |ss|
-    ss.dependency         "IronSourceChartboostAdapter", "4.1.5.2"
+    ss.dependency         "IronSourceChartboostAdapter", "4.1.6.1"
   end
   s.subspec "Facebook" do |ss|
-    ss.dependency         "IronSourceFacebookAdapter", "4.3.3.1"
+    ss.dependency         "IronSourceFacebookAdapter", "4.3.4.2"
   end
   s.subspec "HyprMX" do |ss|
-    ss.dependency         "IronSourceHyprMXAdapter", "4.1.2"
+    ss.dependency         "IronSourceHyprMXAdapter", "4.1.2.1"
   end
   s.subspec "InMobi" do |ss|
-    ss.dependency         "IronSourceInMobiAdapter", "4.3.1.1"
+    ss.dependency         "IronSourceInMobiAdapter", "4.3.1.2"
   end
   s.subspec "Maio" do |ss|
-    ss.dependency         "IronSourceMaioAdapter", "4.1.2.2"
-  end
-  s.subspec "MediaBrix" do |ss|
-    ss.dependency         "IronSourceMediaBrixAdapter", "4.1.1.11"
+    ss.dependency         "IronSourceMaioAdapter", "4.1.3.1"
   end
   s.subspec "Tapjoy" do |ss|
-    ss.dependency         "IronSourceTapjoyAdapter", "4.1.3.1"
+    ss.dependency         "IronSourceTapjoyAdapter", "4.1.4.0"
+  end
+  s.subspec "TikTok" do |ss|
+    ss.dependency         "IronSourceTapjoyAdapter", "4.1.0.1"
   end
   s.subspec "UnityAds" do |ss|
-    ss.dependency         "IronSourceUnityAdsAdapter", "4.1.2.3"
+    ss.dependency         "IronSourceUnityAdsAdapter", "4.1.3.0"
   end
   s.subspec "Vungle" do |ss|
-    ss.dependency         "IronSourceVungleAdapter", "4.1.6.1"
+    ss.dependency         "IronSourceVungleAdapter", "4.1.6.2"
   end
 
 end
