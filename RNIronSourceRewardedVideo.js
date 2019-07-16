@@ -21,12 +21,19 @@ const addEventListener = (type, handler) => {
     case 'ironSourceRewardedVideoUnavailable':
     case 'ironSourceRewardedVideoDidOpen':
     case 'ironSourceRewardedVideoDidStart':
-    case 'ironSourceRewardedVideoClosedByUser':
     case 'ironSourceRewardedVideoClosedByError':
     case 'ironSourceRewardedVideoAdStarted':
     case 'ironSourceRewardedVideoAdEnded':
     case 'ironSourceRewardedVideoAdRewarded':
       eventHandlers[type].set(handler, IronSourceRewardedVideoEventEmitter.addListener(type, handler));
+      break;
+    case 'ironSourceRewardedVideoClosedByUser':
+      eventHandlers[type].set(handler, IronSourceRewardedVideoEventEmitter.addListener(type, () => {
+        // This is a dirty hack that is required by some Ad Networks (Vungle, UnityAds)
+        // It makes 'ironSourceRewardedVideoClosedByUser' and 'ironSourceRewardedVideoAdRewarded'
+        // events order match with all other networks
+        setTimeout(handler);
+      }));
       break;
     default:
       console.log(`Event with type ${type} does not exist.`);
