@@ -1,30 +1,161 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  IronSource,
+  IronSourceRewardedVideo,
+  IronSourceInterstitials,
+  IronSourceOfferwall,
+  IronSourceBanner,
+} from '@wowmaking/react-native-iron-source';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default class App extends Component {
 
-type Props = {};
-export default class App extends Component<Props> {
+  state = {
+    hasRewardedVideo: false,
+  };
+
+  componentDidMount() {
+    IronSource.initializeIronSource('8a19a09d', 'demoapp', {
+      validateIntegration: false,
+    }).then(() => {
+      IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAvailable', () => {
+        this.setState({ hasRewardedVideo: true });
+        console.warn('Rewarded video became available');
+      });
+      IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoUnavailable', () => {
+        this.setState({ hasRewardedVideo: false });
+      });
+      IronSourceRewardedVideo.initializeRewardedVideo();
+
+      IronSourceOfferwall.initializeOfferwall();
+    });
+  }
+
+  showRewardedVideo = () => {
+    if (!this.state.hasRewardedVideo) {
+      console.warn('Rewarded video is not available');
+    }
+
+    const onClose = () => IronSourceRewardedVideo.removeAllListeners();
+
+    IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', res => {
+      console.warn('Rewarded!', res);
+    });
+
+    IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoClosedByUser', onClose);
+    IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoClosedByError', onClose);
+
+    IronSourceRewardedVideo.showRewardedVideo();
+  };
+
+
+  showInterstitial = () => {
+    const onClose = () => IronSourceInterstitials.removeAllListeners();
+
+    IronSourceInterstitials.addEventListener('interstitialDidLoad', () => {
+      IronSourceInterstitials.showInterstitial();
+    });
+    IronSourceInterstitials.addEventListener('interstitialDidFailToLoadWithError', (err) => {
+      console.warn('Failed to load inter', err);
+      onClose();
+    });
+    IronSourceInterstitials.addEventListener('interstitialDidFailToShowWithError', (err) => {
+      console.warn('Failed to show inter', err);
+      onClose();
+    });
+    IronSourceInterstitials.addEventListener('interstitialDidClose', () => {
+      onClose();
+    });
+
+    IronSourceInterstitials.loadInterstitial();
+  };
+
+  showOfferwall = () => {
+    IronSourceOfferwall.showOfferwall();
+    IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res => {
+      console.warn('Got credits', res)
+    });
+  };
+
+  loadBanner = () => {
+    IronSourceBanner.loadBanner('BANNER', {
+      position: 'top',
+      scaleToFitWidth: true,
+    }).then(res => {
+      console.warn(res);
+      IronSourceBanner.showBanner();
+    }).catch(err => {
+      console.warn(err.message);
+    });
+  };
+
+  loadLargeBanner = () => {
+    IronSourceBanner.loadBanner('LARGE', {
+      position: 'top',
+      scaleToFitWidth: true,
+    }).then(res => {
+      console.warn(res);
+      IronSourceBanner.showBanner();
+    }).catch(err => {
+      console.warn(err.message);
+    });
+  };
+
+  loadRectangleBanner = () => {
+    IronSourceBanner.loadBanner('RECTANGLE', {
+      position: 'top',
+      scaleToFitWidth: true,
+    }).then(res => {
+      console.warn(res);
+      IronSourceBanner.showBanner();
+    }).catch(err => {
+      console.warn(err.message);
+    });
+  };
+
+  loadSmartBanner = () => {
+    IronSourceBanner.loadBanner('SMART', {
+      position: 'top',
+      scaleToFitWidth: true,
+    }).then(res => {
+      console.warn(res);
+      IronSourceBanner.showBanner();
+    }).catch(err => {
+      console.warn(err.message);
+    });
+  };
+
+  destroyBanner = () => {
+    IronSourceBanner.destroyBanner();
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <TouchableOpacity onPress={this.showRewardedVideo}>
+          <Text style={styles.button}>Show Rewarded Video</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.showInterstitial}>
+          <Text style={styles.button}>Show Interstitial</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.showOfferwall}>
+          <Text style={styles.button}>Show Offerwall</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.loadBanner}>
+          <Text style={styles.button}>Load Banner</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.loadLargeBanner}>
+          <Text style={styles.button}>Load Large Banner</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.loadRectangleBanner}>
+          <Text style={styles.button}>Load Rectangle Banner</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.loadSmartBanner}>
+          <Text style={styles.button}>Load Smart Banner</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.destroyBanner}>
+          <Text style={styles.button}>Destroy Banner</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -37,14 +168,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
+  button: {
+    fontSize: 24,
+    backgroundColor: '#face8d',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  bannerContainer: {
+    borderColor: 'red',
+    borderWidth: 1,
+    width: '90%',
+  },
+  banner: {
+    borderWidth: 1,
+    height: 150,
   },
 });
