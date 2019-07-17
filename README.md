@@ -286,11 +286,5 @@ pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-sourc
 Ads may stop loading properly when "Reload" option (or CMD+R) in your React Native app was used. You have to restart the app completely if you want to check that ads load and display correctly.
 
 ---
-Native sdk has a known issue with the integration validator- on iOS 12 it prints out that some frameworks are missing when they aren’t. It will be fix in next versions.
-You can safely ignore the following logs when you see them on iOS 12:
 
-
->Missing system framework: CoreGraphics, please be sure to add it to your project. 
-Missing system framework: UIKit, please be sure to add it to your project.
-Missing system framework: MobileCoreServices, please be sure to add it to your project.
 
