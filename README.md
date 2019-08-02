@@ -86,7 +86,7 @@ repositories {
 First initialize IronSource SDK
 
 ```javascript
-import { IronSource } from 'react-native-iron-source';
+import { IronSource } from '@wowmaking/react-native-iron-source';
 
 IronSource.initializeIronSource('8a19a09d', 'userId', {
   validateIntegration: true,
@@ -98,7 +98,7 @@ IronSource.initializeIronSource('8a19a09d', 'userId', {
 ### Interstitial
 
 ```javascript
-import { IronSourceInterstitials } from 'react-native-iron-source';
+import { IronSourceInterstitials } from '@wowmaking/react-native-iron-source';
 
 IronSourceInterstitials.loadInterstitial();
 IronSourceInterstitials.addEventListener('interstitialDidLoad', () => {
@@ -108,7 +108,7 @@ IronSourceInterstitials.addEventListener('interstitialDidLoad', () => {
 ### Rewarded Video
 
 ```javascript
-import { IronSourceRewardedVideo } from 'react-native-iron-source';
+import { IronSourceRewardedVideo } from '@wowmaking/react-native-iron-source';
 
 IronSourceRewardedVideo.showRewardedVideo();
 IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', res => {
@@ -118,7 +118,7 @@ IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', re
 ### Banner
 
 ```javascript
-import { IronSourceBanner } from 'react-native-iron-source';
+import { IronSourceBanner } from '@wowmaking/react-native-iron-source';
 
 IronSourceBanner.loadBanner('LARGE');
 IronSourceBanner.addEventListener('ironSourceBannerDidLoad', () => {
@@ -129,7 +129,7 @@ IronSourceBanner.addEventListener('ironSourceBannerDidLoad', () => {
 ### Offerwall
 
 ```javascript
-import { IronSourceOfferwall } from 'react-native-iron-source';
+import { IronSourceOfferwall } from '@wowmaking/react-native-iron-source';
 
 IronSourceOfferwall.showOfferwall();
 IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res => {
