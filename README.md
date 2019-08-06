@@ -110,6 +110,7 @@ IronSourceInterstitials.addEventListener('interstitialDidLoad', () => {
 ```javascript
 import { IronSourceRewardedVideo } from '@wowmaking/react-native-iron-source';
 
+IronSourceRewardedVideo.initializeRewardedVideo();
 IronSourceRewardedVideo.showRewardedVideo();
 IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', res => {
   console.warn('Rewarded!', res)
