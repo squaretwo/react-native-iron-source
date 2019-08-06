@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@wowmaking/react-native-iron-source": "^2.8.5",
+    "@wowmaking/react-native-iron-source": "^3.0.0",
     "react": "16.6.3",
     "react-native": "0.58.4"
   },

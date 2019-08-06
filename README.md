@@ -13,6 +13,7 @@ The fork includes following improvements:
 * Installation using CocoaPods
 * Easier installation on android 
 * [Validate integration option](https://developers.ironsrc.com/ironsource-mobile/ios/integration-helper-ios/)
+* `IronSource.setConsent` method
 * etc
 
 ## Getting started
@@ -83,7 +84,19 @@ repositories {
 
 ### Initialization
 
-First initialize IronSource SDK
+<details>
+ <summary>1. (Optional) Obtain user's consent to share user data with ad network publishers.</summary>
+ 
+ ```javascript
+ import { IronSource } from '@wowmaking/react-native-iron-source';
+
+ // After user granted consent
+
+ IronSource.setConsent(true);
+ ```
+</details> 
+
+2. Initialize IronSource SDK
 
 ```javascript
 import { IronSource } from '@wowmaking/react-native-iron-source';

@@ -28,5 +28,11 @@ RCT_EXPORT_METHOD(initializeIronSource:(NSString *)appId
     }
     resolve(nil);
 }
+
+RCT_EXPORT_METHOD(setConsent:(BOOL)consent)
+{
+    [IronSource setConsent:consent];
+}
+
 @end
 

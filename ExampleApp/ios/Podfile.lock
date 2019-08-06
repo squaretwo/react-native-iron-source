@@ -1,0 +1,41 @@
+PODS:
+  - IronSourceSDK (6.8.3.0)
+  - React (0.58.4):
+    - React/Core (= 0.58.4)
+  - React/Core (0.58.4):
+    - yoga (= 0.58.4.React)
+  - RNIronSource (3.0.0):
+    - IronSourceSDK (~> 6.8)
+    - React
+    - RNIronSource/Core (= 3.0.0)
+  - RNIronSource/Core (3.0.0):
+    - IronSourceSDK (~> 6.8)
+    - React
+  - yoga (0.58.4.React)
+
+DEPENDENCIES:
+  - React (from `../node_modules/react-native`)
+  - "RNIronSource (from `../node_modules/@wowmaking/react-native-iron-source`)"
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - IronSourceSDK
+
+EXTERNAL SOURCES:
+  React:
+    :path: "../node_modules/react-native"
+  RNIronSource:
+    :path: "../node_modules/@wowmaking/react-native-iron-source"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga"
+
+SPEC CHECKSUMS:
+  IronSourceSDK: 3b5255c5f3982c29e6ee464304b85aef07d2543f
+  React: 6b36b9732ee830d06b470dc4ecdd6837718abe63
+  RNIronSource: e13e098e8724e51981993f3ee907531fe988cbbe
+  yoga: a767b95565bc4e939c7bf241a872cc29bad2f984
+
+PODFILE CHECKSUM: e1d851088ce9e7303281e52e6459d2269c00c95c
+
+COCOAPODS: 1.6.1

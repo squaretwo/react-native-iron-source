@@ -46,4 +46,9 @@ public class RNIronSourceModule extends ReactContextBaseJavaModule {
             }
         });
     }
+
+    @ReactMethod
+    public void setConsent(boolean consent) {
+        IronSource.setConsent(consent);
+    }
 }
