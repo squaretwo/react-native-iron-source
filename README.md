@@ -21,63 +21,87 @@ The fork includes following improvements:
 
 You can find available versions [here](https://github.com/wowmaking/react-native-iron-source/releases).
 
-### Mostly automatic installation
-
-`$ react-native link @wowmaking/react-native-iron-source`
-
-### Manual installation
-
-
-#### iOS
-
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `@wowmaking/react-native-iron-source` and add `RNIronSource.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNIronSource.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)
-
-#### iOS CocoaPods
-1. Add `pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source'` to your `ios/Podfile`
-2. Run `pod install` while in `ios` directory
-
+### RN >= 0.60
+ 
 #### Android
-
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNIronSourcePackage;` to the imports at the top of the file
-  - Add `new RNIronSourcePackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':@wowmaking_react-native-iron-source'
-  	project(':@wowmaking_react-native-iron-source').projectDir = new File(rootProject.projectDir, 	'../node_modules/@wowmaking/react-native-iron-source/android')
-  	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
-    implementation project(':@wowmaking_react-native-iron-source')
-  	```
-
-## Manual Setup
-
-### IronSource iOS SDK
-
-#### For projects with CocoaPods
-
-Do nothing.
-
-#### For other projects
-
-1. Download the iOS SDK from [Ironsrc.com](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/)
-2. Unzip and rename the directory to `IronSourceSDK`
-3. Copy the SDK to `~/Documents/IronSourceSDK`
-4. Drag the `IronSource.framework` to your react native target build phases from the `~/Documents/IronSourceSDK` directory
-5. Add `~/Documents/IronSourceSDK` to your target's Framework Search Paths in Build Settings
+ Add a repo to your `android/app/build.gradle` file 
+ ```
+ allprojects {
+     repositories {
+         // Existing repos here
+         // ...
+         
+         maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }
+     }
+ }
+ ```
 
 
-### Android
-Add a repo to your `app/build.gradle` file 
-```
-repositories {
-    maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }
-}
-```
+<details>
+  <summary>
+    expand/collapse
+    <h3>RN < 0.60</h3>
+  </summary>
+
+  #### Mostly automatic installation
+  
+  `$ react-native link @wowmaking/react-native-iron-source`
+  
+  #### Manual installation
+  
+  
+  ##### iOS
+  
+  1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
+  2. Go to `node_modules` ➜ `@wowmaking/react-native-iron-source` and add `RNIronSource.xcodeproj`
+  3. In XCode, in the project navigator, select your project. Add `libRNIronSource.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+  4. Run your project (`Cmd+R`)
+  
+  ##### iOS CocoaPods
+  1. Add `pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source'` to your `ios/Podfile`
+  2. Run `pod install` while in `ios` directory
+  
+  ##### Android
+  
+  1. Open up `android/app/src/main/java/[...]/MainActivity.java`
+    - Add `import com.reactlibrary.RNIronSourcePackage;` to the imports at the top of the file
+    - Add `new RNIronSourcePackage()` to the list returned by the `getPackages()` method
+  2. Append the following lines to `android/settings.gradle`:
+    	```
+    	include ':@wowmaking_react-native-iron-source'
+    	project(':@wowmaking_react-native-iron-source').projectDir = new File(rootProject.projectDir, 	'../node_modules/@wowmaking/react-native-iron-source/android')
+    	```
+  3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+    	```
+      implementation project(':@wowmaking_react-native-iron-source')
+    	```
+  
+  ### Manual Setup
+  
+  #### IronSource iOS SDK
+  
+  ##### For projects with CocoaPods
+  
+  Do nothing.
+  
+  ##### For other projects
+  
+  1. Download the iOS SDK from [Ironsrc.com](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/)
+  2. Unzip and rename the directory to `IronSourceSDK`
+  3. Copy the SDK to `~/Documents/IronSourceSDK`
+  4. Drag the `IronSource.framework` to your react native target build phases from the `~/Documents/IronSourceSDK` directory
+  5. Add `~/Documents/IronSourceSDK` to your target's Framework Search Paths in Build Settings
+  
+  
+  #### Android
+  Add a repo to your `app/build.gradle` file 
+  ```
+  repositories {
+      maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }
+  }
+  ```
+</details>
+
 
 ## Usage
 
