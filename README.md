@@ -14,6 +14,7 @@ The fork includes following improvements:
 * Easier installation on android 
 * [Validate integration option](https://developers.ironsrc.com/ironsource-mobile/ios/integration-helper-ios/)
 * `IronSource.setConsent` method
+* Working Example App
 * etc
 
 ## Getting started
