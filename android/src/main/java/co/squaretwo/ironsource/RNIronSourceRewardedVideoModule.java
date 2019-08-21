@@ -105,7 +105,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
-    public void showRewardedVideo() {
+    public void showRewardedVideo(String placementName) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
@@ -113,12 +113,17 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
                 boolean available = IronSource.isRewardedVideoAvailable();
                 if (available) {
                     Log.d(TAG, "isRewardedVideoAvailable() = true");
-                    IronSource.showRewardedVideo();
+                    IronSource.showRewardedVideo(placementName);
                 } else {
                     Log.d(TAG, "isRewardedVideoAvailable() = false");
                 }
             }
         });
+    }
+
+    @ReactMethod
+    public void setDynamicUserId(String userId) {
+        IronSource.setDynamicUserId(userId);
     }
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
