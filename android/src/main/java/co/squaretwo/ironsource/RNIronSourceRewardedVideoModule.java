@@ -105,7 +105,7 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
-    public void showRewardedVideo(String placementName) {
+    public void showRewardedVideo(final String placementName) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
