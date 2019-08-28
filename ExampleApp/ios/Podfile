@@ -1,0 +1,16 @@
+platform :ios, '9.0'
+
+target 'ExampleApp' do
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  pod 'React', :path => '../node_modules/react-native'
+
+  pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'React'
+      target.remove_from_project
+    end
+  end
+end

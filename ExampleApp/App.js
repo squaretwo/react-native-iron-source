@@ -15,6 +15,9 @@ export default class App extends Component {
   };
 
   componentDidMount() {
+    // It’s recommended to set consent prior to SDK Initialization.
+    IronSource.setConsent(true);
+
     IronSource.initializeIronSource('8a19a09d', 'demoapp', {
       validateIntegration: false,
     }).then(() => {
@@ -129,6 +132,14 @@ export default class App extends Component {
     IronSourceBanner.destroyBanner();
   };
 
+  grantConsent = () => {
+    IronSource.setConsent(true);
+  };
+
+  withdrawConsent = () => {
+    IronSource.setConsent(false);
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -155,6 +166,15 @@ export default class App extends Component {
         </TouchableOpacity>
         <TouchableOpacity onPress={this.destroyBanner}>
           <Text style={styles.button}>Destroy Banner</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.showRewardedVideo}>
+          <Text style={styles.button}>Show Rewarded Video</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.grantConsent}>
+          <Text style={styles.button}>Grant Consent</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.withdrawConsent}>
+          <Text style={styles.button}>Withdraw Consent</Text>
         </TouchableOpacity>
       </View>
     );
