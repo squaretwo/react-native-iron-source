@@ -8,7 +8,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@wowmaking/react-native-iron-source": "^3.1.0",
     "react": "16.8.6",
     "react-native": "0.60.5"
   },

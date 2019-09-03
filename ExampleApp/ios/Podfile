@@ -32,6 +32,7 @@ target 'ExampleApp' do
     # Pods for testing
   end
 
+  pod 'RNIronSource', :path => '../../RNIronSource.podspec'
 
   use_native_modules!
 end
