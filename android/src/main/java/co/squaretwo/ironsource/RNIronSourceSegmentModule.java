@@ -31,7 +31,7 @@ public class RNIronSourceSegmentModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setCustomValue(String value, String key) {
-        segment.setCustom(value, key);
+        segment.setCustom(key, value);
     }
 
     @ReactMethod
