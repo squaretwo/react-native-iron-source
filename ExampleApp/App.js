@@ -2,11 +2,14 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {
   IronSource,
+  IronSourceSegment,
   IronSourceRewardedVideo,
   IronSourceInterstitials,
   IronSourceOfferwall,
   IronSourceBanner,
 } from '@wowmaking/react-native-iron-source';
+
+const segment = new IronSourceSegment();
 
 export default class App extends Component {
 
@@ -17,6 +20,10 @@ export default class App extends Component {
   componentDidMount() {
     // It’s recommended to set consent prior to SDK Initialization.
     IronSource.setConsent(true);
+
+    segment.setCustomValue('VALUE').forKey('KEY');
+    segment.setSegmentName('NAME');
+    segment.activate();
 
     IronSource.initializeIronSource('8a19a09d', 'demoapp', {
       validateIntegration: false,
@@ -140,6 +147,18 @@ export default class App extends Component {
     IronSource.setConsent(false);
   };
 
+  setUserProperty = () => {
+    segment.setCustomValue('VALUE').forKey('KEY');
+  };
+
+  setSegmentName = () => {
+    segment.setSegmentName('NAME');
+  };
+
+  activateSegment = () => {
+    segment.activate();
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -176,6 +195,15 @@ export default class App extends Component {
         <TouchableOpacity onPress={this.withdrawConsent}>
           <Text style={styles.button}>Withdraw Consent</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={this.setSegmentName}>
+          <Text style={styles.button}>Set Segment Name</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.setUserProperty}>
+          <Text style={styles.button}>Set User Property</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.activateSegment}>
+          <Text style={styles.button}>Activate Segment</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -189,9 +217,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   button: {
-    fontSize: 24,
+    alignSelf: 'center',
+    fontSize: 21,
     backgroundColor: '#face8d',
-    margin: 10,
+    margin: 7,
   },
   bannerContainer: {
     borderColor: 'red',
