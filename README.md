@@ -107,6 +107,10 @@ You can find available versions [here](https://github.com/wowmaking/react-native
 
 ## Usage
 
+You can use [example app](https://github.com/wowmaking/react-native-iron-source/tree/master/ExampleApp) as a reference.
+
+There is also an older example app for RN <= 0.59.x [in this branch](https://github.com/wowmaking/react-native-iron-source/tree/example-app-59/ExampleApp).
+
 ### Initialization
 
 <details>
@@ -235,6 +239,34 @@ IronSourceBanner.loadBanner('BANNER', {
 ### IronSourceBanner.hideBanner()
 ```javascript
 IronSourceBanner.hideBanner();
+```
+
+### IronSourceSegment constructor
+Creates a segment manager
+```javascript
+import { IronSourceSegment } from '@wowmaking/react-native-iron-source';
+
+const segment = new IronSourceSegment();
+```
+
+### IronSourceSegment.setCustomValue
+Sets custom user property
+```javascript
+segment.setCustomValue('VALUE').forKey('KEY');
+```
+
+### IronSourceSegment.setSegmentName
+Sets custom segment name
+
+```javascript
+segment.setSegmentName('NAME');
+```
+
+### IronSourceSegment.activate
+Makes currently existing segment active. Once it's active IronSource SDK will use it to serve your ad units based on segments to tailor the user’s ad experience.
+
+```javascript
+segment.activate();
 ```
 
 ## Events
