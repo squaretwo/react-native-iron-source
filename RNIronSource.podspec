@@ -53,7 +53,7 @@ Pod::Spec.new do |s|
     ss.dependency         "IronSourceTapjoyAdapter", "4.1.4.0"
   end
   s.subspec "TikTok" do |ss|
-    ss.dependency         "IronSourceTapjoyAdapter", "4.1.0.1"
+    ss.dependency         "IronSourceTikTokAdapter", "4.1.0.1"
   end
   s.subspec "UnityAds" do |ss|
     ss.dependency         "IronSourceUnityAdsAdapter", "4.1.3.0"
