@@ -1,6 +1,6 @@
 {
   "name": "@wowmaking/react-native-iron-source",
-  "version": "2.7.0",
+  "version": "3.2.2",
   "description": "React Native package to interface the ironSource SDK.  https://ironsrc.com",
   "main": "index.js",
   "scripts": {
@@ -22,9 +22,6 @@
     "url": "https://github.com/wowmaking"
   },
   "license": "MIT",
-  "dependencies": {
-    "react-native": ">= 0.40.0"
-  },
   "peerDependencies": {
     "react-native": ">= 0.40.0"
   }
