@@ -53,19 +53,24 @@ RCT_EXPORT_METHOD(initializeRewardedVideo)
 //
 // Show the Ad
 //
-RCT_EXPORT_METHOD(showRewardedVideo)
+RCT_EXPORT_METHOD(showRewardedVideo:(NSString*)placementName)
 {
     if ([IronSource hasRewardedVideo]) {
         NSLog(@"showRewardedVideo - video available");
         [self sendEventWithName:kIronSourceRewardedVideoAvailable body:nil];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [IronSource showRewardedVideoWithViewController:RCTPresentedViewController()];
+            [IronSource showRewardedVideoWithViewController:RCTPresentedViewController() placement:placementName];
         });
     } else {
         NSLog(@"showRewardedVideo - video unavailable");
         [self sendEventWithName:kIronSourceRewardedVideoUnavailable body:nil];
     }
+}
+
+RCT_EXPORT_METHOD(setDynamicUserId:(NSString*)userId)
+{
+    [IronSource setDynamicUserId:userId];
 }
 
 #pragma mark delegate events
