@@ -12,6 +12,7 @@
 #endif
 
 #import "IronSource/IronSource.h"
+#import "React/RCTConvert.h"
 
 @interface RNIronSource : NSObject <RCTBridgeModule>
 

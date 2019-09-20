@@ -1,4 +1,4 @@
-#import "RNIronSourceOfferwall.h"
+#import "RNIronSourceOfferWall.h"
 #import "RCTUtils.h"
 
 NSString *const kIronSourceOfferwallAvailable = @"ironSourceOfferwallAvailable";
@@ -11,6 +11,7 @@ NSString *const kIronSourceOfferwallFailedToReceiveCreditsByError = @"ironSource
 
 @implementation RNIronSourceOfferwall {
     RCTResponseSenderBlock _requestOfferwallCallback;
+    bool initialized;
 }
 
 - (dispatch_queue_t)methodQueue
@@ -32,11 +33,13 @@ RCT_EXPORT_MODULE()
 }
 
 // Initialize IronSource before showing the Offerwall
-RCT_EXPORT_METHOD(initializeOfferwall)
+-(void)safeInitializeOfferwall
 {
-    NSLog(@"initializeOfferwall called!!");
-    [IronSource setOfferwallDelegate:self];
-    [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = [NSNumber numberWithInt:1];
+    if (!initialized) {
+        [IronSource setOfferwallDelegate:self];
+        [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = [NSNumber numberWithInt:1];
+        initialized = YES;
+    }
 }
 
 //
@@ -44,6 +47,7 @@ RCT_EXPORT_METHOD(initializeOfferwall)
 //
 RCT_EXPORT_METHOD(showOfferwall)
 {
+    [self safeInitializeOfferwall];
     if ([IronSource hasOfferwall]) {
         NSLog(@"showOfferwall - offerwall available");
         [self sendEventWithName:kIronSourceOfferwallAvailable body:nil];

@@ -7,6 +7,7 @@
 
 #import "RNIronSourceBanner.h"
 #import "RCTUtils.h"
+#import <React/RCTBridge.h>
 
 NSString *const kIronSourceBannerDidLoad = @"ironSourceBannerDidLoad";
 NSString *const kIronSourceBannerDidFailToLoadWithError = @"ironSourceBannerDidFailToLoadWithError";
@@ -50,6 +51,11 @@ RCT_EXPORT_MODULE()
     hasListeners = NO;
 }
 
+- (void)handleRCTBridgeWillReloadNotification:(NSNotification *)notification
+{
+    [self destroyBannerInner];
+}
+
 RCT_EXPORT_METHOD(loadBanner:(NSString *)bannerSizeDescription
                   options:(NSDictionary *)options
                   resolver:(RCTPromiseResolveBlock)resolve
@@ -64,6 +70,12 @@ RCT_EXPORT_METHOD(loadBanner:(NSString *)bannerSizeDescription
     }
     [IronSource loadBannerWithViewController:RCTPresentedViewController()
                                         size:[[ISBannerSize alloc] initWithDescription:bannerSizeDescription]];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:RCTBridgeWillReloadNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleRCTBridgeWillReloadNotification:)
+                                                 name:RCTBridgeWillReloadNotification
+                                               object:nil];
 }
 
 RCT_EXPORT_METHOD(showBanner) {
@@ -82,11 +94,15 @@ RCT_EXPORT_METHOD(hideBanner) {
     }
 }
 
-RCT_EXPORT_METHOD(destroyBanner) {
+- (void)destroyBannerInner {
     if (self.bannerView) {
         [IronSource destroyBanner:self.bannerView];
         self.bannerView = nil;
     }
+}
+
+RCT_EXPORT_METHOD(destroyBanner) {
+    [self destroyBannerInner];
 }
 
 - (void)initializeBanner {

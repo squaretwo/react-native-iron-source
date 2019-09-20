@@ -14,6 +14,7 @@ NSString *const kIronSourceRewardedVideoAdEnded = @"ironSourceRewardedVideoAdEnd
 
 @implementation RNIronSourceRewardedVideo {
     RCTResponseSenderBlock _requestRewardedVideoCallback;
+    bool initialized;
 }
 
 - (dispatch_queue_t)methodQueue
@@ -37,12 +38,16 @@ RCT_EXPORT_MODULE()
 }
 
 // Initialize IronSource before showing the Rewarded Video
-RCT_EXPORT_METHOD(initializeRewardedVideo:(RCTPromiseResolveBlock)resolve
-                  rejector:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(initializeRewardedVideo)
 {
-    NSLog(@"initializeRewardedVideo called!!");
-    [IronSource setRewardedVideoDelegate:self];
-    resolve(nil);
+    if (!initialized) {
+        [IronSource setRewardedVideoDelegate:self];
+        initialized = YES;
+        if ([IronSource hasRewardedVideo]) {
+            NSLog(@"showRewardedVideo - video available");
+            [self sendEventWithName:kIronSourceRewardedVideoAvailable body:nil];
+        }
+    }
 }
 
 //
@@ -83,7 +88,10 @@ RCT_EXPORT_METHOD(showRewardedVideo)
     NSNumber * rewardAmount = [placementInfo rewardAmount];
     NSString * rewardName = [placementInfo rewardName];
     NSLog(@">>>>>>>>>>>> RewardedVideo %@ reward amount %@", rewardName, rewardAmount);
-    [self sendEventWithName:kIronSourceRewardedVideoAdRewarded body:nil];
+    [self sendEventWithName:kIronSourceRewardedVideoAdRewarded body:@{
+                                                                      @"rewardName": rewardName,
+                                                                      @"rewardAmount": rewardAmount
+                                                                      }];
 }
 
 /**

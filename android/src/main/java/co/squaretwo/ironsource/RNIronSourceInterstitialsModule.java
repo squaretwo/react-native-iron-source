@@ -44,10 +44,7 @@ public class RNIronSourceInterstitialsModule extends ReactContextBaseJavaModule 
              */
             @Override
             public void onInterstitialAdLoadFailed(IronSourceError error) {
-                final WritableMap params = Arguments.createMap();
-                params.putString("error_code", error.getErrorMessage());
-
-                sendEvent("interstitialDidFailToLoadWithError", params);
+                sendEvent("interstitialDidFailToLoadWithError", Utility.formatIronSourceError(error));
             }
             /**
              Invoked when the Interstitial Ad Unit is opened
@@ -76,10 +73,7 @@ public class RNIronSourceInterstitialsModule extends ReactContextBaseJavaModule 
              */
             @Override
             public void onInterstitialAdShowFailed(IronSourceError error) {
-                final WritableMap params = Arguments.createMap();
-                params.putString("error_code", error.getErrorMessage());
-
-                sendEvent("interstitialDidFailToShowWithError", params);
+                sendEvent("interstitialDidFailToShowWithError", Utility.formatIronSourceError(error));
             }
             /*
              * Invoked when the end user clicked on the interstitial ad.

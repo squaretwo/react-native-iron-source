@@ -27,5 +27,5 @@ repositories {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.ironsource.sdk:mediationsdk:6.8.2@jar'
+    implementation 'com.ironsource.sdk:mediationsdk:6.+'
 }

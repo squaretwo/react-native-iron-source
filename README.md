@@ -12,6 +12,9 @@ The fork includes following improvements:
 * Documentation
 * Installation using CocoaPods
 * Easier installation on android 
+* [Validate integration option](https://developers.ironsrc.com/ironsource-mobile/ios/integration-helper-ios/)
+* `IronSource.setConsent` method
+* Working Example App
 * etc
 
 ## Getting started
@@ -20,80 +23,124 @@ The fork includes following improvements:
 
 You can find available versions [here](https://github.com/wowmaking/react-native-iron-source/releases).
 
-### Mostly automatic installation
-
-`$ react-native link @wowmaking/react-native-iron-source`
-
-### Manual installation
-
-
-#### iOS
-
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `@wowmaking/react-native-iron-source` and add `RNIronSource.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNIronSource.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)
-
-#### iOS CocoaPods
-1. Add `pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source'` to your `ios/Podfile`
-2. Run `pod install` while in `ios` directory
-
+### RN >= 0.60
+ 
 #### Android
-
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNIronSourcePackage;` to the imports at the top of the file
-  - Add `new RNIronSourcePackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':@wowmaking_react-native-iron-source'
-  	project(':@wowmaking_react-native-iron-source').projectDir = new File(rootProject.projectDir, 	'../node_modules/@wowmaking/react-native-iron-source/android')
-  	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
-    implementation project(':@wowmaking_react-native-iron-source')
-  	```
-
-## Manual Setup
-
-### IronSource iOS SDK
-
-#### For projects with CocoaPods
-
-Do nothing.
-
-#### For other projects
-
-1. Download the iOS SDK from [Ironsrc.com](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/)
-2. Unzip and rename the directory to `IronSourceSDK`
-3. Copy the SDK to `~/Documents/IronSourceSDK`
-4. Drag the `IronSource.framework` to your react native target build phases from the `~/Documents/IronSourceSDK` directory
-5. Add `~/Documents/IronSourceSDK` to your target's Framework Search Paths in Build Settings
+ Add a repo to your `android/app/build.gradle` file 
+ ```
+ allprojects {
+     repositories {
+         // Existing repos here
+         // ...
+         
+         maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }
+     }
+ }
+ ```
 
 
-### Android
-Add a repo to your `app/build.gradle` file 
-```
-repositories {
-    maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }
-}
-```
+<details>
+  <summary>
+    expand/collapse
+    <h3>RN < 0.60</h3>
+  </summary>
+
+  #### Mostly automatic installation
+  
+  `$ react-native link @wowmaking/react-native-iron-source`
+  
+  #### Manual installation
+  
+  
+  ##### iOS
+  
+  1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
+  2. Go to `node_modules` ➜ `@wowmaking/react-native-iron-source` and add `RNIronSource.xcodeproj`
+  3. In XCode, in the project navigator, select your project. Add `libRNIronSource.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+  4. Run your project (`Cmd+R`)
+  
+  ##### iOS CocoaPods
+  1. Add `pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source'` to your `ios/Podfile`
+  2. Run `pod install` while in `ios` directory
+  
+  ##### Android
+  
+  1. Open up `android/app/src/main/java/[...]/MainApplication.java`
+    - Add `import com.reactlibrary.RNIronSourcePackage;` to the imports at the top of the file
+    - Add `new RNIronSourcePackage()` to the list returned by the `getPackages()` method
+  2. Append the following lines to `android/settings.gradle`:
+    	```
+    	include ':@wowmaking_react-native-iron-source'
+    	project(':@wowmaking_react-native-iron-source').projectDir = new File(rootProject.projectDir, 	'../node_modules/@wowmaking/react-native-iron-source/android')
+    	```
+  3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+    	```
+      implementation project(':@wowmaking_react-native-iron-source')
+    	```
+  
+  ### Manual Setup
+  
+  #### IronSource iOS SDK
+  
+  ##### For projects with CocoaPods
+  
+  Do nothing.
+  
+  ##### For other projects
+  
+  1. Download the iOS SDK from [Ironsrc.com](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/)
+  2. Unzip and rename the directory to `IronSourceSDK`
+  3. Copy the SDK to `~/Documents/IronSourceSDK`
+  4. Drag the `IronSource.framework` to your react native target build phases from the `~/Documents/IronSourceSDK` directory
+  5. Add `~/Documents/IronSourceSDK` to your target's Framework Search Paths in Build Settings
+  
+  
+  #### Android
+  Add a repo to your `app/build.gradle` file 
+  ```
+  repositories {
+      maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }
+  }
+  ```
+</details>
+
 
 ## Usage
 
+You can use [example app](https://github.com/wowmaking/react-native-iron-source/tree/master/ExampleApp) as a reference.
+
+There is also an older example app for RN <= 0.59.x [in this branch](https://github.com/wowmaking/react-native-iron-source/tree/example-app-59/ExampleApp).
+
 ### Initialization
 
-First initialize IronSource SDK
+<details>
+ <summary>1. (Optional) Obtain user's consent to share user data with ad network publishers.</summary>
+ 
+ ```javascript
+ import { IronSource } from '@wowmaking/react-native-iron-source';
+
+ // After user granted consent
+
+ IronSource.setConsent(true);
+ ```
+</details> 
+
+2. Initialize IronSource SDK
 
 ```javascript
-import { IronSource } from 'react-native-iron-source';
+import { IronSource } from '@wowmaking/react-native-iron-source';
 
-IronSource.initializeIronSource('12345678', 'userId');
+IronSource.initializeIronSource('8a19a09d', 'userId', {
+  validateIntegration: true,
+}).then(() => {
+  console.warn('Init finished');
+});
 ```
 
 ### Interstitial
 
 ```javascript
-import { IronSourceInterstitials } from 'react-native-iron-source';
+import { IronSourceInterstitials } from '@wowmaking/react-native-iron-source';
 
 IronSourceInterstitials.loadInterstitial();
 IronSourceInterstitials.addEventListener('interstitialDidLoad', () => {
@@ -103,7 +150,7 @@ IronSourceInterstitials.addEventListener('interstitialDidLoad', () => {
 ### Rewarded Video
 
 ```javascript
-import { IronSourceRewardedVideo } from 'react-native-iron-source';
+import { IronSourceRewardedVideo } from '@wowmaking/react-native-iron-source';
 
 IronSourceRewardedVideo.initializeRewardedVideo();
 IronSourceRewardedVideo.showRewardedVideo();
@@ -114,7 +161,7 @@ IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', re
 ### Banner
 
 ```javascript
-import { IronSourceBanner } from 'react-native-iron-source';
+import { IronSourceBanner } from '@wowmaking/react-native-iron-source';
 
 IronSourceBanner.loadBanner('LARGE');
 IronSourceBanner.addEventListener('ironSourceBannerDidLoad', () => {
@@ -125,9 +172,8 @@ IronSourceBanner.addEventListener('ironSourceBannerDidLoad', () => {
 ### Offerwall
 
 ```javascript
-import { IronSourceOfferwall } from 'react-native-iron-source';
+import { IronSourceOfferwall } from '@wowmaking/react-native-iron-source';
 
-IronSourceOfferwall.initializeOfferwall();
 IronSourceOfferwall.showOfferwall();
 IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res => {
   console.warn('Got credits', res)
@@ -137,12 +183,40 @@ IronSourceOfferwall.addEventListener('ironSourceOfferwallReceivedCredits', res =
 
 ## API (Incomplete)
 
+### IronSource.initializeIronSource(ironSourceAppKey, userId, options)
+Initializes IronSource SDK. 
+
+ `validateIntegration` provides an easy way to verify 
+that you’ve successfully integrated the ironSource 
+SDK and any additional adapters; it also makes sure all
+ required dependencies and frameworks were added for 
+ the various mediated ad networks. It doesn't validate Amazon adapter in current version.
+ See official docs for [Android](https://developers.ironsrc.com/ironsource-mobile/android/integration-helper-android/), 
+ [iOS](https://developers.ironsrc.com/ironsource-mobile/ios/integration-helper-ios/).
+  There's known issue in ios 12. See known issue section.
+#### Parameter(s)
+* **ironSourceAppKey:** String. Can be found in Iron Source administrator's interface
+* **userId:** String. Any unique user id.
+* **options:** Object (optional)
+    * **validateIntegration:** Boolean. Default: false
+#### Returns Promise
+
+```javascript
+IronSource.initializeIronSource('8a19a09d', 'userId', {
+  validateIntegration: true
+})
+  .then(() => {
+    console.warn('Init finished');
+  });
+```
+
 ### IronSourceBanner.loadBanner(options)
 Loads IronSource banner. Returns a promise that will be resolved when banner loads successfully and rejected when it fails.
 
 #### Parameter(s)
+* **size**: String. Supported values: `"BANNER"`, `"LARGE"`, `"RECTANGLE"`, `"SMART"`
 * **options:** Object (optional)
-    * **position:** String. Supported values: "top" or "bottom". Default: "bottom".
+    * **position:** String. Supported values: `"top"` or `"bottom"`. Default: `"bottom"`.
     * **scaleToFitWidth:** Boolean. Default: false
 #### Returns Promise of
 * **response:** Object
@@ -150,16 +224,49 @@ Loads IronSource banner. Returns a promise that will be resolved when banner loa
     * **height:** Number
 
 ```javascript
-IronSourceBanner.loadBanner({
+IronSourceBanner.loadBanner('BANNER', {
   position: 'top',
-  scaleToFitWidth: true
+  scaleToFitWidth: true,
 })
-  .then((response) => {
+  .then(response => {
     console.warn(`width: ${response.width}, height: ${response.height}`);
   })
   .catch(err => {
     console.warn(err.message);
   });
+```
+
+### IronSourceBanner.hideBanner()
+```javascript
+IronSourceBanner.hideBanner();
+```
+
+### IronSourceSegment constructor
+Creates a segment manager
+```javascript
+import { IronSourceSegment } from '@wowmaking/react-native-iron-source';
+
+const segment = new IronSourceSegment();
+```
+
+### IronSourceSegment.setCustomValue
+Sets custom user property
+```javascript
+segment.setCustomValue('VALUE').forKey('KEY');
+```
+
+### IronSourceSegment.setSegmentName
+Sets custom segment name
+
+```javascript
+segment.setSegmentName('NAME');
+```
+
+### IronSourceSegment.activate
+Makes currently existing segment active. Once it's active IronSource SDK will use it to serve your ad units based on segments to tailor the user’s ad experience.
+
+```javascript
+segment.activate();
 ```
 
 ## Events
@@ -220,7 +327,11 @@ Official doc:
 - [Android](https://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/#step-1).
 - [iOS](https://developers.ironsrc.com/ironsource-mobile/ios/mediation-networks-ios/#step-1).
 
-You can optionally use this syntax to add iOS mediation adapters instead of suggested by the doc.
+<details>
+ <summary>Optional syntax (not recommended)</summary>
+ 
+__Warning:__ Using this syntax means that you lock down your iOS CocoaPods dependencies to versions that we currently use in our organization. We don't recommend doing this because you might want another version at some point.
+
 ```
 pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source', :subspecs => [
     'Core', # required
@@ -239,6 +350,12 @@ pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-sourc
     'Vungle'
 ]
 ```
+</details>
 
 ## Known issues
+
 Ads may stop loading properly when "Reload" option (or CMD+R) in your React Native app was used. You have to restart the app completely if you want to check that ads load and display correctly.
+
+---
+
+
