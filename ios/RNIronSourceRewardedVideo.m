@@ -64,6 +64,17 @@ RCT_EXPORT_METHOD(showRewardedVideo:(NSString*)placementName)
     }
 }
 
+RCT_EXPORT_METHOD(isRewardedVideoAvailable:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
+{
+  @try {
+    resolve([IronSource hasRewardedVideo]);
+  }
+  @catch (NSException *exception) {
+    NSLog(@"isRewardedVideoAvailable, Error, %@", exception.reason);
+    reject(@"isRewardedVideoAvailable, Error, %@", exception.reason);
+  }
+}
+
 RCT_EXPORT_METHOD(setDynamicUserId:(NSString*)userId)
 {
     [IronSource setDynamicUserId:userId];

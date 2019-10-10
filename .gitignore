@@ -3,6 +3,9 @@
 *.moved-aside
 *.xcuserstate
 *.xcscmblueprint
+.project
+.gradle
+.settings
 
 ## Obj-C/Swift specific
 *.hmap

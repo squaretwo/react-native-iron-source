@@ -129,6 +129,18 @@ public class RNIronSourceRewardedVideoModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
+    public void isRewardedVideoAvailable(Promise promise) {
+      try {
+        Log.d(TAG, "isRewardedVideo() called!!");
+        promise.resolve(IronSource.isRewardedVideoAvailable());
+      }
+      catch (Exception e) {
+        Log.d(TAG, "isRewardedVideo error %s", e);
+        promise.reject("isRewardedVideoAvailable, Error, " + e);
+      }
+    }
+
+    @ReactMethod
     public void setDynamicUserId(String userId) {
         IronSource.setDynamicUserId(userId);
     }

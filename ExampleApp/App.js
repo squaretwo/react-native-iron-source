@@ -41,7 +41,7 @@ export default class App extends Component {
     });
   }
 
-  showRewardedVideo = () => {
+  showRewardedVideo = async () => {
     if (!this.state.hasRewardedVideo) {
       console.warn('Rewarded video is not available');
     }
@@ -55,7 +55,11 @@ export default class App extends Component {
     IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoClosedByUser', onClose);
     IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoClosedByError', onClose);
 
-    IronSourceRewardedVideo.showRewardedVideo();
+    if (await IronSourceRewardedVideo.isRewardedVideoAvailable()) {
+      IronSourceRewardedVideo.showRewardedVideo();
+    } else {
+      console.warn('No Video available');
+    }
   };
 
 
