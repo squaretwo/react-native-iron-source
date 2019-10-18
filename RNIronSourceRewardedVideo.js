@@ -32,7 +32,7 @@ const addEventListener = (type, handler) => {
         // This is a dirty hack that is required by some Ad Networks (Vungle, UnityAds)
         // It makes 'ironSourceRewardedVideoClosedByUser' and 'ironSourceRewardedVideoAdRewarded'
         // events order match with all other networks
-        setTimeout(handler);
+        setTimeout(handler, 250);
       }));
       break;
     default:
