@@ -55,7 +55,13 @@ export default class App extends Component {
     IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoClosedByUser', onClose);
     IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoClosedByError', onClose);
 
-    IronSourceRewardedVideo.showRewardedVideo();
+    IronSourceRewardedVideo.isRewardedVideoAvailable().then((available) => {
+      if (available) {
+        IronSourceRewardedVideo.showRewardedVideo();
+      } else {
+        console.warn('No Video available');
+      }
+    });
   };
 
 

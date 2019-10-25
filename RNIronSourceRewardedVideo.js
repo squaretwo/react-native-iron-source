@@ -64,6 +64,7 @@ module.exports = {
   ...RNIronSourceRewardedVideo,
   initializeRewardedVideo: () => RNIronSourceRewardedVideo.initializeRewardedVideo(),
   showRewardedVideo: (placementName) => RNIronSourceRewardedVideo.showRewardedVideo(placementName),
+  isRewardedVideoAvailable: () => RNIronSourceRewardedVideo.isRewardedVideoAvailable(),
   setDynamicUserId: (userId) => RNIronSourceRewardedVideo.setDynamicUserId(userId),
   addEventListener,
   removeEventListener,

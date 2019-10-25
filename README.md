@@ -152,11 +152,21 @@ IronSourceInterstitials.addEventListener('interstitialDidLoad', () => {
 ```javascript
 import { IronSourceRewardedVideo } from '@wowmaking/react-native-iron-source';
 
+
 IronSourceRewardedVideo.initializeRewardedVideo();
-IronSourceRewardedVideo.showRewardedVideo();
 IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', res => {
   console.warn('Rewarded!', res)
 });
+
+// or use IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAvailable') 
+// to get video status
+IronSourceRewardedVideo.isVideoRewardAvailable().then((available) => {
+  if (available) {
+    IronSourceRewardedVideo.showRewardedVideo();
+  } else {
+    throw new Error('No video available');
+  }
+})
 ```
 ### Banner
 
@@ -267,6 +277,20 @@ Makes currently existing segment active. Once it's active IronSource SDK will us
 
 ```javascript
 segment.activate();
+```
+
+### IronSourceRewardedVideo.isRewardedVideoAvailable
+Check if a reward video is available to be shown.
+Return a Promise resolving a boolean.
+
+```javascript
+IronSourceRewardedVideo.isRewardedVideoAvailable().then((available) => {
+  if (available) {
+    // Video available
+  } else {
+    // Video not available
+  }
+});
 ```
 
 ## Events
