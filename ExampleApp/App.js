@@ -41,7 +41,7 @@ export default class App extends Component {
     });
   }
 
-  showRewardedVideo = async () => {
+  showRewardedVideo = () => {
     if (!this.state.hasRewardedVideo) {
       console.warn('Rewarded video is not available');
     }
@@ -55,11 +55,13 @@ export default class App extends Component {
     IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoClosedByUser', onClose);
     IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoClosedByError', onClose);
 
-    if (await IronSourceRewardedVideo.isRewardedVideoAvailable()) {
-      IronSourceRewardedVideo.showRewardedVideo();
-    } else {
-      console.warn('No Video available');
-    }
+    IronSourceRewardedVideo.isRewardedVideoAvailable().then((available) => {
+      if (available) {
+        IronSourceRewardedVideo.showRewardedVideo();
+      } else {
+        console.warn('No Video available');
+      }
+    });
   };
 
 

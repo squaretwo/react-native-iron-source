@@ -60,13 +60,6 @@ const removeAllListeners = () => {
   IronSourceRewardedVideoEventEmitter.removeAllListeners('ironSourceRewardedVideoAdRewarded');
 };
 
-isRewardedVideoAvailable = async () => {
-  const timeoutTime = 5000;
-  setTimeout(() => Promise.reject(new Error(`Timeout isRewardedVideoAvailable: timeout: ${timeoutTime}`))
-    , timeoutTime);
-  return RNIronSourceRewardedVideo.isRewardedVideoAvailable();
-}
-
 module.exports = {
   ...RNIronSourceRewardedVideo,
   initializeRewardedVideo: () => RNIronSourceRewardedVideo.initializeRewardedVideo(),

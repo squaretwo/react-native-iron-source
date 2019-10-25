@@ -154,12 +154,15 @@ import { IronSourceRewardedVideo } from '@wowmaking/react-native-iron-source';
 
 
 IronSourceRewardedVideo.initializeRewardedVideo();
+IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', res => {
+  console.warn('Rewarded!', res)
+});
+
+// or use IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAvailable') 
+// to get video status
 IronSourceRewardedVideo.isVideoRewardAvailable().then((available) => {
   if (available) {
     IronSourceRewardedVideo.showRewardedVideo();
-    IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', res => {
-      console.warn('Rewarded!', res)
-    });
   } else {
     throw new Error('No video available');
   }
@@ -281,7 +284,7 @@ Check if a reward video is available to be shown.
 Return a Promise resolving a boolean.
 
 ```javascript
-ironSourceRewardedVideo.isRewardedVideoAvailable().then((available) => {
+IronSourceRewardedVideo.isRewardedVideoAvailable().then((available) => {
   if (available) {
     // Video available
   } else {
