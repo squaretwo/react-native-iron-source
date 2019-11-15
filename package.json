@@ -1,6 +1,6 @@
 {
   "name": "@wowmaking/react-native-iron-source",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "React Native package to interface the ironSource SDK.  https://ironsrc.com",
   "main": "index.js",
   "scripts": {
