@@ -104,6 +104,38 @@ You can find available versions [here](https://github.com/wowmaking/react-native
   ```
 </details>
 
+## Mediation Setup
+
+**WARNING!** Make sure you following the doc carefully. If you miss something in the mediation setup process for some network it may not work partially or entirely. Follow guide for each mediation. Add your devices and simulators to test device list in ironsource admin panel.
+
+Official doc:
+- [Android](https://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/#step-1).
+- [iOS](https://developers.ironsrc.com/ironsource-mobile/ios/mediation-networks-ios/#step-1).
+
+<details>
+ <summary>Optional syntax (not recommended)</summary>
+ 
+__Warning:__ Using this syntax means that you lock down your iOS CocoaPods dependencies to versions that we currently use in our organization. We don't recommend doing this because you might want another version at some point.
+
+```
+pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source', :subspecs => [
+    'Core', # required
+    'AdColony',
+    'Admob',
+    'Amazon',
+    'AppLovin',
+    'Chartboost',
+    'Facebook',
+    'HyprMX',
+    'InMobi',
+    'Maio',
+    'MediaBrix',
+    'Tapjoy',
+    'UnityAds',
+    'Vungle'
+]
+```
+</details>
 
 ## Usage
 
@@ -342,39 +374,6 @@ IronSourceRewardedVideo.isRewardedVideoAvailable().then((available) => {
 | ironSourceOfferwallFailedToReceiveCreditsByError | Called when failed to retrieve the users credit balance info |
 
 You can find out more about events in the official doc. Start [here](https://developers.ironsrc.com/ironsource-mobile/ios/rewarded-video-integration-ios/) if you wish.
-
-## Mediation Setup
-
-**WARNING!** Make sure you following the doc carefully. If you miss something in the mediation setup process for some network it may not work partially or entirely.
-
-Official doc:
-- [Android](https://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/#step-1).
-- [iOS](https://developers.ironsrc.com/ironsource-mobile/ios/mediation-networks-ios/#step-1).
-
-<details>
- <summary>Optional syntax (not recommended)</summary>
- 
-__Warning:__ Using this syntax means that you lock down your iOS CocoaPods dependencies to versions that we currently use in our organization. We don't recommend doing this because you might want another version at some point.
-
-```
-pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source', :subspecs => [
-    'Core', # required
-    'AdColony',
-    'Admob',
-    'Amazon',
-    'AppLovin',
-    'Chartboost',
-    'Facebook',
-    'HyprMX',
-    'InMobi',
-    'Maio',
-    'MediaBrix',
-    'Tapjoy',
-    'UnityAds',
-    'Vungle'
-]
-```
-</details>
 
 ## Known issues
 
