@@ -192,7 +192,7 @@ IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAdRewarded', re
 
 // or use IronSourceRewardedVideo.addEventListener('ironSourceRewardedVideoAvailable') 
 // to get video status
-IronSourceRewardedVideo.isVideoRewardAvailable().then((available) => {
+IronSourceRewardedVideo.isRewardedVideoAvailable().then((available) => {
   if (available) {
     IronSourceRewardedVideo.showRewardedVideo();
   } else {
