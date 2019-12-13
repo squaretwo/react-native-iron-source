@@ -39,7 +39,7 @@ const removeEventListener = (type, handler) => {
 };
 
 const removeAllListeners = () => {
-  supportedEvents.map(IronSourceBannerEventEmitter.removeAllListeners);
+  supportedEvents.map((eventType) => IronSourceBannerEventEmitter.removeAllListeners(eventType));
 };
 
 module.exports = {
