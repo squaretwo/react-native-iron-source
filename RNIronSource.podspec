@@ -68,4 +68,11 @@ Pod::Spec.new do |s|
     ss.dependency         "IronSourceVungleAdapter", "> 1"
   end
 
+  if defined?($RNIronSourceAsStaticFramework)
+    Pod::UI.puts "#{s.name}: Using overridden static_framework value of '#{$RNIronSourceAsStaticFramework}'"
+    s.static_framework = $RNIronSourceAsStaticFramework
+  else
+    s.static_framework = false
+  end
+
 end

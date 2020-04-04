@@ -63,6 +63,10 @@ You can find available versions [here](https://github.com/wowmaking/react-native
   1. Add `pod 'RNIronSource', :path => '../node_modules/@wowmaking/react-native-iron-source'` to your `ios/Podfile`
   2. Run `pod install` while in `ios` directory
   
+  #### Allow iOS Static Frameworks
+  If you are using Static Frameworks on iOS, you need to manually enable this for the project. To enable Static Framework support, add the following global to the top of your /ios/Podfile file:
+  `$RNIronSourceAsStaticFramework = true`
+
   ##### Android
   
   1. Open up `android/app/src/main/java/[...]/MainApplication.java`
